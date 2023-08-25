@@ -64,6 +64,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 💡 After all the dependencies have been installed, you just need to run the server with the following command:
 
 php artisan serve
-## License
+## 💻 Running the server
+
+💡 After all the dependencies have been installed, you just need to run the server with the following command:
+
+php artisan serve
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
