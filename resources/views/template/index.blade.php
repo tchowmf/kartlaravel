@@ -114,7 +114,8 @@
             R. Duque de Caxias, O - 276<br>
             Pederneiras, SP<br>
             <abbr title="Telefone">Tel:</abbr>
-            (14) 3284-1427
+            (14) 3284-1427<br>
+            email@email.com
           </address>
         </div>
         <div class="col-12 col-lg-6 col-xl-3 border-end p-5">
@@ -135,7 +136,7 @@
           </ul>
         </div>
         <div class="col-12 col-lg-6 col-xl-3 border-end p-5">
-          <h3 class="h6 mb-3">Serviços</h3>
+          <h3 class="h6 mb-3">Princais serviços</h3>
           <ul class="nav flex-column">
             <li class="nav-item">
               <a class="nav-link link-secondary ps-0" aria-current="page" href="#">Invisalign</a>
@@ -147,21 +148,18 @@
               <a class="nav-link link-secondary ps-0" href="/servicos">Clareamento</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link link-secondary ps-0" href="/servicos">Aparelhos em geral</a>
+              <a class="nav-link link-secondary ps-0" href="/servicos">Cirurgias em geral</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link link-secondary ps-0" href="/servicos">Cirurgias em geral</a>
+              <a class="nav-link link-secondary ps-0" href="/servicos">Aparelhos em geral</a>
             </li>
           </ul>
         </div>
         <div class="col-12 col-lg-6 col-xl-3 p-5">
-          <h3 class="h6 mb-3">Subpages</h3>
+          <h3 class="h6 mb-3">IESP</h3>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link link-secondary ps-0" aria-current="page" href="404.html">404 System Page</a>
-              <a class="nav-link link-secondary ps-0" aria-current="page" href="register.html">Register System Page</a>
-              <a class="nav-link link-secondary ps-0" aria-current="page" href="content.html">Simple Text Content
-                Page</a>
+              é um renomado centro de excelência no campo da odontologia, destacando-se por sua abordagem inovadora e principalmente pelos serviços de alta qualidade.
             </li>
           </ul>
         </div>
