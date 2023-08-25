@@ -160,6 +160,9 @@
           <ul class="nav flex-column">
             <li class="nav-item">
               é um renomado centro de excelência no campo da odontologia, destacando-se por sua abordagem inovadora e principalmente pelos serviços de alta qualidade.
+            </li><br>
+            <li>
+              Nosso objetivo é atingir a satisfação de nossos clientes
             </li>
           </ul>
         </div>

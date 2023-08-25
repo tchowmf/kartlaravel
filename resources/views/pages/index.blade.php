@@ -13,8 +13,8 @@
 
           <div class="col-lg-7 py-vh-6 position-relative" data-aos="fade-right">
             <h1 class="display-1 fw-bold mt-5">IESP voce tratado por especialistas!</h1>
-            <p class="lead">To be honest, this is just a stupid placeholder text. We don´t know how to sell anything,
-              not even lesser or slower as you.</p>
+            <p class="lead">Onde a inovação e a excelência se encontram para criar sorrisos deslumbrantes e saudáveis! 
+                Somos uma referência em odontologia, liderando os tratamentos ortodônticos e de implantes dentários.</p>
             <a href="https://wa.me/5514996975055?text=Olá, vim do seu site. Gostaria de agendar uma consulta." target="blank" class="btn btn-dark btn-xl shadow me-3 rounded-0 my-5">Agende uma consulta</a>
           </div>
 
@@ -93,14 +93,14 @@
             </div>
           </div>
           <div class="col-lg-4">
-            <h3 class="py-5 border-top border-dark" data-aos="fade-left">We did some interesting stuff in our field of
-              work. For example we collect a lot of these free photos and use them on our website.</h3>
-            <p data-aos="fade-left" data-aos-delay="200">Donec id elit non mi porta gravida at eget metus. Fusce
-              dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet
-              risus.
+          <span class="h5 fw-lighter">Quem somos?</span>
+            <h3 class="py-5 border-top border-dark" data-aos="fade-left">Não somos apenas dentistas somos apaixonados, destinados a criar sorrisos que iluminam vidas. 
+              Junte-se a nós e descubra como o IESP está moldando sorrisos. Sua jornada para um sorriso espetacular começa aqui!</h3>
+            <p data-aos="fade-left" data-aos-delay="200">Ana Paula Marostica Ferreira<br>CRO: 48.556<br>Especialista em Ortodontia
             </p>
+            <p data-aos="fade-left" data-aos-delay="400">Eduardo Wilson Ferreira<br>CRO: 50.489<br>Especialista em Periodontia</p>
             <p>
-              <a href="/quemsomos" class="link-fancy link-dark" data-aos="fade-left" data-aos-delay="400">Veja mais
+              <a href="/quemsomos" class="link-fancy link-dark" data-aos="fade-left" data-aos-delay="600">Veja mais
               </a>
             </p>
           </div>
