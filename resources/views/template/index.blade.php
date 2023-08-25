@@ -63,7 +63,7 @@
   <nav id="navScroll" class="navbar navbar-expand-lg navbar-light fixed-top" tabindex="0">
     <div class="container">
       <a class="navbar-brand pe-4 fs-4" href="/">
-        <img src = "img/webp/toothe.webp" width="32" height="32" fill="currentColor" class="bi bi-layers-half" viewbox="0 0 16 16">
+        <img src = "img/webp/logo.webp" width="32" height="32" fill="currentColor" class="bi bi-layers-half" viewbox="0 0 16 16">
         <span class="ms-1 fw-bolder">IESP</span>
       </a>
 
@@ -108,7 +108,7 @@
       <div class="row py-5 d-flex justify-content-between">
 
         <div class="col-12 col-lg-6 col-xl-3 border-end p-5">
-        <img src = "img/webp/toothe.webp" width="24" height="24" fill="currentColor" class="bi bi-layers-half"viewbox="0 0 16 16">
+        <img src = "img/webp/logo.webp" width="24" height="24" fill="currentColor" class="bi bi-layers-half"viewbox="0 0 16 16">
           <address class="text-secondary mt-3">
             <strong>IESP, Ltda.</strong><br>
             R. Duque de Caxias, O - 276<br>
