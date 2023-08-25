@@ -29,39 +29,38 @@
       <div class="container">
         <div class="row d-flex justify-content-end">
           <div class="col-lg-8"' data-aos="fade-down">
-            <h2 class="display-6">Okay, there are three really good reasons for us. There are no more than three, but we
-              think three is a reasonable good number of good stuff.</h2>
+            <h2 class="display-6">Bem-vindo a um mundo de confiança e autoexpressão através de um sorriso radiante! 
+              Nossos serviços foram criados para atender às suas necessidades únicas e oferecer resultados que vão muito além das suas expectativas. 
+              Explore um pouco do que temos a oferecer:</h2>
           </div>
         </div>
         <div class="row d-flex align-items-center">
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <span class="h5 fw-lighter">01.</span>
-            <h3 class="py-5 border-top border-dark">We rented this fancy startup office in an old factory building.</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus culpa, voluptatibus ex itaque, sapiente a
-              consequatur inventore beatae, ipsam debitis omnis consequuntur iste asperiores. Similique quisquam debitis
-              corrupti deserunt, dolor.</p>
+            <span class="h5 fw-lighter">Invisalign</span>
+            <h3 class="py-5 border-top border-dark">Invisalign: Reimagine o Seu Sorriso, sem Limitações!</h3>
+            <p>Você merece um sorriso alinhado e cativante, e o Invisalign é a chave para alcançar isso de maneira discreta e eficaz. 
+              <br>Diga adeus aos tradicionais aparelhos metálicos e dê as boas-vindas a alinhadores transparentes e confortáveis. <br>Com Invisalign, 
+              cada etapa do processo é um passo em direção à sua confiança renovada e a um sorriso que reflete a verdadeira você.<p>
             <a href="/servicos" class="link-fancy">Veja mais
             </a>
           </div>
 
           <div class="col-md-6 col-lg-4 py-vh-2 pb-0" data-aos="fade-up" data-aos-delay="400">
-            <span class="h5 fw-lighter">02.</span>
-            <h3 class="py-5 border-top border-dark">We don´t know exactly what we are doing. But thats good because we
-              can´t break something intentionally.</h3>
-            <p>Lorem, ipsum dolor sit adipisicing elit. Minus culpa, voluptatibus ex itaque, sapiente a consequatur
-              inventore beatae, ipsam debitis omnis consequuntur iste asperiores. Similique quisquam debitis corrupti
-              deserunt, dolor.</p>
+            <span class="h5 fw-lighter">Implantes</span>
+            <h3 class="py-5 border-top border-dark">Implantes: Restaurando Sorrisos, Revivendo Confiança!</h3>
+            <p>Quando se trata de recuperar um sorriso completo e saudável, nossos serviços de implantes dentários são inigualáveis. 
+              Restauramos não apenas dentes, mas também a capacidade de saborear a vida plenamente. <br>Com tecnologia de ponta e expertise cirúrgica, 
+              nossa equipe dedicada oferece soluções personalizadas para cada necessidade, para que você possa sorrir, mastigar e viver sem limitações.</p>
             <a href="/servicos" class="link-fancy">Veja mais
             </a>
           </div>
 
-          <div class="col-md-6 col-lg-4 py-vh-6 pb-0" data-aos="fade-up" data-aos-delay="600">
-            <span class="h5 fw-lighter">03.</span>
-            <h3 class="py-5 border-top border-dark">There is no real number three reason. So please read again number
-              one and two.</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus culpa, voluptatibus ex itaque, sapiente a
-              consequatur inventore beatae, ipsam debitis omnis consequuntur iste asperiores. Similique quisquam debitis
-              corrupti deserunt, dolor.</p>
+          <div class="col-md-6 col-lg-4 py-vh-6" data-aos="fade-up" data-aos-delay="600">
+            <span class="h5 fw-lighter">Clareamento</span>
+            <h3 class="py-5 border-top border-dark">Clareamento Dental: Ilumine o Seu Sorriso, Ilumine o Seu Dia!</h3>
+            <p>Um sorriso brilhante é uma introdução memorável. <br>Com nossos serviços de clareamento dental, você pode remover anos de manchas e descolorações, 
+              revelando um sorriso luminoso que projeta confiança e vitalidade. <br>Nossos métodos seguros e eficazes são projetados para 
+              oferecer resultados visíveis e duradouros, para que você possa iluminar qualquer ambiente com seu sorriso radiante.</p>
             <a href="/servicos" class="link-fancy">Veja mais
             </a>
           </div>

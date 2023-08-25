@@ -26,9 +26,9 @@
               </div>
                 <div class="col-lg-4">
                 <span class="h5 fw-lighter">🦷 Dr. Eduardo Wilson Ferreira</span>
-                    <h3 class="py-5 border-top border-dark" data-aos="fade-left"> No mundo da odontologia de precisão, eu lidero a revolução dos implantes dentários. 
+                    <h3 class="py-5 border-top border-dark" data-aos="fade-left">No mundo da odontologia de precisão, eu lidero a revolução dos implantes dentários. 
                         Cada sorriso perdido é uma oportunidade de transformação. Com tecnologia de ponta e habilidade cirúrgica incomparável, devolvemos não apenas dentes, mas a alegria de viver.</h3>
-                    <p data-aos="fade-left" data-aos-delay="400">Especialista em Periodontia<br>CRO: 50.489
+                    <p data-aos="fade-left" data-aos-delay="200">Especialista em Periodontia<br>CRO: 50.489
                     </p>
                 </div>
           </div>

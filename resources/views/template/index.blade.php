@@ -133,6 +133,9 @@
             <li class="nav-item">
               <a class="nav-link link-secondary ps-0" href="/galeria">Galeria</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link link-secondary ps-0" href="https://wa.me/5514996975055?text=Olá, vim do seu site. Gostaria de agendar uma consulta." target="blank" data-splitbee-event="Click Download" title="Enviar mensagem pelo WhatsApp" aria-label="Enviar mensagem pelo WhatsApp" class="link-dark pb-1 link-fancy me-2"">Agende uma Consulta</a>
+            </li>
           </ul>
         </div>
         <div class="col-12 col-lg-6 col-xl-3 border-end p-5">
