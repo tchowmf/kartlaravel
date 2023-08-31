@@ -1,5 +1,5 @@
 
-# First Laravel Project
+# Laravel Project
 
 A Dentist Website done with Laravel Framework 10.x
 
