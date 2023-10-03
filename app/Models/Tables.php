@@ -9,9 +9,4 @@ class Tables extends Model
 {
     use HasFactory;
 
-    protected $table = "kart";
-    protected $fillable = ["mediaTempo", "numVotlas"];
-    protected $uniqueKey = ["numKart"];
-
-    public $timestamps = false;
 }

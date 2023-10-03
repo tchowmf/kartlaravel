@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TablesController;
+use App\Http\Controllers\KartsController;
+use App\Http\Controllers\VoltasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,10 @@ Route::get('/', function () {
 });
 
 Route::get('/tables', [TablesController::class, 'index']);
+
+Route::group(['prefix' => 'karts'], function() {
+    Route::get('/', [KartsController::class, 'index']);
+    Route::get('/{numKart}', [KartsController::class, 'showVoltas']);
+});
+
+Route::get('/pilotos', [VoltasController::class, 'index']);
