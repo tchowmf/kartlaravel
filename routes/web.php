@@ -17,7 +17,7 @@ use App\Http\Controllers\VoltasController;
 */
 
 Route::get('/', function () {
-    return view('tables.index');
+    return view('TemplateUser.index');
 });
 
 Route::get('/tables', [TablesController::class, 'index']);
