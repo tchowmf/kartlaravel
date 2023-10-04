@@ -2,11 +2,23 @@
 
 @section('contents')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Tabelas</h1>
+    <div class="d-flex justify-content-between mb-3">
+        <h1 class="h3 mb-0 text-gray-800">Tabelas</h1>
+        <div class="input-group col-md-2">
+            <input type="text" class="form-control" placeholder="Pesquisar...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </div>
 
     <div class="card">
-        <div class="card-header">
-            Ranking geral
+        <div class="card-header d-flex justify-content-between">
+            <span>Ranking geral</span>
+            <div>
+                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-up"></i></a>
+                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-down"></i></a>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-bordered dataTable">

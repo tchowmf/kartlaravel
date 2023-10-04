@@ -2,11 +2,23 @@
 
 @section('contents')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">KARTS</h1>
+    <div class="d-flex justify-content-between mb-3">
+        <h1 class="h3 mb-0 text-gray-800">KARTS</h1>
+        <div class="input-group col-md-2">
+            <input type="text" class="form-control" placeholder="Pesquisar n° KART">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </div>
 
     <div class="card">
-        <div class="card-header">
-            Lista dos KARTS
+        <div class="card-header d-flex justify-content-between">
+            <span>Lista dos KARTS</span>
+            <div>
+                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-up"></i></a>
+                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-down"></i></a>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-bordered dataTable">
@@ -15,10 +27,7 @@
                     <th>Numero do KART</th>
                     <th>Media de Tempo</th>
                     <th>Quantidade de Baterias</th>
-                    <th>
-                        <a href="#" class="btn btn-primary ordenar" data-ordenar="asc"><li class="fa fa-arrow-up"></li></a>
-                        <a href="#" class="btn btn-primary ordenar" data-ordenar="desc"><li class="fa fa-arrow-down"></li></a>
-                    </th>
+                    <th>Ação</th>
                 </thead>
 
                 <tbody>
