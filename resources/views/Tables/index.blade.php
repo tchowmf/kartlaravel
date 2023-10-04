@@ -2,11 +2,11 @@
 
 @section('contents')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Tabela</h1>
+    <h1 class="h3 mb-4 text-gray-800">Tabelas</h1>
 
-   <div class="card">
-        <div class = "card-header">
-            Lista de Marcas
+    <div class="card">
+        <div class="card-header">
+            Ranking geral
         </div>
         <div class="card-body">
             <table class="table table-bordered dataTable">
@@ -31,4 +31,7 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+
 @endsection

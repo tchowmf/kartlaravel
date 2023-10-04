@@ -10,16 +10,19 @@
                 <thead>
                     <th>Nome do Piloto</th>
                     <th>Melhor Volta</th>
+                    <th>Ação</th>
                 </thead>
                 <tbody>
                     @foreach ($voltas as $volta)
                         <tr>
                             <td>{{ $volta->nomePiloto }}</td>
                             <td>{{ $volta->melhorVolta }}</td>
+                            <td><a href="#" class="btn btn-danger"><li class="fa fa-times"></li></a></td>
                         </tr>
                     @endforeach
                 </tbody>
-                </div>
-            </div>
             </table>
+        </div>
+    </div>
+
 @endsection
