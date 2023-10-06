@@ -18,7 +18,15 @@ class KartsController extends Controller
     public function showVoltas($numKart)
     {
         $voltas = Voltas::where('numKart', $numKart)->get();
-        return view("Karts/inspect", ['numKart' => $numKart, 'voltas' => $voltas]);
+        return view("Karts.inspect", ['numKart' => $numKart, 'voltas' => $voltas]);
+    }
+
+    public function excluir($numKart, $id)
+    {
+        $voltas = Voltas::find($id);
+        $voltas->delete();
+
+        return redirect("/karts/{$numKart}");
     }
 
 }

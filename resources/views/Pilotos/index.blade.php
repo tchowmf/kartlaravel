@@ -39,7 +39,6 @@
                             <td><a href="#" class="btn btn-info"><li class="fa fa-search"></li></a></td>
                         </tr>
                     @endforeach
-
                 </tbody>
         </div>
     </div>

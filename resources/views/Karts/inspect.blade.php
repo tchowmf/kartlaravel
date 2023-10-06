@@ -1,6 +1,7 @@
 @extends('TemplateUser.index')
 
 @section('contents')
+
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Detalhes do Kart: {{ $numKart }}</h1>
 
@@ -17,7 +18,7 @@
                         <tr>
                             <td>{{ $volta->nomePiloto }}</td>
                             <td>{{ $volta->melhorVolta }}</td>
-                            <td><a href="#" class="btn btn-danger"><li class="fa fa-times"></li></a></td>
+                            <td><a href="/karts/{{ $volta->numKart }}/excluir/{{ $volta->id }}" class="btn btn-danger"><li class="fa fa-trash"></li></a></td>
                         </tr>
                     @endforeach
                 </tbody>
