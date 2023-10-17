@@ -9,9 +9,9 @@ class Voltas extends Model
 {
     use HasFactory;
 
-    protected $table = "voltas";
-    protected $fillable = ["nomePiloto", "melhorVolta"];
-    protected $Key = ["numKart"];
+    protected $table = 'voltas';
+    protected $fillable = ['nomePiloto', 'melhorVolta', 'notaPiloto'];
+    protected $Key = ['numKart'];
 
     public $timestamps = false;
 }

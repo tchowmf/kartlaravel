@@ -17,10 +17,38 @@ class VoltasController extends Controller
 
     public function showDrivers()
     {
-        $voltas = Voltas::selectRaw('nomePiloto, MIN(melhorVolta) as melhorVolta, numKart')
+        $voltas = Voltas::selectRaw('nomePiloto, MIN(melhorVolta) as melhorVolta, numKart, MAX(notaPiloto) as notaPiloto')
         ->groupBy('nomePiloto', 'numKart')
         ->get();
 
         return view("Pilotos.index", ['voltas' => $voltas]);
+    }
+
+    public function inserirNota($id)
+    {
+        $volta = Voltas::find($id);
+
+        return view("Pilotos.formulario", ['volta' => $volta]);
+    }
+
+    public function salvarNota(Request $request, $id)
+    {
+        $volta = Voltas::find($id);
+        $volta->notaPiloto = $request->input("notaPiloto");
+        $volta->save();
+
+        return redirect("/pilotos");
+    }
+
+    public function excluirNota($id)
+    {
+        $volta = Volta::find($id);
+
+        if ($volta) {
+            $volta->notaPiloto = null; // Ou qualquer outro valor que represente uma nota ausente
+            $volta->save();
+        }
+
+        return redirect("/pilotos");
     }
 }

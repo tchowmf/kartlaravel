@@ -25,11 +25,14 @@ Route::get('/tables', [TablesController::class, 'index']);
 Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'index']);
     Route::get('/{numKart}', [KartsController::class, 'showVoltas']);
-    //Route::get('/excluir/{id}',[KartsController::class,'excluir']);
     Route::get('/{numKart}/excluir/{id}', [KartsController::class, 'excluir']);
 
 });
 
-Route::get('/pilotos', [VoltasController::class, 'showDrivers']);
 
-//Route::group(['prefix' => 'karts'])
+Route::group(['prefix' => 'pilotos'], function() {
+    Route::get('/', [VoltasController::class, 'showDrivers']);
+    Route::get('/inserir-nota/{id}', [VoltasController::class, 'inserirNota']);
+    Route::post('/salvar-nota/{id}', [VoltasController::class, 'salvarNota']);
+    Route::get('/excluir-nota/{id}', [VoltasController::class, 'excluirNota']);
+});
