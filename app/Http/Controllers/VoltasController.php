@@ -17,12 +17,13 @@ class VoltasController extends Controller
 
     public function showDrivers()
     {
-        $voltas = Voltas::selectRaw('nomePiloto, MIN(melhorVolta) as melhorVolta, numKart, MAX(notaPiloto) as notaPiloto')
-        ->groupBy('nomePiloto', 'numKart')
-        ->get();
+        $voltas = Voltas::selectRaw('id, nomePiloto, MIN(melhorVolta) as melhorVolta, numKart, MAX(notaPiloto) as notaPiloto')
+            ->groupBy('id', 'nomePiloto', 'numKart')
+            ->get();
 
         return view("Pilotos.index", ['voltas' => $voltas]);
     }
+
 
     public function inserirNota($id)
     {
@@ -51,4 +52,6 @@ class VoltasController extends Controller
 
         return redirect("/pilotos");
     }
+
+
 }

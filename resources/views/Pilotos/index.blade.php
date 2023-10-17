@@ -16,8 +16,13 @@
         <div class="card-header d-flex justify-content-between">
             <span>Lista dos PILOTOS</span>
             <div>
-                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-up"></i></a>
-                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-down"></i></a>
+                <select class="form-control" name="orderby" id="orderby" class="orderby" aria-label="Ordenar por">
+                    <option value="id" selected="selected">Ordenação padrão</option>
+                    <option value="melhorVolta">Ordenar por melhor tempo</option>
+                    <option value="nomePiloto">Ordenar por nome do piloto</option>
+                    <option value="numKart">Ordenar por número do kart</option>
+                    <option value="notaPiloto">Ordenar por nota do piloto</option>
+                </select>
             </div>
         </div>
         <div class="card-body">
@@ -35,7 +40,7 @@
                 <tbody>
                     @foreach ($voltas as $volta)
                         <tr>
-                            <td>{{ $volta->id }}</td>
+                            <td>{{ $volta->id}}</td>
                             <td>{{ $volta->nomePiloto }}</td>
                             <td>{{ $volta->melhorVolta }}</td>
                             <td>{{ $volta->numKart }}</td>
