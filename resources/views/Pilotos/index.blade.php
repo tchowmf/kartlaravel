@@ -29,22 +29,21 @@
             <table class="table table-bordered dataTable">
 
                 <thead>
-                    <th>ID</th>
                     <th>Nome do PILOTO</th>
+                    <th>Nota do Piloto</th>
                     <th>Melhor Tempo</th>
                     <th>KART do Melhor Tempo</th>
-                    <th>Nota do Piloto</th>
                     <th>Ação</th>
                 </thead>
 
                 <tbody>
                     @foreach ($voltas as $volta)
                         <tr>
-                            <td>{{ $volta->id}}</td>
+                            <input type="hidden" name="id" value="{{ $volta->id }}">
                             <td>{{ $volta->nomePiloto }}</td>
+                            <td>{{ $volta->notaPiloto }}</td>
                             <td>{{ $volta->melhorVolta }}</td>
                             <td>{{ $volta->numKart }}</td>
-                            <td>{{ $volta->notaPiloto }}</td>
                             <td>
                                 <a href="/pilotos/inserir-nota/{{ $volta->id }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                 <a href="#" class="btn btn-info"><i class="fa fa-search"></i></a>

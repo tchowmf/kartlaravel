@@ -16,8 +16,12 @@
         <div class="card-header d-flex justify-content-between">
             <span>Lista dos KARTS</span>
             <div>
-                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-up"></i></a>
-                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-down"></i></a>
+                <select class="form-control" name="orderby" id="orderby" class="orderby" aria-label="Ordenar por">
+                    <option value="id" selected="selected">Ordenação padrão</option>
+                    <option value="melhorVolta">Ordenar por melhor tempo</option>
+                    <option value="nomePiloto">Ordenar por nota do kart</option>
+                    <option value="numKart">Ordenar por número do kart</option>
+                </select>
             </div>
         </div>
         <div class="card-body">
@@ -25,6 +29,7 @@
 
                 <thead>
                     <th>Numero do KART</th>
+                    <th>Nota do KART</th>
                     <th>Media de Tempo</th>
                     <th>Quantidade de Baterias</th>
                     <th>Ação</th>
@@ -34,6 +39,7 @@
                     @foreach ($karts as $kart)
                         <tr>
                             <td>{{ $kart['numKart'] }}</td>
+                            <td>{{ $kart['notaKart'] }}</td>
                             <td>{{ $kart['mediaTempo'] }}</td>
                             <td>{{ $kart['numVoltas'] }}</td>
                             <td><a href="{{ url("karts/" . $kart['numKart']) }}" class="btn btn-info"><li class="fa fa-search"></li></a></td>

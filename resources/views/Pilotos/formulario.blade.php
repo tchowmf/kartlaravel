@@ -25,7 +25,8 @@
                 <option value="D" {{ isset($volta) && $volta->notaPiloto === 'D' ? 'selected' : '' }}>D</option>
             </select>
             <br/>
-            <input type="submit" class="btn btn-success" value="{{ isset($volta) ? 'Atualizar' : 'Inserir' }}">
+            <input type="submit" class="btn btn-success" value="Atualizar">
+            <a href="/pilotos" class="btn btn-danger">Voltar</a>
         </form>
     </div>
 </div>
