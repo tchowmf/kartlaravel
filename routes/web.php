@@ -20,7 +20,6 @@ Route::get('/', function () {
     return view('TemplateUser.index');
 });
 
-Route::get('/tables', [TablesController::class, 'index']);
 
 Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'showKarts']);
@@ -35,4 +34,9 @@ Route::group(['prefix' => 'pilotos'], function() {
     Route::get('/inserir-nota/{id}', [VoltasController::class, 'inserirNota']);
     Route::post('/salvar-nota/{id}', [VoltasController::class, 'salvarNota']);
     Route::get('/excluir-nota/{id}', [VoltasController::class, 'excluirNota'])->name('excluir.nota');
+});
+
+Route::group(['prefix' => 'tables'], function() {
+    Route::get('/', [TablesController::class, 'entrada']);
+    Route::get('/birigui', [TablesController::class, 'showTables']);
 });

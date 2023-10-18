@@ -3,7 +3,7 @@
 @section('contents')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Detalhes do Kart: {{ $numKart }}</h1>
+    <h2 class="h3 mb-4 text-gray-800">Detalhes do Kart: {{ $numKart }}</h2>
 
     <div class="card">
         <div class="card-body">

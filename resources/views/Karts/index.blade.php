@@ -3,7 +3,7 @@
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h1 class="h3 mb-0 text-gray-800">KARTS</h1>
+        <h2 class="h3 mb-0 text-gray-800">KARTS</h2>
         <div class="input-group col-md-2">
             <input type="text" class="form-control" placeholder="Pesquisar n° KART">
             <div class="input-group-append">

@@ -5,7 +5,7 @@
     $titulo = "Inserir/Atualizar Nota do PILOTO";
 @endphp
 
-<h1 class="h3 mb-4 text-gray-800">{{ $titulo }}</h1>
+<h2 class="h3 mb-4 text-gray-800">{{ $titulo }}</h2>
 <div class="card" style="width: 30%;">
     <div class="card-header">
         {{ isset($volta) ? 'Atualizar' : 'Inserir' }} Nota do Piloto

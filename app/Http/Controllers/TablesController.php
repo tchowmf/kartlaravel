@@ -14,6 +14,11 @@ class TablesController extends Controller
         return view("TemplateUser.index");
     }
 
+    public function entrada()
+    {
+        return view("Tables.entrada");
+    }
+
     public function showTables(Request $request)
     {
 
