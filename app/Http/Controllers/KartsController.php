@@ -15,6 +15,20 @@ class KartsController extends Controller
         return view("Karts.index", ['karts' => $kart]);
     }
 
+    public function showKarts(Request $request)
+{
+    $orderBy = $request->input('orderby', 'id');
+    $direction = 'asc';
+
+    if ($orderBy === 'notaPiloto') {
+        $direction = 'desc';
+    }
+
+    $karts = Karts::orderBy($orderBy, $direction)->get();
+
+    return view("Karts.index", ['karts' => $karts]);
+}
+
     public function showVoltas($numKart)
     {
         $voltas = Voltas::where('numKart', $numKart)->get();

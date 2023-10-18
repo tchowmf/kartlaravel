@@ -6,7 +6,7 @@
 @endphp
 
 <h1 class="h3 mb-4 text-gray-800">{{ $titulo }}</h1>
-<div class="card">
+<div class="card" style="width: 30%;">
     <div class="card-header">
         {{ isset($volta) ? 'Atualizar' : 'Inserir' }} Nota do Piloto
     </div>
@@ -25,8 +25,11 @@
                 <option value="D" {{ isset($volta) && $volta->notaPiloto === 'D' ? 'selected' : '' }}>D</option>
             </select>
             <br/>
+            <td>
             <input type="submit" class="btn btn-success" value="Atualizar">
-            <a href="/pilotos" class="btn btn-danger">Voltar</a>
+            <a href="{{ route('excluir.nota', ['id' => $volta->id]) }}" class="btn btn-danger"><li class="fa fa-trash"></li></a>
+            <a href="/pilotos" class="btn btn-info">Voltar</a>
+            </td>
         </form>
     </div>
 </div>
