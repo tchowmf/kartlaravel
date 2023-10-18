@@ -11,34 +11,68 @@ class TablesController extends Controller
 {
     public function index()
     {
+        return view("TemplateUser.index");
+    }
+
+    public function showTables(Request $request)
+    {
+
+        // Recupere o valor selecionado no 'select' com name 'orderby'
+        $orderBy = $request->input('orderby', 'id');
+
+
+        // Defina um array associativo para mapear valores do select para colunas de ordenação
+        $orderByMapping = [
+            'id' => 'id', // Ordenação padrão
+            'mediaTempo' => 'mediaTempo',
+            'numKart' => 'numKart',
+            'notaKart' => 'notaKart',
+            'notaPiloto' => 'notaPiloto',
+            'nomePiloto' => 'nomePiloto',
+            'numVoltas' => 'numVoltas',
+        ];
+
+        // Verifique se a opção selecionada está no mapeamento; caso contrário, use 'id' como padrão
+        $orderByColumn = $orderByMapping[$orderBy] ?? 'numKart';
+
+        // Recupere os dados dos karts
         $karts = Karts::all();
+
         $dadosCombinados = [];
 
         foreach ($karts as $kart) {
             $dadosVoltas = Voltas::where('numKart', $kart->numKart)->first();
 
-            // Verifique se há dados de voltas para o kart atual
             if ($dadosVoltas) {
                 $dadosCombinados[] = [
                     'numKart' => $kart->numKart,
+                    'notaKart' => $kart->notaKart,
                     'mediaTempo' => $kart->mediaTempo,
                     'numVoltas' => $kart->numVoltas,
+                    'numVoltas-desc' => $kart->numVoltas,
                     'nomePiloto' => $dadosVoltas->nomePiloto,
+                    'notaPiloto' => $dadosVoltas->notaPiloto,
                     'melhorVolta' => $dadosVoltas->melhorVolta,
                 ];
             } else {
-                // Caso não haja dados de voltas para o kart, preencha com valores vazios
                 $dadosCombinados[] = [
                     'numKart' => $kart->numKart,
+                    'notaKart' => '',
                     'mediaTempo' => $kart->mediaTempo,
                     'numVoltas' => $kart->numVoltas,
                     'nomePiloto' => '',
+                    'notaPiloto' => '',
                     'melhorVolta' => '',
                 ];
             }
         }
 
+        if (in_array($orderByColumn, ['notaPiloto', 'notaKart', 'numVoltas-desc'])) {
+            $dadosCombinados = collect($dadosCombinados)->sortByDesc($orderByColumn);
+        } else {
+            $dadosCombinados = collect($dadosCombinados)->sortBy($orderByColumn);
+        }
+
         return view("Tables.index", ['dadosCombinados' => $dadosCombinados]);
     }
-
 }

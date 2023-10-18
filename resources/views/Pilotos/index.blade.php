@@ -58,21 +58,17 @@
 
     <script>
         document.getElementById('orderby').addEventListener('change', function() {
-            var selectedValue = this.value;
-            var currentUrl = window.location.href;
-            var newUrl = updateQueryStringParameter(currentUrl, 'orderby', selectedValue);
-            window.location.href = newUrl;
-        });
+            const selectedValue = this.value;
+            const currentUrl = window.location.href;
 
-        // Função para atualizar parâmetros na URL
-        function updateQueryStringParameter(uri, key, value) {
-            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-            if (uri.match(re)) {
-                return uri.replace(re, '$1' + key + "=" + value + '$2');
-            } else {
-                return uri + separator + key + "=" + value;
-            }
-        }
+            // Analisar a URL atual
+            const url = new URL(currentUrl);
+
+            // Adicionar ou atualizar o parâmetro "orderby" na URL
+            url.searchParams.set('orderby', selectedValue);
+
+            // Redirecionar para a URL com o novo parâmetro
+            window.location.href = url.toString();
+        });
     </script>
 @endsection

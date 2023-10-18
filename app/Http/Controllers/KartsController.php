@@ -16,18 +16,25 @@ class KartsController extends Controller
     }
 
     public function showKarts(Request $request)
-{
-    $orderBy = $request->input('orderby', 'id');
-    $direction = 'asc';
+    {
+        $orderBy = $request->input('orderby', 'id');
+        $direction = 'asc';
 
-    if ($orderBy === 'notaPiloto') {
-        $direction = 'desc';
+        if ($orderBy === 'mediaTempo-desc') {
+            $direction = 'desc';
+            $orderBy = 'mediaTempo'; // Altere o valor de orderBy para a coluna real
+        }
+
+        if ($orderBy === 'notaKart-desc') {
+            $direction = 'desc';
+            $orderBy = 'notaKart';
+        }
+
+        $karts = Karts::orderBy($orderBy, $direction)->get();
+
+        return view("Karts.index", ['karts' => $karts]);
     }
 
-    $karts = Karts::orderBy($orderBy, $direction)->get();
-
-    return view("Karts.index", ['karts' => $karts]);
-}
 
     public function showVoltas($numKart)
     {

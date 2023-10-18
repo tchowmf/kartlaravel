@@ -17,11 +17,13 @@
             <span>Lista dos KARTS</span>
             <div>
                 <form method="get">
-                    <select class="form-control" name="orderby" id="orderby" class="orderby" aria-label="Ordenar por">
+                    <select class="form-control" name="orderby" id="orderby" aria-label="Ordenar por" style="max-width: 250px">
                         <option value="id" selected="selected">Ordenação padrão</option>
-                        <option value="mediaTempo">Ordenar por melhor tempo</option>
-                        <option value="notaKart">Ordenar por nota do kart</option>
                         <option value="numKart">Ordenar por número do kart</option>
+                        <option value="notaKart">Ordenar por nota do kart: menor para maior</option>
+                        <option value="notaKart-desc">Ordenar por nota do kart: maior para menor</option>
+                        <option value="mediaTempo">Ordenar por melhor tempo: menor para maior</option>
+                        <option value="mediaTempo-desc">Ordenar por melhor tempo: maior para menor</option>
                     </select>
                 </form>
             </div>
