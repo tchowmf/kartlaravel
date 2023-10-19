@@ -10,9 +10,7 @@ class VoltasController extends Controller
 
     public function index()
     {
-        $votla = Votlas::all();
-
-        return view("Pilotos.index", ['voltas' => $volta]);
+        return view("Pilotos.index");
     }
 
     /* -- SELECT WORKING CLEAN BUT DUPLICATED INFO
@@ -51,7 +49,7 @@ class VoltasController extends Controller
             ->orderBy($orderBy, $direction)
             ->get();
 
-        return view("Pilotos.index", ['voltas' => $voltas]);
+        return view("Pilotos.show", ['voltas' => $voltas]);
     }
 
     public function inserirNota($id)

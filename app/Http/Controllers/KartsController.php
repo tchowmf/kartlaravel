@@ -10,9 +10,7 @@ class KartsController extends Controller
 {
     public function index()
     {
-        $kart = Karts::all();
-
-        return view("Karts.index", ['karts' => $kart]);
+        return view("Karts.index");
     }
 
     public function showKarts(Request $request)
@@ -32,7 +30,7 @@ class KartsController extends Controller
 
         $karts = Karts::orderBy($orderBy, $direction)->get();
 
-        return view("Karts.index", ['karts' => $karts]);
+        return view("Karts.show", ['karts' => $karts]);
     }
 
 

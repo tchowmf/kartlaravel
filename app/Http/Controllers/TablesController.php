@@ -73,6 +73,6 @@ class TablesController extends Controller
             $dadosCombinados = collect($dadosCombinados)->sortBy($orderByColumn);
         }
 
-        return view("Tables.showkgv", ['dadosCombinados' => $dadosCombinados]);
+        return view("Tables.show", ['dadosCombinados' => $dadosCombinados]);
     }
 }

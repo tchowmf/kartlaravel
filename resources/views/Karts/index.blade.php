@@ -1,73 +1,61 @@
 @extends('TemplateUser.index')
 
 @section('contents')
-    <!-- Page Heading -->
-    <div class="d-flex justify-content-between mb-3">
-        <h2 class="h3 mb-0 text-gray-800">KARTS</h2>
-        <div class="input-group col-md-2">
-            <input type="text" class="form-control" placeholder="Pesquisar n° KART">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-            </div>
+<!-- Page Heading -->
+<div class="d-flex justify-content-between mb-3">
+    <h2 class="h3 mb-0 text-gray-800">KARTÓDROMOS DISPONÍVEIS</h2>
+    <div class="input-group col-md-2">
+        <input type="text" class="form-control" placeholder="Pesquisar LOCAL">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
         </div>
     </div>
+</div>
 
-    <div class="card">
-        <div class="card-header d-flex justify-content-between">
-            <span>Lista dos KARTS</span>
-            <div>
-                <form method="get">
-                    <select class="form-control" name="orderby" id="orderby" aria-label="Ordenar por" style="max-width: 250px">
-                        <option value="id" selected="selected">Ordenação padrão</option>
-                        <option value="numKart">Ordenar por número do kart</option>
-                        <option value="notaKart">Ordenar por nota do kart: menor para maior</option>
-                        <option value="notaKart-desc">Ordenar por nota do kart: maior para menor</option>
-                        <option value="mediaTempo">Ordenar por melhor tempo: menor para maior</option>
-                        <option value="mediaTempo-desc">Ordenar por melhor tempo: maior para menor</option>
-                    </select>
-                </form>
-            </div>
-        </div>
-        <div class="card-body">
-            <table class="table table-bordered dataTable">
 
-                <thead>
-                    <th>Numero do KART</th>
-                    <th>Nota do KART</th>
-                    <th>Media de Tempo</th>
-                    <th>Quantidade de Baterias</th>
-                    <th>Ação</th>
-                </thead>
+<table style="width: 50%;">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: separate; /* Use "separate" para permitir espaçamento */
+            border-spacing: 10px; /* Adicione o espaçamento desejado em pixels */
+        }
 
-                <tbody>
-                    @foreach ($karts as $kart)
-                        <tr>
-                            <td>{{ $kart['numKart'] }}</td>
-                            <td>{{ $kart['notaKart'] }}</td>
-                            <td>{{ $kart['mediaTempo'] }}</td>
-                            <td>{{ $kart['numVoltas'] }}</td>
-                            <td><a href="{{ url("karts/" . $kart['numKart']) }}" class="btn btn-info"><li class="fa fa-search"></li></a></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+        th, td {
+            width: 50%; /* Distribua igualmente o espaço entre as duas colunas */
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #6e707e;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #d1d3e2;
+            border-radius: 0.35rem;
+        }
+    </style>
 
-    <script>
-        document.getElementById('orderby').addEventListener('change', function() {
-            const selectedValue = this.value;
-            const currentUrl = window.location.href;
+    <tbody>
+        <tr>
+            <td onclick="location.href='/karts/birigui';" style="cursor: pointer;">
+                <div>
+                    <span style="font-weight: bold;">Speed Park - Birigui</span><br>
+                    <div style="float: left; height: 80px; width: 10px;"></div>
+                    <!--<a>@ Autodromo XRP</a><br>-->
+                    <span style="font-size: 12px">@ Birigui</span>
+                </div>
+            </td>
 
-            // Analisar a URL atual
-            const url = new URL(currentUrl);
-
-            // Adicionar ou atualizar o parâmetro "orderby" na URL
-            url.searchParams.set('orderby', selectedValue);
-
-            // Redirecionar para a URL com o novo parâmetro
-            window.location.href = url.toString();
-        });
-    </script>
-
+            <td onclick="location.href='/karts/kgv';" style="cursor: pointer;">
+                <div>
+                    <span style="font-weight: bold;">KGV - Kartodromo Granja Viana</span><br>
+                    <div style="float: left; height: 80px; width: 10px;"></div>
+                    <!--<a>@ Kartodromo Granja Viana</a><br>-->
+                    <span style="font-size: 12px">@ São Paulo</span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
 @endsection
