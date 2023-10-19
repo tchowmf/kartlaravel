@@ -40,10 +40,10 @@
         <tr>
             <td onclick="location.href='/tables/birigui';" style="cursor: pointer;">
                 <div>
-                    <span style="font-weight: bold;">Speed Park - Birigui</span><br>
+                    <span style="font-weight: bold;">Speed Park</span><br>
                     <div style="float: left; height: 80px; width: 10px;"></div>
-                    <!--<a>@ Autodromo XRP</a><br>-->
-                    <span style="font-size: 12px">@ Birigui</span>
+                    <span style="font-size: 12px">@ Birigui</span><br>
+                    <a style="font-size: 12px" href='https://www.speedpark.com.br/'>speedpark.com.br</a>
                 </div>
             </td>
 
@@ -51,8 +51,8 @@
                 <div>
                     <span style="font-weight: bold;">KGV - Kartodromo Granja Viana</span><br>
                     <div style="float: left; height: 80px; width: 10px;"></div>
-                    <!--<a>@ Kartodromo Granja Viana</a><br>-->
-                    <span style="font-size: 12px">@ São Paulo</span>
+                    <span style="font-size: 12px">@ São Paulo</span><br>
+                    <a style="font-size: 12px" href='https://kartodromogranjaviana.com.br/'>kartodromogranjaviana.com.br</a>
                 </div>
             </td>
         </tr>

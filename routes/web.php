@@ -44,3 +44,11 @@ Route::group(['prefix' => 'tables'], function() {
     Route::get('/', [TablesController::class, 'index']);
     Route::get('/kgv', [TablesController::class, 'showTables']);
 });
+
+Route::group(['prefix' => 'results'], function() {
+    Route::get('/', [ResultsController::class, 'index']);
+});
+
+Route::group(['prefix' => 'live'], function() {
+    Route::get('/', [LiveController::class, 'index']);
+});

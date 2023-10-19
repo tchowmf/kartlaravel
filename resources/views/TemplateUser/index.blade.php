@@ -34,8 +34,8 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    <img src="/img/Rental-Kart-G.svg" style="width: 3.3rem;"/>
                 </div>
                 <div class="sidebar-brand-text mx-3">Kart Timer</div>
             </a>
@@ -78,7 +78,7 @@
 
             <!-- Nav Item - Live -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/live">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Corridas - Ao vivo</span></a>
             </li>
@@ -88,7 +88,7 @@
 
             <!-- Nav Item - Results -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/results">
                     <i class="fas fa-fw fa-flag-checkered"></i>
                     <span>Corridas - Resultados</span></a>
             </li>

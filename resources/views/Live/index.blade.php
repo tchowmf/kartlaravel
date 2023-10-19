@@ -38,7 +38,7 @@
 
     <tbody>
         <tr>
-            <td onclick="location.href='/pilotos/birigui';" style="cursor: pointer;">
+            <td onclick="location.href='/live/birigui';" style="cursor: pointer;">
                 <div>
                     <span style="font-weight: bold;">Speed Park</span><br>
                     <div style="float: left; height: 80px; width: 10px;"></div>
@@ -47,7 +47,7 @@
                 </div>
             </td>
 
-            <td onclick="location.href='/pilotos/kgv';" style="cursor: pointer;">
+            <td onclick="location.href='/live/kgv';" style="cursor: pointer;">
                 <div>
                     <span style="font-weight: bold;">KGV - Kartodromo Granja Viana</span><br>
                     <div style="float: left; height: 80px; width: 10px;"></div>
