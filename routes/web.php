@@ -37,6 +37,6 @@ Route::group(['prefix' => 'pilotos'], function() {
 });
 
 Route::group(['prefix' => 'tables'], function() {
-    Route::get('/', [TablesController::class, 'entrada']);
-    Route::get('/birigui', [TablesController::class, 'showTables']);
+    Route::get('/', [TablesController::class, 'index']);
+    Route::get('/kgv', [TablesController::class, 'showTables']);
 });

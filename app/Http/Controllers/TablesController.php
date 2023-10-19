@@ -11,12 +11,7 @@ class TablesController extends Controller
 {
     public function index()
     {
-        return view("TemplateUser.index");
-    }
-
-    public function entrada()
-    {
-        return view("Tables.entrada");
+        return view("Tables.index");
     }
 
     public function showTables(Request $request)
@@ -78,6 +73,6 @@ class TablesController extends Controller
             $dadosCombinados = collect($dadosCombinados)->sortBy($orderByColumn);
         }
 
-        return view("Tables.index", ['dadosCombinados' => $dadosCombinados]);
+        return view("Tables.showkgv", ['dadosCombinados' => $dadosCombinados]);
     }
 }
