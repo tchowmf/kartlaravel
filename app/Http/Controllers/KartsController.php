@@ -48,4 +48,34 @@ class KartsController extends Controller
         return redirect("/karts/{$numKart}");
     }
 
+
+    public function calcularNotas()
+{
+    $voltas = Voltas::all();
+
+    foreach ($voltas as $volta) {
+        $tempoVolta = floatval($volta->melhorVolta);
+
+        $mediaTempo = Voltas::avg('melhorVolta');
+
+        $diferenca = $tempoVolta - $mediaTempo;
+
+        if ($diferenca <= -5) {
+            $nota = 'S';
+        } elseif ($diferenca >= -5 && $diferenca <= -1.4) {
+            $nota = 'A';
+        } elseif ($diferenca > -1.5 && $diferenca <= 1) {
+            $nota = 'B';
+        } elseif ($diferenca > 1 && $diferenca <= 2) {
+            $nota = 'C';
+        } elseif ($diferenca > 2) {
+            $nota = 'D';
+        }
+
+        Voltas::where('id', $volta->id)->update(['notaKart' => $nota]);
+    }
+
+    return redirect()->route('pagina_de_notas');
+}
+
 }

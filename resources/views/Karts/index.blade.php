@@ -43,7 +43,7 @@
                     <span style="font-weight: bold;">Speed Park</span><br>
                     <div style="float: left; height: 80px; width: 10px;"></div>
                     <span style="font-size: 12px">@ Birigui</span><br>
-                    <a style="font-size: 12px" href='https://www.speedpark.com.br/'>speedpark.com.br</a>
+                    <a style="font-size: 12px" target="_blank" href='https://www.speedpark.com.br/'>speedpark.com.br</a>
                 </div>
             </td>
 

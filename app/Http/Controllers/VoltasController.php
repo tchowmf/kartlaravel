@@ -41,10 +41,9 @@ class VoltasController extends Controller
         }
 
         $voltas = Voltas::select('voltas.id', 'voltas.nomePiloto', 'voltas.melhorVolta', 'voltas.numKart', 'voltas.notaPiloto')
-            ->whereIn('voltas.id', function ($query) {
-                $query->select(Voltas::raw('MIN(id)'))
-                    ->from('voltas')
-                    ->groupBy('nomePiloto');
+            ->join(Voltas::raw("(SELECT nomePiloto, MIN(melhorVolta) AS minMelhorVolta FROM voltas GROUP BY nomePiloto) as sub"), function($join) {
+                $join->on('voltas.nomePiloto', '=', 'sub.nomePiloto');
+                $join->on('voltas.melhorVolta', '=', 'sub.minMelhorVolta');
             })
             ->orderBy($orderBy, $direction)
             ->get();
