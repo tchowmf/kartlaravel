@@ -16,10 +16,8 @@ class TablesController extends Controller
 
     public function showTables(Request $request)
     {
-
         // Recupere o valor selecionado no 'select' com name 'orderby'
         $orderBy = $request->input('orderby', 'id');
-
 
         // Defina um array associativo para mapear valores do select para colunas de ordenação
         $orderByMapping = [
@@ -30,6 +28,7 @@ class TablesController extends Controller
             'notaPiloto' => 'notaPiloto',
             'nomePiloto' => 'nomePiloto',
             'numVoltas' => 'numVoltas',
+            'melhorVolta' => 'melhorVolta',
         ];
 
         // Verifique se a opção selecionada está no mapeamento; caso contrário, use 'id' como padrão
@@ -41,7 +40,7 @@ class TablesController extends Controller
         $dadosCombinados = [];
 
         foreach ($karts as $kart) {
-            $dadosVoltas = Voltas::where('numKart', $kart->numKart)->first();
+            $dadosVoltas = Voltas::where('numKart', $kart->numKart)->orderBy('melhorVolta')->first();
 
             if ($dadosVoltas) {
                 $dadosCombinados[] = [
