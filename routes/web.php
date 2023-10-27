@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TablesController;
 use App\Http\Controllers\KartsController;
 use App\Http\Controllers\VoltasController;
+use App\Http\Controllers\ResultsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,8 @@ Route::group(['prefix' => 'tables'], function() {
 
 Route::group(['prefix' => 'results'], function() {
     Route::get('/', [ResultsController::class, 'index']);
+    Route::get('/kgv', [ResultsController::class, 'showEvents']);
+    Route::get('/birigui', [ResultsController::class, 'index']);
 });
 
 Route::group(['prefix' => 'live'], function() {
