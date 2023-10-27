@@ -3,7 +3,7 @@
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h2 class="h3 mb-0 text-gray-800">CORRIDAS - RESULTADOS</h2>
+        <h2 class="h3 mb-0 text-gray-800">CORRIDAS</h2>
         <div class="input-group col-md-2">
             <input type="text" class="form-control" placeholder="Pesquisar n° RESULTADO">
             <div class="input-group-append">
@@ -41,12 +41,12 @@
         <tbody>
                 <tr>
                     @foreach($attributesArray as $attributes)
-                        <td onclick="location.href='/results/kgv/{{$attributes['ID_EVENTO']}}/epg';" style="cursor: pointer; width: 25%; padding: 10px;">
+                        <td onclick="location.href='/results/kgv/{{$ID_EVENTO}}/{{$attributes['ID_EVENTO_PISTA_GRUPO']}}/provas';" style="cursor: pointer; width: 25%; padding: 10px;">
                             <div>
                                 <span style="font-weight: bold;">{{ $attributes['NOME'] }}</span><br>
                                 <div style="float: left; height: 80px; width: 10px;"></div>
+                                <span style="font-size: 12px">{{ $attributes['ID_PISTA'] }}</span><br> <!-- IDENTIFICAR AS PISTAS PARA ASSOCIAÇÃO -->
                                 <span style="font-size: 12px">@ Birigui</span><br>
-                                <span style="font-size: 12px">{{ $attributes['DATA'] }}</span><br>
                                 <a style="font-size: 12px" href='{{ $attributes['link'] }}'></a>
                             </div>
                         </td>
@@ -56,7 +56,7 @@
                     @endforeach
                 </tr>
             </table>
-            <a href="/results/" class="btn btn-info">Voltar</a>
+            <a href="/results/kgv" class="btn btn-info">Voltar</a>
         </tbody>
 
 @endsection
