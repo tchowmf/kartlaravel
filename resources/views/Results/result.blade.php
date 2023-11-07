@@ -17,7 +17,7 @@
             <table class="table table-bordered dataTable">
                 <thead>
                     <th>POSIÇÃO</th>
-                    <th>NUM KART</th>
+                    <th>KART</th>
                     <th>NOME PILOTO</th>
                     <th>TEMPO MELHOR VOLTA</th>
                     <th>N MELHOR VOLTA</th>

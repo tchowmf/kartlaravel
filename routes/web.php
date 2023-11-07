@@ -5,6 +5,7 @@ use App\Http\Controllers\TablesController;
 use App\Http\Controllers\KartsController;
 use App\Http\Controllers\VoltasController;
 use App\Http\Controllers\ResultsController;
+use App\Http\Controllers\LivesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,5 +57,9 @@ Route::group(['prefix' => 'results'], function() {
 });
 
 Route::group(['prefix' => 'live'], function() {
-    Route::get('/', [LiveController::class, 'index']);
+    Route::get('/', [LivesController::class, 'index']);
+    Route::get('/kgv', [LivesController::class, 'showLive']);
+    Route::get('/kgv/select', [LivesController::class, 'select']);
+    Route::get('/kgv/{numeroKart}', [LivesController::class, 'showDetail']);
+    Route::get('/birigui', [LivesController::class, 'showLive']);
 });
