@@ -66,7 +66,7 @@ class TablesController extends Controller
             }
         }
 
-        if (in_array($orderByColumn, ['notaPiloto', 'notaKart', 'numVoltas-desc'])) {
+        if (in_array($orderByColumn, ['notaPiloto', 'notaKart', 'numVoltas-desc', 'numVoltas'])) {
             $dadosCombinados = collect($dadosCombinados)->sortByDesc($orderByColumn);
         } else {
             $dadosCombinados = collect($dadosCombinados)->sortBy($orderByColumn);
