@@ -60,6 +60,7 @@ Route::group(['prefix' => 'live'], function() {
     Route::get('/', [LivesController::class, 'index']);
     Route::get('/kgv', [LivesController::class, 'showLive']);
     Route::get('/kgv/select', [LivesController::class, 'select']);
-    Route::get('/kgv/{numeroKart}', [LivesController::class, 'showDetail']);
+    Route::post('/kgv/select', [LivesController::class, 'saveSelect']);
+    Route::get('/kgv/{numero}', [LivesController::class, 'showDetail']);
     Route::get('/birigui', [LivesController::class, 'showLive']);
 });

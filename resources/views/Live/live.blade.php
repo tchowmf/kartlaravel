@@ -3,24 +3,19 @@
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h2 class="h3 mb-0 text-gray-800">AO VIVO</h2> {{-- PERGUNTAR COMO USAR O TITULO--}}
-        <div class="input-group col-md-2">
-            <input type="text" class="form-control" placeholder="Pesquisar n° RESULTADO">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-            </div>
-        </div>
+        @foreach ($header as $attributes)
+            <h2 class="h3 mb-0 text-gray-800">{!! $attributes->TITULO !!}</h2>
+            TEMPO DE PROVA: {{ $attributes['TEMPOCORRIDA'] }}<br>
+            TEMPO RESTANTE: {{ $attributes['TEMPORESTANTE'] }}<br><br>
+            {{$attributes['MELHORVOLTAPROVA']}}
+        @endforeach
     </div>
 
+    <!-- Page Body -->
     <div class="card">
         <div class="card-body">
             <table class="table table-bordered dataTable">
-                @foreach ($header as $attributes)
-                {{$attributes->TITULO}}<br>
-                TEMPO DE PROVA: {{$attributes['TEMPOCORRIDA']}}<br>
-                TEMPO RESTANTE: {{$attributes['TEMPORESTANTE']}}<br>
-                {{$attributes['MELHORVOLTAPROVA']}}<br><br>
-                @endforeach
+
                 <thead>
                     <th>POSIÇÃO</th>
                     <th>KART</th>
