@@ -53,7 +53,7 @@ class LivesController extends Controller
 
     public function saveSelect(Request $request) {
         $numero = $request->input('numeroKart');
-        var_dump($numero);
+
         return redirect("/live/kgv/$numero");
     }
 
