@@ -55,6 +55,7 @@ Route::group(['prefix' => 'results'], function() {
     Route::get('/kgv/{ID_EVENTO}/epg', [ResultsController::class, 'showEpg']);
     Route::get('/kgv/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'showProvas']);
     Route::get('/kgv/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'showResults']);
+    Route::post('/kgv/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'insertData']);
 });
 
 Route::group(['prefix' => 'live'], function() {

@@ -64,7 +64,6 @@
                                     }
                                 @endphp
                                 {{ $resultado }}
-
                             </td>
                             <td>3</td>
                             <td>{{ $attributes->DIFA}}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Voltas;
 
 class ResultsController extends Controller
 {
@@ -73,4 +74,42 @@ class ResultsController extends Controller
 
         return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA]);
     }
+
+    public function insertData(Request $request, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA)
+    {
+        $nKarts = $request->input("nKart");
+        $nome = $request->input("nome");
+        $tempos = $request->input("tempo");
+
+        $count = count($nKarts);
+        $insertionSuccessful = true;
+
+        for ($i = 0; $i < $count; $i++) {
+            $time = $tempos[$i];
+            list($minutes, $seconds) = explode(':', $time);
+            $totalSeconds = (floatval($minutes) * 60) + floatval($seconds);
+
+            // Check if the same float value exists in the database's melhorVolta column
+            $existingTempo = Voltas::whereRaw('CAST(melhorVolta AS DECIMAL(10, 3)) = ?', [$totalSeconds])->first();
+
+            if ($existingTempo) {
+                $insertionSuccessful = false;
+                break;
+            }
+
+            // If not a duplicate, proceed with insertion
+            $volta = new Voltas();
+            $volta->numKart = $nKarts[$i];
+            $volta->nomePiloto = $nome[$i];
+            $volta->melhorVolta = $totalSeconds;
+            $volta->save();
+        }
+
+        if ($insertionSuccessful) {
+            return back()->with('success', 'TEMPOS INSERIDOS COM SUCESSO!!');
+        } else {
+            return back()->with('danger', 'TEMPOS DUPLICADOS OU ERRO NA INSERÇÃO!!');
+        }
+    }
+
 }

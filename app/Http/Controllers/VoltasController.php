@@ -64,7 +64,7 @@ class VoltasController extends Controller
         $volta->notaPiloto = $request->input("notaPiloto");
         $volta->save();
 
-        return redirect("/pilotos");
+        return redirect("/pilotos/kgv");
     }
 
     public function excluirNota($id)

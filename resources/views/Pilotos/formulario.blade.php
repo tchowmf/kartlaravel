@@ -26,9 +26,11 @@
             </select>
             <br/>
             <td>
-            <input type="submit" class="btn btn-success" value="Atualizar">
-            <a href="{{ route('excluir.nota', ['id' => $volta->id]) }}" class="btn btn-danger"><li class="fa fa-trash"></li></a>
-            <a href="/pilotos" class="btn btn-info">Voltar</a>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <a href="/pilotos" class="btn btn-info">Voltar</a>
+                    <a href="{{ route('excluir.nota', ['id' => $volta->id]) }}" class="btn btn-danger"><li class="fa fa-trash"></li></a>
+                    <input type="submit" class="btn btn-success" value="Atualizar">
+                </div>
             </td>
         </form>
     </div>
