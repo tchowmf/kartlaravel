@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Voltas;
+use App\Controllers\KartsController;
+use App\Traits\CalculosTrait;
 
 class ResultsController extends Controller
 {
+    use CalculosTrait;
+
     public function index()
     {
         return view("Results.index");
@@ -106,7 +110,10 @@ class ResultsController extends Controller
         }
 
         if ($insertionSuccessful) {
+            $this->calcularNotas();
+            $this->calcularTempo();
             return back()->with('success', 'TEMPOS INSERIDOS COM SUCESSO!!');
+
         } else {
             return back()->with('danger', 'TEMPOS DUPLICADOS OU ERRO NA INSERÇÃO!!');
         }
