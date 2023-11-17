@@ -27,8 +27,8 @@ Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'index']);
     Route::get('/kgv', [KartsController::class, 'showKarts']);
     Route::get('/birigui', [KartsController::class, 'showKarts']);
-    Route::get('/{numKart}', [KartsController::class, 'showVoltas']);
-    Route::get('/{numKart}/excluir/{id}', [KartsController::class, 'excluir']);
+    Route::get('/birigui/{numKart}', [KartsController::class, 'showVoltas']);
+    Route::get('/birigui/{numKart}/excluir/{id}', [KartsController::class, 'excluir']);
 
 });
 
