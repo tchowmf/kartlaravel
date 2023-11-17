@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Voltas;
 use App\Models\Karts;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 trait calculosTrait
 {
@@ -52,20 +53,25 @@ trait calculosTrait
             // Aqui você pode formatar o tempo como necessário
             $mediaTempoFormatado = $this->formatarTempo($mediaTempo);
 
-            // Atualizar o modelo Kart com os valores calculados
-            $kart = new Karts();
+            try {
+                // Tente encontrar ou criar um Kart existente
+                $kart = Karts::firstOrNew(['numKart' => $kartId]);
 
-            if ($kart) {
+                // Preencha os valores do Kart
                 $kart->numKart = $kartId;
                 $kart->mediaTempo = $mediaTempoFormatado;
                 $kart->numVoltas = $resultado->numVoltas;
                 $kart->save();
 
-                // Exibir informações (pode ser log ou saída para console)
-                echo "Kart " . $kartId . " - Média de Tempo: " . $mediaTempoFormatado . " - Número de Voltas: " . $resultado->numVoltas . "\n";
-            } else {
-                // Tratar a situação em que o kart não foi encontrado
-                echo "Kart com ID " . $kartId . " não encontrado\n";
+            } catch (\Exception $e) {
+                // Tratar o erro aqui
+                if ($e->getCode() == '23000') {
+                    // Trate a duplicação de chave
+                    Session::flash('error', "Erro: Duplicação de chave para Kart com ID " . $kartId);
+                } else {
+                    // Outro tipo de erro
+                    Session::flash('error', "Erro ao salvar Kart com N: " . $kartId . ": " . $e->getMessage());
+                }
             }
         }
     }

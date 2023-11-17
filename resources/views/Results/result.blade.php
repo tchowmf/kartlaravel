@@ -6,19 +6,6 @@
         <h2 class="h3 mb-0 text-gray-800">RESULTADO</h2>
     </div>
 
-
-    @if(Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
-
-    @if(Session::has('danger'))
-        <div class="alert alert-danger">
-            {{ Session::get('danger') }}
-        </div>
-    @endif
-
     <div class="card">
         <div class="card-body">
             <table class="table table-bordered dataTable">
@@ -65,5 +52,27 @@
         </form>
         </div>
     </div>
+
+@endsection
+
+@section('scripts')
+
+@if(Session::has('success'))
+    <script>
+        alert("{{ Session::get('success') }}")
+    </script>
+@endif
+
+@if(Session::has('danger'))
+    <script>
+        alert("{{ Session::get('danger') }}")
+    </script>
+@endif
+
+@if(Session::has('error'))
+    <script>
+        alert("{{ Session::get('error') }}");
+    </script>
+@endif
 
 @endsection
