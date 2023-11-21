@@ -39,9 +39,10 @@
                     @endforeach
                 </tbody>
             </table>
-            <a href="/live/kgv" class="btn btn-info">INICIAL</a>
-            <a href="/live/kgv/select" class="btn btn-info">SELECIONAR KART</a>
+            <a href="/live/birigui" class="btn btn-info">INICIAL</a>
+            <a href="/live/birigui/select" class="btn btn-info">SELECIONAR KART</a>
             <a href="/live/media" class="btn btn-info">MEDIA das VOLTAS</a>
+            <a href="/live/timer" class="btn btn-info">CRONOMETRO</a>
             <a href="/live" class="btn btn-info">Voltar</a>
         </div>
     </div>

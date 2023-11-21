@@ -54,7 +54,7 @@ class LivesController extends Controller
     public function saveSelect(Request $request) {
         $numero = $request->input('numeroKart');
 
-        return redirect("/live/kgv/$numero");
+        return redirect("/live/birigui/$numero");
     }
 
     public function showDetail($numero) {

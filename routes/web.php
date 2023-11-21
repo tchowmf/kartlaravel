@@ -52,10 +52,10 @@ Route::group(['prefix' => 'results'], function() {
     Route::get('/', [ResultsController::class, 'index']);
     Route::get('/kgv', [ResultsController::class, 'showEvents']);
     Route::get('/birigui', [ResultsController::class, 'showEvents']);
-    Route::get('/kgv/{ID_EVENTO}/epg', [ResultsController::class, 'showEpg']);
-    Route::get('/kgv/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'showProvas']);
-    Route::get('/kgv/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'showResults']);
-    Route::post('/kgv/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'insertData']);
+    Route::get('/birigui/{ID_EVENTO}/epg', [ResultsController::class, 'showEpg']);
+    Route::get('/birigui/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'showProvas']);
+    Route::get('/birigui/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'showResults']);
+    Route::post('/birigui/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'insertData']);
 });
 
 Route::group(['prefix' => 'live'], function() {
@@ -65,5 +65,8 @@ Route::group(['prefix' => 'live'], function() {
     Route::post('/kgv/select', [LivesController::class, 'saveSelect']);
     Route::get('/kgv/{numero}', [LivesController::class, 'showDetail']);
     Route::get('/birigui', [LivesController::class, 'showLive']);
+    Route::get('/birigui/select', [LivesController::class, 'select']);
+    Route::post('/birigui/select', [LivesController::class, 'saveSelect']);
+    Route::get('/birigui/{numero}', [LivesController::class, 'showDetail']);
     Route::get('/media', [LivesController::class, 'showAverage']);
 });

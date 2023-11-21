@@ -31,8 +31,8 @@
                     @foreach ($attributesArray as $index => $attributes)
                     @if($attributes->NUMERO == $numero)
                         <tr>
-                            <td>{{ $attributes->POS }}</td>
                             <td>{{ $attributes->P_INI }}</td>
+                            <td>{{ $attributes->POS }}</td>
                             <td>{{ $attributes->NUMERO }}</td>
                             <td>{{ $attributes->VOLTA }}</td>
                             <td>{{ $attributes->TEMPO_MELHOR_VOLTA}}</td>
@@ -102,7 +102,6 @@
 
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span class="text-primary" style="font-weight: bold; font-size: 50px;">{{ $attributes->DIFA}}</span>
-                            <span class="text-primary" style="font-weight: bold; font-size: 50px;">{{ $attributes->VOLTA }}</span>
                             <span class="text-primary" style="font-weight: bold; font-size: 50px;">{{ $nextDIFA}}</span>
                         </div>
 
@@ -114,10 +113,11 @@
                     @endif
                 @endforeach
 
-            <a href="/live/kgv" class="btn btn-info">INICIAL</a>
-            <a href="/live/kgv/select" class="btn btn-info">SELECIONAR KART</a>
+            <a href="/live/birigui" class="btn btn-info">INICIAL</a>
+            <a href="/live/birigui/select" class="btn btn-info">SELECIONAR KART</a>
             <a href="/live/media" class="btn btn-info">MEDIA das VOLTAS</a>
-            <a href="/live/kgv" class="btn btn-info">Voltar</a>
+            <a href="/live/timer" class="btn btn-info">CRONOMETRO</a>
+            <a href="/live" class="btn btn-info">Voltar</a>
         </div>
     </div>
 
