@@ -27,7 +27,7 @@
             </form>
             <a href="/live/kgv" class="btn btn-info">INICIAL</a>
             <a href="/live/kgv/select" class="btn btn-info">SELECIONAR KART</a>
-            <a href="#" class="btn btn-info">PAGINA 4</a>
+            <a href="/live/media" class="btn btn-info">MEDIA das VOLTAS</a>
             <a href="/live/kgv" class="btn btn-info">Voltar</a>
         </div>
     </div>

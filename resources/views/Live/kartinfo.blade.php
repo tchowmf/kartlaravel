@@ -22,7 +22,6 @@
                     <th>N VOLTA</th>
                     <th>MELHOR VOLTA</th>
                     <th>TEMPO ULTIMA VOLTA</th>
-                    <th>TEMPO DE PROVA</th>
                     <th>MEDIA DAS VOLTAS</th>
                     <th>POS MEDIA</th>
                     <th>DIF FRENTE</th>
@@ -38,7 +37,6 @@
                             <td>{{ $attributes->VOLTA }}</td>
                             <td>{{ $attributes->TEMPO_MELHOR_VOLTA}}</td>
                             <td>{{ $attributes->TEMPO_VOLTA }}</td>
-                            <td>{{ $attributes->TEMPO_TOTAL }}</td>
                             <td>
                                 @php
                                     $tempoTotalParts = explode(':', $attributes->TEMPO_TOTAL);
@@ -118,7 +116,7 @@
 
             <a href="/live/kgv" class="btn btn-info">INICIAL</a>
             <a href="/live/kgv/select" class="btn btn-info">SELECIONAR KART</a>
-            <a href="#" class="btn btn-info">PAGINA 4</a>
+            <a href="/live/media" class="btn btn-info">MEDIA das VOLTAS</a>
             <a href="/live/kgv" class="btn btn-info">Voltar</a>
         </div>
     </div>

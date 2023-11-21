@@ -65,4 +65,5 @@ Route::group(['prefix' => 'live'], function() {
     Route::post('/kgv/select', [LivesController::class, 'saveSelect']);
     Route::get('/kgv/{numero}', [LivesController::class, 'showDetail']);
     Route::get('/birigui', [LivesController::class, 'showLive']);
+    Route::get('/media', [LivesController::class, 'showAverage']);
 });

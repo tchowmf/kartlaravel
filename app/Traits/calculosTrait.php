@@ -35,8 +35,6 @@ trait calculosTrait
 
             Voltas::where('id', $volta->id)->update(['notaKart' => $nota]);
         }
-
-        return redirect('karts/birigui');
     }
 
     public function calcularTempo()

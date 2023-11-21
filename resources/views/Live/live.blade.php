@@ -24,7 +24,6 @@
                     <th>MELHOR VOLTA</th>
                     <th>NA VOLTA</th>
                     <th>TEMPO ULTIMA VOLTA</th>
-                    <th>TEMPO DE PROVA</th>
                 </thead>
                 <tbody>
                     @foreach ($attributesArray as $index => $attributes)
@@ -36,14 +35,13 @@
                             <td>{{ $attributes->TEMPO_MELHOR_VOLTA}}</td>
                             <td>{{ $attributes->MELHOR_VOLTA}}</td>
                             <td>{{ $attributes->TEMPO_VOLTA }}</td>
-                            <td>{{ $attributes->TEMPO_TOTAL }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
             <a href="/live/kgv" class="btn btn-info">INICIAL</a>
             <a href="/live/kgv/select" class="btn btn-info">SELECIONAR KART</a>
-            <a href="#" class="btn btn-info">PAGINA 4</a>
+            <a href="/live/media" class="btn btn-info">MEDIA das VOLTAS</a>
             <a href="/live" class="btn btn-info">Voltar</a>
         </div>
     </div>
