@@ -9,7 +9,7 @@
     <!-- Page Body -->
     <div class="card">
         <div class="card-body">
-            <form method="post" action="/live/birigui/select">
+            <form method="post" action="/live/speedpark/select">
                 @CSRF
                 <input type="hidden" id="numeroKart" name="numeroKart" value="">
                 <tbody>
@@ -25,9 +25,9 @@
                     <br><input type="submit" class="btn btn-success" value="Selecionar Kart"><br><br>
                 </tbody>
             </form>
-            <a href="/live/birigui" class="btn btn-info">INICIAL</a>
-            <a href="/live/birigui/select" class="btn btn-info">SELECIONAR KART</a>
-            <a href="/live/media" class="btn btn-info">MEDIA das VOLTAS</a>
+            <a href="/live/speedpark" class="btn btn-info">INICIAL</a>
+            <a href="/live/speedpark/select" class="btn btn-info">SELECIONAR KART</a>
+            <a href="/live/speedpark/media" class="btn btn-info">MEDIA das VOLTAS</a>
             <a href="/live/timer" class="btn btn-info">CRONOMETRO</a>
             <a href="/live" class="btn btn-info">Voltar</a>
         </div>

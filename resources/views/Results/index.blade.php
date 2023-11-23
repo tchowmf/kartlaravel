@@ -38,7 +38,7 @@
 
     <tbody>
         <tr>
-            <td onclick="location.href='/results/birigui';" style="cursor: pointer;">
+            <td onclick="location.href='/results/speedpark';" style="cursor: pointer;">
                 <div>
                     <span style="font-weight: bold;">Speed Park</span><br>
                     <div style="float: left; height: 80px; width: 10px;"></div>

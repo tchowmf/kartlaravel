@@ -35,7 +35,7 @@
         <tbody>
                 <tr>
                     @foreach($attributesArray as $attributes)
-                        <td onclick="location.href='/results/birigui/{{$ID_EVENTO}}/{{$attributes['ID_EVENTO_PISTA_GRUPO']}}/provas';" style="cursor: pointer; width: 25%; padding: 10px;">
+                        <td onclick="location.href='/results/speedpark/{{$ID_EVENTO}}/{{$attributes['ID_EVENTO_PISTA_GRUPO']}}/provas';" style="cursor: pointer; width: 25%; padding: 10px;">
                             <div>
                                 <span style="font-weight: bold;">{{ $attributes['NOME'] }}</span><br>
                                 <div style="float: left; height: 80px; width: 10px;"></div>
@@ -50,7 +50,7 @@
                     @endforeach
                 </tr>
             </table>
-            <a href="/results/birigui" class="btn btn-info">Voltar</a>
+            <a href="/results/speedpark" class="btn btn-info">Voltar</a>
         </tbody>
 
 @endsection

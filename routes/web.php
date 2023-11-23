@@ -26,9 +26,9 @@ Route::get('/', function () {
 Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'index']);
     Route::get('/kgv', [KartsController::class, 'showKarts']);
-    Route::get('/birigui', [KartsController::class, 'showKarts']);
-    Route::get('/birigui/{numKart}', [KartsController::class, 'showVoltas']);
-    Route::get('/birigui/{numKart}/excluir/{id}', [KartsController::class, 'excluir']);
+    Route::get('/speedpark', [KartsController::class, 'showKarts']);
+    Route::get('/speedpark/{numKart}', [KartsController::class, 'showVoltas']);
+    Route::get('/speedpark/{numKart}/excluir/{id}', [KartsController::class, 'excluir']);
 
 });
 
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'karts'], function() {
 Route::group(['prefix' => 'pilotos'], function() {
     Route::get('/', [VoltasController::class, 'index']);
     Route::get('/kgv', [VoltasController::class, 'showDrivers']);
-    Route::get('/birigui', [VoltasController::class, 'showDrivers']);
+    Route::get('/speedpark', [VoltasController::class, 'showDrivers']);
     Route::get('/inserir-nota/{id}', [VoltasController::class, 'inserirNota']);
     Route::post('/salvar-nota/{id}', [VoltasController::class, 'salvarNota']);
     Route::get('/excluir-nota/{id}', [VoltasController::class, 'excluirNota'])->name('excluir.nota');
@@ -45,17 +45,17 @@ Route::group(['prefix' => 'pilotos'], function() {
 Route::group(['prefix' => 'tables'], function() {
     Route::get('/', [TablesController::class, 'index']);
     Route::get('/kgv', [TablesController::class, 'showTables']);
-    Route::get('/birigui', [TablesController::class, 'showTables']);
+    Route::get('/speedpark', [TablesController::class, 'showTables']);
 });
 
 Route::group(['prefix' => 'results'], function() {
     Route::get('/', [ResultsController::class, 'index']);
     Route::get('/kgv', [ResultsController::class, 'showEvents']);
-    Route::get('/birigui', [ResultsController::class, 'showEvents']);
-    Route::get('/birigui/{ID_EVENTO}/epg', [ResultsController::class, 'showEpg']);
-    Route::get('/birigui/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'showProvas']);
-    Route::get('/birigui/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'showResults']);
-    Route::post('/birigui/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'insertData']);
+    Route::get('/speedpark', [ResultsController::class, 'showEvents']);
+    Route::get('/speedpark/{ID_EVENTO}/epg', [ResultsController::class, 'showEpg']);
+    Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'showProvas']);
+    Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'showResults']);
+    Route::post('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'insertData']);
 });
 
 Route::group(['prefix' => 'live'], function() {
@@ -64,9 +64,11 @@ Route::group(['prefix' => 'live'], function() {
     Route::get('/kgv/select', [LivesController::class, 'select']);
     Route::post('/kgv/select', [LivesController::class, 'saveSelect']);
     Route::get('/kgv/{numero}', [LivesController::class, 'showDetail']);
-    Route::get('/birigui', [LivesController::class, 'showLive']);
-    Route::get('/birigui/select', [LivesController::class, 'select']);
-    Route::post('/birigui/select', [LivesController::class, 'saveSelect']);
-    Route::get('/birigui/{numero}', [LivesController::class, 'showDetail']);
-    Route::get('/media', [LivesController::class, 'showAverage']);
+    Route::get('/liveTable', [LivesController::class, 'liveTable']);
+    Route::get('/speedpark', [LivesController::class, 'live']);
+    Route::get('/speedpark/select', [LivesController::class, 'select']);
+    Route::post('/speedpark/select', [LivesController::class, 'saveSelect']);
+    Route::get('/infoTable/{numero}', [LivesController::class, 'showDetail']);
+    Route::get('/speedpark/{numero}', [LivesController::class, 'info']);
+    Route::get('/speedpark/media', [LivesController::class, 'showAverage']);
 });

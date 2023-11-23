@@ -46,7 +46,7 @@
                             <td>{{ $kart['notaKart'] }}</td>
                             <td>{{ $kart['mediaTempo'] }}</td>
                             <td>{{ $kart['numVoltas'] }}</td>
-                            <td><a href="{{ url("karts/birigui/". $kart['numKart']) }}" class="btn btn-info"><li class="fa fa-search"></li></a></td>
+                            <td><a href="{{ url("karts/speedpark/". $kart['numKart']) }}" class="btn btn-info"><li class="fa fa-search"></li></a></td>
                         </tr>
                     @endforeach
                 </tbody>
