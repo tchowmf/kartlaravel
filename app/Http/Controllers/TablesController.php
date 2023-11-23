@@ -56,7 +56,7 @@ class TablesController extends Controller
             } else {
                 $dadosCombinados[] = [
                     'numKart' => $kart->numKart,
-                    'notaKart' => $dadosVoltas->notaKart,
+                    'notaKart' => '',
                     'mediaTempo' => $kart->mediaTempo,
                     'numVoltas' => $kart->numVoltas,
                     'nomePiloto' => '',

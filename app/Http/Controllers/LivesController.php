@@ -20,7 +20,7 @@ class LivesController extends Controller
 
     public function info($numero)
     {
-        $url = "file:///E:/Geral/Estudos/Projetos/ProjetoKart/teste%20xml/livetime.xml";
+        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 
@@ -93,7 +93,7 @@ class LivesController extends Controller
 
     public function select()
     {
-        $url = "file:///E:/Geral/Estudos/Projetos/ProjetoKart/teste%20xml/livetime.xml";
+        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 
@@ -113,7 +113,7 @@ class LivesController extends Controller
     }
 
     public function showDetail($numero) {
-        $url = "file:///E:/Geral/Estudos/Projetos/ProjetoKart/teste%20xml/livetime.xml";
+        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 
@@ -136,7 +136,7 @@ class LivesController extends Controller
 
     public function showAverage()
     {
-        $url = "file:///E:/Geral/Estudos/Projetos/ProjetoKart/teste%20xml/livetime.xml";
+        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 

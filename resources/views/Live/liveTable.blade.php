@@ -43,20 +43,18 @@
                     <th>POSIÇÃO</th>
                     <th>KART</th>
                     <th>NOME PILOTO</th>
-                    <th>N VOLTA</th>
+                    <th>Nº VOLTA</th>
                     <th>MELHOR VOLTA</th>
-                    <th>NA VOLTA</th>
                     <th>TEMPO ULTIMA VOLTA</th>
                 </thead>
                 <tbody>
                     @foreach ($attributesArray as $index => $attributes)
                         <tr>
-                            <td>{{ $attributes->POS }}</td>
+                            <td>{{ $attributes->POS }}º</td>
                             <td>{{ $attributes->NUMERO }}</td>
                             <td>{{ $attributes->NOME }}</td>
                             <td>{{ $attributes->VOLTA }}</td>
-                            <td>{{ $attributes->TEMPO_MELHOR_VOLTA}}</td>
-                            <td>{{ $attributes->MELHOR_VOLTA}}</td>
+                            <td>{{ $attributes->TEMPO_MELHOR_VOLTA}} - volta: {{ $attributes->MELHOR_VOLTA}}</td>
                             <td>{{ $attributes->TEMPO_VOLTA }}</td>
                         </tr>
                     @endforeach
