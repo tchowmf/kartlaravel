@@ -20,7 +20,15 @@ use App\Http\Controllers\TrocaController;
 */
 
 Route::get('/', function () {
-    return view('TemplateUser.index');
+    return view('Landing.login');
+});
+
+Route::get('/register', function () {
+    return view('Landing.register');
+});
+
+Route::get('/forgot-password', function() {
+    return view('Landing.forgot-password');
 });
 
 
