@@ -20,7 +20,8 @@ trait calculosTrait
 
             foreach ($voltas as $volta) {
                 $mediaTempo = Voltas::avg('melhorVolta');
-                $diferenca = $mediaTempo - $mediaKart;
+
+                $diferenca = $mediaKart - $mediaTempo;
 
                 if ($diferenca <= -5) {
                     $nota = 'S';

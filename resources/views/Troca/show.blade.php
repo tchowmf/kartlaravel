@@ -17,7 +17,7 @@
 
     <div class="card">
         <div class="card-header d-flex justify-content-between">
-            <span>SELECIONE OS KARTS DISPONIVEIS</span>
+            <span>SELECIONE OS KARTS DISPONIVEIS (desmarque os que estao correndo)</span>
         </div>
         <div class="card-body">
             <table class="table table-bordered dataTable">
