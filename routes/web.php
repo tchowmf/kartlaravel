@@ -6,6 +6,7 @@ use App\Http\Controllers\KartsController;
 use App\Http\Controllers\VoltasController;
 use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\LivesController;
+use App\Http\Controllers\TrocaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,4 +72,12 @@ Route::group(['prefix' => 'live'], function() {
     Route::get('/infoTable/{numero}', [LivesController::class, 'showDetail']);
     Route::get('/speedpark/{numero}', [LivesController::class, 'info']);
     Route::get('/speedpark/media', [LivesController::class, 'showAverage']);
+    Route::get('/timer', [LivesController::class, 'timer']);
+});
+
+
+Route::group(['prefix' => 'troca'], function() {
+    Route::get('/', [TrocaController::class, 'index']);
+    Route::get('/speedpark', [TrocaController::class, 'troca']);
+    Route::post('/speedpark', [TrocaController::class, 'calcularProbabilidade']);
 });

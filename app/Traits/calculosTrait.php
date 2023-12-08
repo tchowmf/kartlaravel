@@ -12,28 +12,30 @@ trait calculosTrait
 {
     public function calcularNotas()
     {
-        $voltas = Voltas::all();
+        $karts = Voltas::select('numKart', DB::raw('AVG(melhorVolta) AS media'))->groupBy('numKart')->get();
 
-        foreach ($voltas as $volta) {
-            $tempoVolta = floatval($volta->melhorVolta);
+        foreach ($karts as $kart) {
+            $voltas = Voltas::where('numKart', $kart->numKart)->get();
+            $mediaKart = $kart->media;
 
-            $mediaTempo = Voltas::avg('melhorVolta');
+            foreach ($voltas as $volta) {
+                $mediaTempo = Voltas::avg('melhorVolta');
+                $diferenca = $mediaTempo - $mediaKart;
 
-            $diferenca = $tempoVolta - $mediaTempo;
+                if ($diferenca <= -5) {
+                    $nota = 'S';
+                } elseif ($diferenca >= -5 && $diferenca <= -1.4) {
+                    $nota = 'A';
+                } elseif ($diferenca > -1.5 && $diferenca <= 1) {
+                    $nota = 'B';
+                } elseif ($diferenca > 1 && $diferenca <= 2) {
+                    $nota = 'C';
+                } elseif ($diferenca > 2) {
+                    $nota = 'D';
+                }
 
-            if ($diferenca <= -5) {
-                $nota = 'S';
-            } elseif ($diferenca >= -5 && $diferenca <= -1.4) {
-                $nota = 'A';
-            } elseif ($diferenca > -1.5 && $diferenca <= 1) {
-                $nota = 'B';
-            } elseif ($diferenca > 1 && $diferenca <= 2) {
-                $nota = 'C';
-            } elseif ($diferenca > 2) {
-                $nota = 'D';
+                Karts::where('numKart', $kart->numKart)->update(['notaKart' => $nota]);
             }
-
-            Voltas::where('id', $volta->id)->update(['notaKart' => $nota]);
         }
     }
 

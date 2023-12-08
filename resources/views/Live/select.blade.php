@@ -15,12 +15,12 @@
                 <tbody>
                     <label class="form-label">N KART</label>
                     <select id='numero' name='numero'  class="form-control select">
-                            <option value="" selected></option>
-                        @foreach ($attributesArray as $attributes)
-                            <option value="{{ $attributes }}">
-                                {{ $attributes }}
-                            </option>
-                        @endforeach
+                        <option value="" selected></option>
+                            @foreach ($attributesArray as $attributes)
+                                <option value="{{ $attributes }}">
+                                    {{ $attributes }}
+                                </option>
+                            @endforeach
                     </select>
                     <br><input type="submit" class="btn btn-success" value="Selecionar Kart"><br><br>
                 </tbody>

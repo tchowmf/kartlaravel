@@ -3,10 +3,17 @@
 @section('contents')
 
     <!-- Page Body -->
-    <div class="justify-content-between mb-3" id=dados-container>
+    @foreach($attributesArray as $index => $attributes)
+    @if($attributes->NUMERO == $numero)
+    <div class="mb-3" id="cronometro{{$index}}">
+        <span class="text-primary" style="font-weight: bold; font-size: 100px; display: flex; position: absolute;">00:00.000</span><br>
 
+        <div class="justify-content-between mb-3" id=dados-container>
+
+        </div>
     </div>
-
+    @endif
+    @endforeach
 @endsection
 
 @section('scripts')

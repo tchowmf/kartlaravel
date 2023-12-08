@@ -25,9 +25,8 @@
 </head>
 <body>
     <!-- Page Heading -->
-    <div class="d-flex justify-content-between mb-3">
+    <div class="mb-3" style="display: flex; justify-content: flex-end;">
         @foreach ($header as $attributes)
-            <h2 class="h3 mb-0 text-gray-800">{!! $attributes->TITULO !!}</h2>
             TEMPO DE PROVA: {{ $attributes->TEMPOCORRIDA }}<br>
             TEMPO RESTANTE: {{ $attributes->TEMPORESTANTE }}<br><br>
             {{$attributes->MELHORVOLTAPROVA}}
@@ -107,32 +106,32 @@
             <div>
                 @foreach ($attributesArray as $index => $attributes)
                     @php
-                    $totalAttributes = count($attributesArray);
+                        $totalAttributes = count($attributesArray);
 
-                        if ($index < $totalAttributes - 1) {
-                            $nextDIFA = $attributesArray[$index + 1]->DIFA;
-                        } else {
-                            $nextDIFA = "---";
-                        }
-                        if ($index < $totalAttributes - 1) {
-                            $nextPOS = $attributesArray[$index + 1]->POS;
-                        } else {
-                            $nextPOS = "-";
-                        }
-                        if ($index > 0) {
-                            $prevPOS = $attributesArray[$index - 1]->POS;
-                        } else {
-                            $prevPOS = "-"; // Ou defina um valor padrão para o primeiro elemento
-                        }if ($index < $totalAttributes - 1) {
-                            $nextNUM = $attributesArray[$index + 1]->NUMERO;
-                        } else {
-                            $nextNUM = "-";
-                        }
-                        if ($index > 0) {
-                            $prevNUM = $attributesArray[$index - 1]->NUMERO;
-                        } else {
-                            $prevNUM = "-"; // Ou defina um valor padrão para o primeiro elemento
-                        }
+                            if ($index < $totalAttributes - 1) {
+                                $nextDIFA = $attributesArray[$index + 1]->DIFA;
+                            } else {
+                                $nextDIFA = "---";
+                            }
+                            if ($index < $totalAttributes - 1) {
+                                $nextPOS = $attributesArray[$index + 1]->POS;
+                            } else {
+                                $nextPOS = "-";
+                            }
+                            if ($index > 0) {
+                                $prevPOS = $attributesArray[$index - 1]->POS;
+                            } else {
+                                $prevPOS = "-"; // Ou defina um valor padrão para o primeiro elemento
+                            }if ($index < $totalAttributes - 1) {
+                                $nextNUM = $attributesArray[$index + 1]->NUMERO;
+                            } else {
+                                $nextNUM = "-";
+                            }
+                            if ($index > 0) {
+                                $prevNUM = $attributesArray[$index - 1]->NUMERO;
+                            } else {
+                                $prevNUM = "-"; // Ou defina um valor padrão para o primeiro elemento
+                            }
 
                     @endphp
                     @if($attributes->NUMERO == $numero)
@@ -176,51 +175,4 @@
     </div>
 </body>
 
-<script>
-    var voltasAnteriores = {}; // Para rastrear voltas anteriores
 
-    // Função para iniciar o cronômetro
-    function iniciarCronometro(index) {
-        var cronometroElement = document.getElementById('cronometro' + index).querySelector('span');
-        var startTime = new Date().getTime(); // Tempo de início em milissegundos
-
-        function atualizarCronometro() {
-            var currentTime = new Date().getTime();
-            var elapsedTime = (currentTime - startTime) / 1000; // Tempo decorrido em segundos
-
-            // Atualiza o formato hh:mm:ss
-            var minutos = Math.floor(elapsedTime / 60);
-            var segundos = Math.floor(elapsedTime % 60);
-            var milissegundos = Math.floor((elapsedTime % 1) * 1000);
-
-            // Formatação do cronômetro
-            var formattedTime = minutos.toString().padStart(2, '0') +
-                ':' + segundos.toString().padStart(2, '0') +
-                '.' + milissegundos.toString().padStart(3, '0');
-
-            // Atualiza o texto no span, mantendo a formatação
-            cronometroElement.innerHTML = formattedTime;
-        }
-
-        // Limpar o cronômetro se já estiver em execução
-        clearInterval(voltasAnteriores[index]);
-
-        // Iniciar o cronômetro
-        voltasAnteriores[index] = setInterval(atualizarCronometro, 1);
-    }
-
-    // Reinicia o cronômetro quando a VOLTA mudar
-    function reiniciarCronometro(index) {
-        clearInterval(voltasAnteriores[index]);
-        iniciarCronometro(index);
-    }
-
-    // Inicie o cronômetro quando a página carregar
-    window.onload = function () {
-        @foreach ($attributesArray as $index => $attributes)
-            @if($attributes->NUMERO == $numero)
-                iniciarCronometro({{ $index }});
-            @endif
-        @endforeach
-    }
-</script>

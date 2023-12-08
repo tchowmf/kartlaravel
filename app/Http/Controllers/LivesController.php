@@ -20,7 +20,7 @@ class LivesController extends Controller
 
     public function info($numero)
     {
-        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
+        $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 
@@ -35,11 +35,16 @@ class LivesController extends Controller
         return view("Live.info", ['attributesArray' => $attributesArray, 'numero' => $numero]);
     }
 
+    public function timer()
+    {
+        return view("Live.timer");
+    }
+
 
     /* LIVETIME CONSULT WORKING*/
     public function liveTable()
     {
-        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
+        $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 
@@ -93,7 +98,7 @@ class LivesController extends Controller
 
     public function select()
     {
-        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
+        $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 
@@ -113,7 +118,7 @@ class LivesController extends Controller
     }
 
     public function showDetail($numero) {
-        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
+        $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 
@@ -136,7 +141,7 @@ class LivesController extends Controller
 
     public function showAverage()
     {
-        $url = "https://www.mylaptime.com/laptime/clientes/270251021PSC90X6218Y96600/livetime.xml";
+        $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
 

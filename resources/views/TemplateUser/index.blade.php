@@ -74,6 +74,16 @@
             </li>
 
             <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+             <!-- Nav Item - Results -->
+             <li class="nav-item">
+                <a class="nav-link" href="/troca">
+                    <i class="fas fa-fw fa-random"></i>
+                    <span>Sistema de Troca</span></a>
+            </li>
+
+            <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Live -->
@@ -92,6 +102,7 @@
                     <i class="fas fa-fw fa-flag-checkered"></i>
                     <span>Corridas - Resultados</span></a>
             </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
