@@ -37,7 +37,7 @@ Route::group(['prefix' => 'forgot-password'], function() {
 
 Route::group(['prefix' => 'reset-password'], function() {
     Route::get('/{token}', [UserController::class, 'reset'])->name('password.reset');
-    Route::post('/{token}', [UserController::class, 'reset']);
+    Route::post('/{token}', [UserController::class, 'resetPassword']);
 });
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

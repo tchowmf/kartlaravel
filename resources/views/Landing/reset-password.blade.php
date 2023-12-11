@@ -42,7 +42,9 @@
                                         <h1 class="h4 text-gray-900 mb-2">Redefina sua sena!</h1>
                                         <p class="mb-4"> Lembre-se: sua nova senha deve ter pelo menos 8 caracteres, incluindo pelo menos 1 letra maiúscula. Obrigado!</p>
                                     </div>
-                                    <form class="user" method="post" action="" onsubmit="return validatePassword()">
+                                    <form class="user" method="post" action="/reset-password/{{ $token }}" onsubmit="return validatePassword()">
+                                        @CSRF
+                                        <input type="hidden" name="token" value="{{ $token }}">
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 name="password" required id="password" placeholder="Senha">

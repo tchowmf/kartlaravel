@@ -28,18 +28,6 @@ class UserController extends Controller
         return view("Landing.forgot-password");
     }
 
-    public function reset($token)
-    {
-        $user = User::where('reset_token', $token)->first();
-        if( !is_null( $user ) ){
-            $data = [
-                'token' => $token
-            ];
-            return view('Landing.reset-password', $data);
-        }
-        return redirect()->route('login')->with(['error' => 'Token de redefinição de senha não encontrado ou expirado.']);
-    }
-
     public function create(Request $request)
     {
         $codigoInserido = $request->input('invite');
@@ -80,6 +68,20 @@ class UserController extends Controller
         return redirect()->route('login')->with('error', 'Credenciais inválidas. Tente novamente.');
     }
 
+    public function reset($token)
+    {
+        if ($this->isTokenValid($token)) {
+            $user = User::where('reset_token', $token)->first();
+            if (!is_null($user)) {
+                $data = [
+                    'token' => $token
+                ];
+                return view('Landing.reset-password', $data);
+            }
+        }
+        return redirect()->route('login')->with(['error' => 'Token de redefinição de senha não encontrado ou expirado.']);
+    }
+
     public function sendResetPasswordLink(Request $request)
     {
         $user = User::where('email', $request->get('email'))->first();
@@ -87,6 +89,7 @@ class UserController extends Controller
         if ($user) {
             $token = Str::random(30);
             $user->reset_token = $token;
+            $user->token_expires_at = now()->addMinutes(15);
             $user->save();
 
             $userDetails = [
@@ -102,15 +105,34 @@ class UserController extends Controller
         return redirect()->back()->with(['error' => 'Não foi possível encontrar o usuário com este e-mail.']);
     }
 
-    public function resetPassword (  ResetPasswordRequest $request ){
-        $user = AdminUser::where('reset_token', $request->get('token'))->first();
-        if( !is_null( $user ) ){
+    public function isTokenValid($token)
+    {
+        $user = User::where('reset_token', $token)
+                    ->where('token_expires_at', '>', now()) // Verifica se o token ainda não expirou
+                    ->first();
+
+        return $user !== null;
+    }
+
+    public function clearExpiredTokens()
+    {
+        User::where('token_expires_at', '<', now())->update([
+                        'reset_token' => null,
+                        'token_expires_at' => null
+        ]);
+    }
+
+    public function resetPassword (Request $request)
+    {
+        $user = User::where('reset_token', $request->get('token'))->first();
+
+        if( !is_null($user) ){
             $user->reset_token = null;
             $user->password = Hash::make( $request->get('password') );
             $user->save();
-            return redirect()->route('admin.login')->with('success-message', 'Password has been reset successfully.');
+            return redirect()->route('login')->with('success', 'A senha foi redefinida com sucesso.');
         }
-        return redirect()->back()->with('error-message', 'Reset password token not found.');
+        return redirect()->route('login')->with(['error' => 'Token de redefinição de senha não encontrado ou expirado.']);
     }
 
     public function logout()
