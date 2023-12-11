@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Recupera de senha - Kart Timer</title>
+    <title>Reset de senha - Kart Timer</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -39,29 +39,22 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Esqueceu sua senha?</h1>
-                                        <p class="mb-4">Nós entendemos, coisas assim acontecem. Basta digitar seu endereço de e-mail abaixo
-                                            e lhe enviaremos um link para redefinir sua senha!</p>
+                                        <h1 class="h4 text-gray-900 mb-2">Redefina sua sena!</h1>
+                                        <p class="mb-4"> Lembre-se: sua nova senha deve ter pelo menos 8 caracteres, incluindo pelo menos 1 letra maiúscula. Obrigado!</p>
                                     </div>
-                                    @if(session('success'))
-                                        <div class="alert alert-success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-                                    @if (session('error'))
-                                        <div class="alert alert-danger">
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
-                                    <form class="user" method="post" action="">
-                                        @CSRF
+                                    <form class="user" method="post" action="" onsubmit="return validatePassword()">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                name="email" id="email" required aria-describedby="emailHelp"
-                                                placeholder="Endereço de E-mail ...">
+                                            <input type="password" class="form-control form-control-user"
+                                                name="password" required id="password" placeholder="Senha">
+                                            <span id="password-error" style="color: red;"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                name="password_confirmation" required placeholder="Confirmação de senha">
+                                            <span id="confirm-error" style="color: red;"></span>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Enviar link de recuperação no e-mail
+                                            Resetar Senha
                                         </button>
                                     </form>
                                     <hr>
@@ -92,6 +85,39 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementsByName("password_confirmation")[0].value;
+
+            var uppercaseRegex = /^(?=.*[A-Z])/;
+            var lengthRegex = /^.{8,}$/;
+
+            var errors = [];
+
+            if (!lengthRegex.test(password)) {
+                errors.push("A senha deve ter no mínimo 8 caracteres.");
+            }
+
+            if (!uppercaseRegex.test(password)) {
+                errors.push("A senha deve conter pelo menos uma letra maiúscula.");
+            }
+
+            if (password !== confirmPassword) {
+                errors.push("As senhas não coincidem.");
+            }
+
+            if (errors.length > 0) {
+                document.getElementById("password-error").innerHTML = errors.join("<br>");
+                return false;
+            } else {
+                document.getElementById("password-error").innerHTML = "";
+                document.getElementById("confirm-error").innerHTML = "";
+                return true;
+            }
+        }
+    </script>
 
 </body>
 
