@@ -19,10 +19,10 @@ class TrocaController extends Controller
         $nKarts = [];
 
         foreach($karts as $kart){
-            $nKart[] = $kart->numKart;
+            $nKarts[] = $kart->numKart;
         }
 
-        return view("Troca.show", ["nKart" => $nKart]);
+        return view("Troca.show", ["nKart" => $nKarts]);
     }
 
     public function calcularProbabilidade(Request $request) {

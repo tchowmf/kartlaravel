@@ -36,45 +36,57 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crie sua conta!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" method="post" action="/register" onsubmit="return validatePassword()">
+                                @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="Primeiro Nome">
+                                        <input type="text" class="form-control form-control-user" id="firstname"
+                                            name="firstname" required placeholder="Primeiro Nome">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Sobrenome">
+                                        <input type="text" class="form-control form-control-user" id="lastname"
+                                            name="lastname" required placeholder="Sobrenome">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="E-mail">
+                                    <input type="email" class="form-control form-control-user" id="email"
+                                        name="email" required placeholder="E-mail">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Senha">
+                                            name="password" required id="password" placeholder="Senha">
+                                        <span id="password-error" style="color: red;"></span>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Confirmação de senha">
+                                            name="password_confirmation" required placeholder="Confirmação de senha">
+                                        <span id="confirm-error" style="color: red;"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="invite"
-                                        placeholder="Codigo de Invite">
+                                    <input type="text" class="form-control form-control-user" required id="invite"
+                                        name="invite" placeholder="Código de Invite">
                                 </div>
-                                <a href="/" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Registrar Conta
+                                </button>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Esqueceu a senha?</a>
+                                <a class="small" href="/forgot-password">Esqueceu a senha?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="/">Já tem uma conta? Login!</a>
+                                <a class="small" href="/login">Já tem uma conta? Login!</a>
                             </div>
                         </div>
                     </div>
@@ -93,6 +105,39 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementsByName("password_confirmation")[0].value;
+
+            var uppercaseRegex = /^(?=.*[A-Z])/;
+            var lengthRegex = /^.{8,}$/;
+
+            var errors = [];
+
+            if (!lengthRegex.test(password)) {
+                errors.push("A senha deve ter no mínimo 8 caracteres.");
+            }
+
+            if (!uppercaseRegex.test(password)) {
+                errors.push("A senha deve conter pelo menos uma letra maiúscula.");
+            }
+
+            if (password !== confirmPassword) {
+                errors.push("As senhas não coincidem.");
+            }
+
+            if (errors.length > 0) {
+                document.getElementById("password-error").innerHTML = errors.join("<br>");
+                return false;
+            } else {
+                document.getElementById("password-error").innerHTML = "";
+                document.getElementById("confirm-error").innerHTML = "";
+                return true;
+            }
+        }
+    </script>
 
 </body>
 

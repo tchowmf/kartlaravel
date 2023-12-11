@@ -58,7 +58,7 @@
                                         <a class="small" href="/register">Crie sua conta!</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="/">Já tem uma conta? Login!</a>
+                                        <a class="small" href="/login">Já tem uma conta? Login!</a>
                                     </div>
                                 </div>
                             </div>
