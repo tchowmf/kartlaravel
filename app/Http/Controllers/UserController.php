@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Invite;
 use App\Mail\ResetPasswordMail;
+use App\Mail\EmailVerification;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -41,26 +42,57 @@ class UserController extends Controller
                 // Outras regras de validação para os campos do formulário...
             ]);
 
+            $token = Str::random(30);
+
             $user = new User;
             $user->firstname = $request->input("firstname");
             $user->lastname = $request->input("lastname");
             $user->email = $request->input("email");
-            $user->password = Hash::make( $request->get('password') );
+            $user->password = Hash::make($request->get('password'));
+            $user->email_verification_token = $token;
+
             $user->save();
 
             $convite->update(['used' => true]);
 
-            return redirect('/login')->with('success', 'Cadastro realizado com sucesso!');
+
+            $userDetails = ['name' => $user->firstname];
+
+            Mail::to($user->email)->send(new EmailVerification($token, $userDetails));
+
+            return redirect('/login')->with('success', 'Cadastro realizado com sucesso! Verifique seu e-mail.');
         }
 
         return redirect('/register')->withErrors(['message' => 'Código de Convite Inválido']);
     }
 
+    public function confirmEmail(Request $request)
+    {
+        $expires = $request->input('expires');
+        $token = $request->input('token');
+        $signature = $request->input('signature');
+
+        // Faça as verificações necessárias para garantir a validade do token, se ele ainda está dentro do prazo de validade, se a assinatura é válida, etc.
+
+        // Se as verificações forem bem-sucedidas, atualize o campo 'email_verified_at'
+        $user = User::where('email_verification_token', $token)->first();
+
+        if ($user) {
+            $user->email_verified_at = now(); // Defina como o timestamp atual para indicar a confirmação
+            $user->save();
+
+            return redirect('/login')->with('success', 'Seu e-mail foi verificado com sucesso! Faça login para continuar.');
+        }
+
+        return redirect('/login')->with('error', 'Falha na verificação do e-mail. Tente novamente.');
+    }
+
     public function doLogin(Request $request)
     {
         $credentials = $request->only('email', 'password');
+        $is_remember = $request->has('remember-me');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $is_remember)) {
             // Autenticação bem-sucedida
             return redirect()->intended('/karts'); // Redireciona para a página após o login
         }
@@ -122,7 +154,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function resetPassword (Request $request)
+    public function resetPassword(Request $request)
     {
         $user = User::where('reset_token', $request->get('token'))->first();
 

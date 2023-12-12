@@ -8,6 +8,7 @@ use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\LivesController;
 use App\Http\Controllers\TrocaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ use App\Http\Controllers\UserController;
 Route::group(['prefix' => 'login'], function() {
     Route::get('/', [UserController::class, 'login'])->name('login');
     Route::post('/', [UserController::class, 'doLogin']);
+    Route::get('/confirm-email', [UserController::class, 'confirmEmail'])->name('verification');
 });
 
 Route::group(['prefix' => 'register'], function() {
@@ -41,6 +43,13 @@ Route::group(['prefix' => 'reset-password'], function() {
 });
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
+    Route::get('/', [ProfileController::class, 'profile']);
+    Route::get('/settings', [ProfileController::class, 'settings']);
+    Route::get('/update-password', [ProfileController::class, 'updatePasswordForm']);
+    Route::post('/update-password', [ProfileController::class, 'updatePassword']);
+});
 
 Route::group(['prefix' => 'karts', 'middleware' => 'auth'], function() {
     Route::get('/', [KartsController::class, 'index']);
