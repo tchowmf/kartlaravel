@@ -49,9 +49,9 @@ class ProfileController extends Controller
         $newPassword = $request->input('new_password');
         $confirmPassword = $request->input('confirm_password');
 
-        // Verifica se a nova senha e a antiga coincidem
-        if ($newPassword == $currentPassword) {
-            return redirect()->back()->with('error', 'A nova senha não pode ser igual a senha antiga.');
+        // Verifica se a nova senha e a confirmcao coincidem
+        if ($newPassword !== $confirmPassword) {
+            return redirect()->back()->with('error', 'As senhas não coincidem.');
         }
 
         // Verifica se a senha atual fornecida corresponde à senha armazenada no banco de dados

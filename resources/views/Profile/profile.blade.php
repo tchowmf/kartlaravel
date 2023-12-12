@@ -70,10 +70,25 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
+                            <br><h5>E-mail confirmado:</h5>
+                        </div>
+                        <span>
+                            <br>@if (auth()->user()->email_verified_at != null)
+                                    Confirmado✅
+                                @else
+                                    <form action="{{ route('sendVerificationEmail', ['user' => auth()->user()->id]) }}" method="post">
+                                        @CSRF
+                                        <button type="submit" class="btn btn-light">Enviar Email de Confirmação</button>
+                                    </form>
+                                @endif
+                        </span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
                             <br><h5>Data de nascimento:</h5>
                         </div>
                         <span>
-                            <br>{{$userInfo->email}} <a href="#"><img src="{{ asset('img/edit.gif') }}" alt="Edit Value"></a>
+                            <br>--/--/----<a href="#"><img src="{{ asset('img/edit.gif') }}" alt="Edit Value"></a>
                         </span>
                     </div>
                 </div>

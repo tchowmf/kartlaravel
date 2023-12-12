@@ -25,6 +25,7 @@ Route::group(['prefix' => 'login'], function() {
     Route::get('/', [UserController::class, 'login'])->name('login');
     Route::post('/', [UserController::class, 'doLogin']);
     Route::get('/confirm-email', [UserController::class, 'confirmEmail'])->name('verification');
+    Route::post('/send-verification-email/{user}', [UserController::class, 'sendVerificationEmail'])->name('sendVerificationEmail');
 });
 
 Route::group(['prefix' => 'register'], function() {
@@ -45,7 +46,7 @@ Route::group(['prefix' => 'reset-password'], function() {
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
-    Route::get('/', [ProfileController::class, 'profile']);
+    Route::get('/', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/settings', [ProfileController::class, 'settings']);
     Route::get('/update-password', [ProfileController::class, 'updatePasswordForm']);
     Route::post('/update-password', [ProfileController::class, 'updatePassword']);

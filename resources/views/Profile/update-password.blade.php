@@ -69,8 +69,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <input type="password" class="form-control form-control-user"
-                                name="current_password" required id="password" placeholder="Senha Atual...">
-                            <span id="password-error" style="color: red;"></span>
+                                name="current_password" required id="current_password" placeholder="Senha Atual...">
                         </div>
                     </div>
                     <div class="row">
@@ -79,9 +78,9 @@
                         </div>
                         <div class="form-group col-md-4">
                             <input type="password" class="form-control form-control-user"
-                                name="new_password" required id="password" placeholder="Nova Senha...">
-                            <span id="password-error" style="color: red;"></span>
+                                name="new_password" required id="new_password" placeholder="Nova Senha...">
                         </div>
+                            <span id="password-error" style="color: red;"></span>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -89,7 +88,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <input type="password" class="form-control form-control-user"
-                                name="confirm_password" required id="password" placeholder="Confirmação de Nova Senha...">
+                                name="confirm_password" required id="confirm_password" placeholder="Confirmação de Nova Senha...">
                             <span id="password-error" style="color: red;"></span>
                         </div>
                     </div>
@@ -118,7 +117,7 @@
         }
 
         if (!uppercaseRegex.test(password)) {
-            errors.push("A senha deve conter pelo menos uma letra maiúscula.");
+            errors.push("A senha precisa ter uma letra maiúscula.");
         }
 
         if (password !== confirmPassword) {

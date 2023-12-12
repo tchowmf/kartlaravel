@@ -42,28 +42,53 @@ class UserController extends Controller
                 // Outras regras de validação para os campos do formulário...
             ]);
 
-            $token = Str::random(30);
+            $user = $this->createUser($request->all());
 
-            $user = new User;
-            $user->firstname = $request->input("firstname");
-            $user->lastname = $request->input("lastname");
-            $user->email = $request->input("email");
-            $user->password = Hash::make($request->get('password'));
-            $user->email_verification_token = $token;
+            if ($user) {
 
-            $user->save();
+                $convite->update(['used' => true]);
 
-            $convite->update(['used' => true]);
+                $this->sendEmailVerify($user);
 
-
-            $userDetails = ['name' => $user->firstname];
-
-            Mail::to($user->email)->send(new EmailVerification($token, $userDetails));
-
-            return redirect('/login')->with('success', 'Cadastro realizado com sucesso! Verifique seu e-mail.');
+                return redirect('/login')->with('success', 'Cadastro realizado com sucesso! Verifique seu e-mail.');
+            }
         }
 
         return redirect('/register')->withErrors(['message' => 'Código de Convite Inválido']);
+    }
+
+    public function sendVerificationEmail(User $user)
+    {
+        // Verifica se o usuário ainda não confirmou o e-mail
+        if ($user->email_verified_at == null) {
+            $this->sendEmailVerify($user);
+            return redirect()->back()->with('success', 'Email de verificação reenviado com sucesso.');
+        }
+
+        return redirect()->route('profile')->with('info', 'Seu e-mail já foi verificado.');
+    }
+
+    protected function sendEmailVerify(User $user)
+    {
+        $userDetails = ['name' => $user->firstname];
+        Mail::to($user->email)->send(new EmailVerification($user->email_verification_token, $userDetails));
+    }
+
+    protected function createUser(array $data)
+    {
+        $token = Str::random(30);
+
+        $user = new User;
+        $user->firstname = $data["firstname"];
+        $user->lastname = $data["lastname"];
+        $user->email = $data["email"];
+        $user->password = Hash::make($data['password']);
+        $user->email_verification_token = $token;
+
+        $user->save();
+
+
+        return $user;
     }
 
     public function confirmEmail(Request $request)
