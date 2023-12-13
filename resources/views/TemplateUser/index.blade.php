@@ -305,9 +305,13 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="/profile/settings">
+                                <a class="dropdown-item" href="/profile/support">
+                                    <i class="fas fa-headphones fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Suporte
+                                </a>
+                                <a class="dropdown-item" href="/profile/support">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Alterar Senha
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -384,6 +388,9 @@
     <script src="/js/sb-admin-2.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Text Area -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
     @yield('scripts')
 
 </body>

@@ -24,7 +24,7 @@ class ProfileController extends Controller
         if (Auth::check()) {
             $userInfo = Auth::user();
 
-            return view("Profile.settings", compact('userInfo'));
+            return view("Profile.support", compact('userInfo'));
         }
 
         return redirect()->route('login');
@@ -64,5 +64,42 @@ class ProfileController extends Controller
         }
 
         return redirect()->back()->with('error', 'A senha atual está incorreta. Tente novamente.');
+    }
+
+    public function updateName(Request $request)
+    {
+        $user = auth()->user();
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
+        $user->save();
+
+        // Redirecionar de volta à página ou para qualquer outra rota desejada após a atualização
+        return redirect()->route('profile')->with('success', 'Data de nascimento atualizada com sucesso.');
+    }
+
+    public function updateMail(Request $request)
+    {
+        $user = auth()->user();
+        $user->email = $request->input('email');
+        $user->email_verified_at = null;
+        $user->save();
+
+        // Redirecionar de volta à página ou para qualquer outra rota desejada após a atualização
+        return redirect()->route('profile')->with('success', 'Data de nascimento atualizada com sucesso.');
+    }
+
+    public function updateBirthDate(Request $request)
+    {
+        $user = auth()->user();
+        $user->birth_date = $request->input('birth_date');
+        $user->save();
+
+        // Redirecionar de volta à página ou para qualquer outra rota desejada após a atualização
+        return redirect()->route('profile')->with('success', 'Data de nascimento atualizada com sucesso.');
+    }
+
+    public function sendSupport()
+    {
+
     }
 }

@@ -3,12 +3,6 @@
 @section('contents')
 <div class="d-flex justify-content-between mb-3">
     <h1 class="h3 mb-0 text-gray-800">CONTA</h1>
-    <div class="input-group col-md-2">
-        <input type="text" class="form-control" placeholder="Pesquisar LOCAL">
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-        </div>
-    </div>
 </div>
 
 <body>
@@ -27,16 +21,12 @@
                             Conta
                         </a>
 
-                        <a class="nav-link" href="#" style="color: black; text-decoration: none;">
+                        <a class="nav-link" href="/profile/support" style="color: black; text-decoration: none;">
                             Suporte
                         </a>
 
                         <a class="nav-link" href="/profile/update-password" style="color: black; text-decoration: none;">
                             Alterar senha
-                        </a>
-
-                        <a class="nav-link" href="/profile/settings" style="color: black; text-decoration: none;">
-                            Configurações gerais
                         </a>
 
                         <div class="dropdown-divider"></div>
@@ -56,17 +46,35 @@
                         <div class="col-md-3">
                             <br><h5>Nome completo:</h5>
                         </div>
-                        <span>
-                            <br>{{$userInfo->firstname}} {{$userInfo->lastname}} <a href="#"><img src="{{ asset('img/edit.gif') }}" alt="Edit Value"></a>
+                        <span id="fullName">
+                            <!-- Exibição do nome completo -->
+                            <br><span>{{ $userInfo->firstname }} {{ $userInfo->lastname }} <a href="#" onclick="toggleForm('nameForm')" id="editIconName"><img src="{{ asset('img/edit.gif') }}" alt="Edit Value"></a></span>
                         </span>
+
+                        <!-- Formulário de edição para nome -->
+                        <form action="{{ route('update-name', ['user' => $userInfo->id]) }}" method="post" style="display: none;" id="nameForm">
+                            @CSRF
+                            <input type="text" class="form-control" value="{{ $userInfo->firstname }}" name="firstname">
+                            <input type="text" class="form-control" value="{{ $userInfo->lastname }}" name="lastname">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </form>
                     </div>
+
                     <div class="row">
                         <div class="col-md-3">
                             <br><h5>E-mail:</h5>
                         </div>
-                        <span>
-                            <br>{{$userInfo->email}} <a href="#"><img src="{{ asset('img/edit.gif') }}" alt="Edit Value"></a>
+                        <span id="userEmail">
+                            <!-- Exibição do e-mail -->
+                            <br>{{ $userInfo->email }} <a href="#" onclick="toggleForm('emailForm')" id="editIconEmail"><img src="{{ asset('img/edit.gif') }}" alt="Edit Value"></a></span>
                         </span>
+
+                        <!-- Formulário de edição para e-mail -->
+                        <form action="{{ route('update-email', ['user' => $userInfo->id]) }}" method="post" style="display: none;" id="emailForm">
+                            @CSRF
+                            <input type="email" class="form-control" value="{{ $userInfo->email }}" name="email">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </form>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
@@ -74,7 +82,7 @@
                         </div>
                         <span>
                             <br>@if (auth()->user()->email_verified_at != null)
-                                    Confirmado✅
+                                    Confirmado ✅
                                 @else
                                     <form action="{{ route('sendVerificationEmail', ['user' => auth()->user()->id]) }}" method="post">
                                         @CSRF
@@ -87,9 +95,21 @@
                         <div class="col-md-3">
                             <br><h5>Data de nascimento:</h5>
                         </div>
-                        <span>
-                            <br>--/--/----<a href="#"><img src="{{ asset('img/edit.gif') }}" alt="Edit Value"></a>
+                        <span id="dateOfBirth">
+                            @php
+                                $formattedBirthDate = (auth()->user()->birth_date) ? \Carbon\Carbon::createFromFormat('Y-m-d', auth()->user()->birth_date)->format('d/m/Y') : '--/--/----';
+                            @endphp
+
+                            <!-- Exibição da data de nascimento -->
+                            <br><span>{{ $formattedBirthDate }} <a href="#" onclick="toggleFormdate()" id="editIcon"><img src="{{ asset('img/edit.gif') }}" alt="Edit Value"></a></span>
                         </span>
+
+                        <!-- Formulário de edição (inicialmente oculto) -->
+                        <form action="{{ route('update-birth-date', ['user' => auth()->user()->id]) }}" method="post" style="display: none;" id="birth_date">
+                            @CSRF
+                            <br><input type="date" class="form-control" value="{{ auth()->user()->birth_date }}" name="birth_date">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -102,7 +122,7 @@
                             <br><h5>Participou de corridas:</h5>
                         </div>
                         <span>
-                            <br>0
+                            <br>5
                         </span>
                     </div>
                     <div class="row">
@@ -128,5 +148,47 @@
 </body>
 @endsection
 
+@section('scripts')
+<script>
+    function toggleFormdate() {
+        var form = document.getElementById('birth_date');
+        var dateOfBirth = document.getElementById('dateOfBirth');
+        var editIcon = document.getElementById('editIcon');
 
+        if (form.style.display === 'none') {
+            form.style.display = 'inline-block';
+            dateOfBirth.style.display = 'none';
+        } else {
+            form.style.display = 'none';
+            dateOfBirth.style.display = 'inline';
+        }
+    }
+</script>
+
+<script>
+    function toggleForm(formId) {
+    var form = document.getElementById(formId);
+    var fullName = document.getElementById('fullName');
+    var userEmail = document.getElementById('userEmail');
+
+    if (form.style.display === 'none') {
+        form.style.display = 'inline-block';
+
+        if (formId === 'nameForm') {
+            fullName.style.display = 'none';
+        } else if (formId === 'emailForm') {
+            userEmail.style.display = 'none';
+        }
+    } else {
+        form.style.display = 'none';
+
+        if (formId === 'nameForm') {
+            fullName.style.display = 'inline';
+        } else if (formId === 'emailForm') {
+            userEmail.style.display = 'inline';
+        }
+    }
+}
+</script>
+@endsection
 

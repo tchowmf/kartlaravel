@@ -47,9 +47,13 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
     Route::get('/', [ProfileController::class, 'profile'])->name('profile');
-    Route::get('/settings', [ProfileController::class, 'settings']);
+    Route::get('/support', [ProfileController::class, 'settings']);
+    Route::post('/support', [ProfileController::class, 'sendSupport']);
     Route::get('/update-password', [ProfileController::class, 'updatePasswordForm']);
     Route::post('/update-password', [ProfileController::class, 'updatePassword']);
+    Route::post('/update-name', [ProfileController::class, 'updateName'])->name('update-name');
+    Route::post('/update-email', [ProfileController::class, 'updateMail'])->name('update-email');
+    Route::post('/update-birth-date', [ProfileController::class, 'updateBirthDate'])->name('update-birth-date');
 });
 
 Route::group(['prefix' => 'karts', 'middleware' => 'auth'], function() {
