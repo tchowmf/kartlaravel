@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\SupportMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {
@@ -74,7 +76,7 @@ class ProfileController extends Controller
         $user->save();
 
         // Redirecionar de volta à página ou para qualquer outra rota desejada após a atualização
-        return redirect()->route('profile')->with('success', 'Data de nascimento atualizada com sucesso.');
+        return redirect()->route('profile')->with('success', 'Nome atualizado com sucesso.');
     }
 
     public function updateMail(Request $request)
@@ -85,7 +87,7 @@ class ProfileController extends Controller
         $user->save();
 
         // Redirecionar de volta à página ou para qualquer outra rota desejada após a atualização
-        return redirect()->route('profile')->with('success', 'Data de nascimento atualizada com sucesso.');
+        return redirect()->route('profile')->with('success', 'E-mail atualizado com sucesso.');
     }
 
     public function updateBirthDate(Request $request)

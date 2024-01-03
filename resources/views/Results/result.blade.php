@@ -8,7 +8,7 @@
 
     <div class="card">
         <div class="card-body">
-            <table class="table table-bordered dataTable">
+            <table id="dataTable" class="table table-bordered">
                 <thead>
                     <th>POSIÇÃO</th>
                     <th>KART</th>
@@ -57,22 +57,26 @@
 
 @section('scripts')
 
-@if(Session::has('success'))
     <script>
-        alert("{{ Session::get('success') }}")
+        new DataTable('#dataTable');
     </script>
-@endif
 
-@if(Session::has('danger'))
-    <script>
-        alert("{{ Session::get('danger') }}")
-    </script>
-@endif
+    @if(Session::has('success'))
+        <script>
+            alert("{{ Session::get('success') }}")
+        </script>
+    @endif
 
-@if(Session::has('error'))
-    <script>
-        alert("{{ Session::get('error') }}");
-    </script>
-@endif
+    @if(Session::has('danger'))
+        <script>
+            alert("{{ Session::get('danger') }}")
+        </script>
+    @endif
+
+    @if(Session::has('error'))
+        <script>
+            alert("{{ Session::get('error') }}");
+        </script>
+    @endif
 
 @endsection

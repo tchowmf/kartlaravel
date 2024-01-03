@@ -45,7 +45,7 @@ Route::group(['prefix' => 'reset-password'], function() {
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function() {
     Route::get('/', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/support', [ProfileController::class, 'settings']);
     Route::post('/support', [ProfileController::class, 'sendSupport']);

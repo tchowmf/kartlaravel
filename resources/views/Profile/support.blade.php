@@ -87,6 +87,12 @@
                                     name="phone" required id="phone" placeholder="Telefone para Contato">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input type="checkbox" class="custom-control-input" name="wpp" id="wpp">
+                                <label class="custom-control-label" for="wpp">Receber resposta pelo whatsapp? (tempo de resposta menor)</label>
+                            </div>
+                        </div>
 
                         <!-- espacador -->
                         <div class="row">

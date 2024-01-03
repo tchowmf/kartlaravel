@@ -34,7 +34,6 @@ class KartsController extends Controller
         return view("Karts.show", ['karts' => $karts]);
     }
 
-
     public function showVoltas($numKart)
     {
         $voltas = Voltas::where('numKart', $numKart)->get();
