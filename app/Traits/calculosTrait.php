@@ -3,10 +3,11 @@
 namespace App\Traits;
 
 use Illuminate\Http\Request;
-use App\Models\Voltas;
 use App\Models\Karts;
+use App\Models\Voltas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 trait calculosTrait
 {
@@ -23,7 +24,7 @@ trait calculosTrait
 
                 $diferenca = $mediaKart - $mediaTempo;
 
-                if ($diferenca <= -5) {
+                if ($diferenca <= -3) {
                     $nota = 'S';
                 } elseif ($diferenca >= -5 && $diferenca <= -1.4) {
                     $nota = 'A';
@@ -36,6 +37,10 @@ trait calculosTrait
                 }
 
                 Karts::where('numKart', $kart->numKart)->update(['notaKart' => $nota]);
+                
+                //Quando a tabela estiver sem registros, usar:
+                //Karts::updateOrInsert(['numKart' => $kart->numKart], ['notaKart' => $nota]);
+
             }
         }
     }

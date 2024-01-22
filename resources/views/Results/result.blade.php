@@ -57,10 +57,6 @@
 
 @section('scripts')
 
-    <script>
-        new DataTable('#dataTable');
-    </script>
-
     @if(Session::has('success'))
         <script>
             alert("{{ Session::get('success') }}")
