@@ -21,6 +21,10 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
+Route::group(['prefix' => 'auth'], function() {
+
+});
+
 Route::group(['prefix' => 'login'], function() {
     Route::get('/', [UserController::class, 'login'])->name('login');
     Route::post('/', [UserController::class, 'doLogin']);
@@ -29,8 +33,8 @@ Route::group(['prefix' => 'login'], function() {
 });
 
 Route::group(['prefix' => 'register'], function() {
-    Route::get('/', [UserController::class, 'register']);
-    Route::post('/', [UserController::class, 'create']);
+    Route::get('/', [UserController::class, 'getRegister'])->name('get-register');
+    Route::post('/', [UserController::class, 'postRegister']);
 });
 
 Route::group(['prefix' => 'forgot-password'], function() {
@@ -41,6 +45,12 @@ Route::group(['prefix' => 'forgot-password'], function() {
 Route::group(['prefix' => 'reset-password'], function() {
     Route::get('/{token}', [UserController::class, 'reset'])->name('password.reset');
     Route::post('/{token}', [UserController::class, 'resetPassword']);
+});
+
+Route::prefix('/racetracks')->group(function() {
+    Route::prefix('/{racetrack}/karts')->group(function () {
+        Route::get('/', []); // /racetracks/1/karts
+    });
 });
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

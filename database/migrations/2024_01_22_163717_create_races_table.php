@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kart', function (Blueprint $table) {
+        Schema::create('races', function (Blueprint $table) {
             $table->id();
-            $table->integer('numKart')->nullable(false);
-            $table->string('mediaTempo')->nullable(true);
-            $table->integer('numVoltas')->nullable(true);
-            $table->char('notaKart')->nullable(true);
+            $table->string('name');
+            $table->foreignId('racetrack_id')->constrained('racetracks');
+
+            $table->timestamps();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kart');
+        Schema::dropIfExists('races');
     }
 };

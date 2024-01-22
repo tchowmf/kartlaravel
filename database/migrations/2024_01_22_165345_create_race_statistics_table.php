@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('voltas', function (Blueprint $table) {
+        Schema::create('race_statistics', function (Blueprint $table) {
             $table->id();
-            $table->integer('numKart')->nullable(false);
-            $table->string('nomePiloto')->nullable(false);
-            $table->float('melhorVolta')->nullable(false);
-            $table->char('notaPiloto', 1)->nullable(true);
+            $table->foreignId('pilot_id')->constrained('pilots');
+            $table->foreignId('race_id')->constrained('races');
+            $table->float('best_lap');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('voltas');
+        Schema::dropIfExists('races_statistics');
     }
 };

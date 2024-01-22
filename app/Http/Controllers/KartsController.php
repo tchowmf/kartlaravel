@@ -4,17 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Karts;
+use App\Models\Kart;
 use App\Models\Voltas;
+use Illuminate\View\View;
 
 class KartsController extends Controller
 {
-    public function index()
-    {
-        return view("Karts.index");
-    }
-
-    public function showKarts(Request $request)
+    public function index(Request $request): View
     {
         $orderBy = $request->input('orderby', 'id');
         $direction = 'asc';
@@ -29,7 +25,7 @@ class KartsController extends Controller
             $orderBy = 'notaKart';
         }
 
-        $karts = Karts::orderBy($orderBy, $direction)->get();
+        $karts = Kart::orderBy($orderBy, $direction)->get();
 
         return view("Karts.show", ['karts' => $karts]);
     }

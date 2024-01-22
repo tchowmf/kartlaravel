@@ -31,6 +31,7 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
+
         $codigoInserido = $request->input('invite');
 
         $convite = Invite::where('codigo', $codigoInserido)->first();

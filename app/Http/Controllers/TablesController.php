@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Karts;
+use App\Models\Kart;
 use App\Models\Tables;
 use App\Models\Voltas;
 
@@ -35,7 +35,7 @@ class TablesController extends Controller
         $orderByColumn = $orderByMapping[$orderBy] ?? 'numKart';
 
         // Recupere os dados dos karts
-        $karts = Karts::all();
+        $karts = Kart::all();
 
         $dadosCombinados = [];
 
