@@ -31,13 +31,13 @@ class KartsController extends Controller
 
         $karts = Karts::orderBy($orderBy, $direction)->get();
 
-        return view("Karts.show", ['karts' => $karts]);
+        return view("Karts.show", compact(['karts']));
     }
 
     public function showVoltas($numKart)
     {
         $voltas = Voltas::where('numKart', $numKart)->get();
-        return view("Karts.inspect", ['numKart' => $numKart, 'voltas' => $voltas]);
+        return view("Karts.inspect", compact(['numKart', 'voltas']));
     }
 
     public function excluir($numKart, $id)

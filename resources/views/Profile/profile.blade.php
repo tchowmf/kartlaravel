@@ -1,4 +1,5 @@
 @extends('TemplateUser.index')
+@section('title', 'Conta - Kart Timer')
 
 @section('contents')
 <div class="d-flex justify-content-between mb-3">

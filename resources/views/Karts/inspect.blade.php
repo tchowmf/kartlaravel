@@ -1,4 +1,5 @@
 @extends('TemplateUser.index')
+@section('title', "Kart $numKart - Kart Timer")
 
 @section('contents')
 

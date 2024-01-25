@@ -1,4 +1,5 @@
 @extends('TemplateUser.index')
+@section('title', 'Karts Speed Park - Kart Timer')
 
 @section('contents')
     <!-- Page Heading -->
