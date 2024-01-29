@@ -9,12 +9,12 @@ use App\Models\Voltas;
 
 class TablesController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view("Tables.index");
     }
 
-    public function showTables(Request $request)
+    public function showTables(Request $request): View
     {
         // Recupere o valor selecionado no 'select' com name 'orderby'
         $orderBy = $request->input('orderby', 'id');

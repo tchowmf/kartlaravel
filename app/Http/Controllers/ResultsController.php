@@ -11,12 +11,12 @@ class ResultsController extends Controller
 {
     use CalculosTrait;
 
-    public function index()
+    public function index(): View
     {
         return view("Results.index");
     }
 
-    public function showEvents()
+    public function showEvents(): View
     {
 
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/eventos.xml";
@@ -33,7 +33,7 @@ class ResultsController extends Controller
         return view("Results.show", ['attributesArray' => $attributesArray]);
     }
 
-    public function showEpg($ID_EVENTO)
+    public function showEpg($ID_EVENTO): View
     {
 
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/epg.xml";
@@ -49,7 +49,7 @@ class ResultsController extends Controller
         return view("Results.epg", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO,]);
     }
 
-    public function showProvas($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO)
+    public function showProvas($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO): View
     {
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/{$ID_EVENTO_PISTA_GRUPO}/provas.xml";
 
@@ -64,7 +64,7 @@ class ResultsController extends Controller
         return view("Results.prova", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO]);
     }
 
-    public function showResults($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA)
+    public function showResults($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): View
     {
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/{$ID_EVENTO_PISTA_GRUPO}/{$ID_CORRIDA}.xml";
 
@@ -79,7 +79,7 @@ class ResultsController extends Controller
         return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA]);
     }
 
-    public function insertData(Request $request, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA)
+    public function insertData(Request $request, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): RedirectResponse
     {
         $nKarts = $request->input("nKart");
         $nome = $request->input("nome");

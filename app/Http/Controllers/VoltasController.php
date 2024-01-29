@@ -8,7 +8,7 @@ use App\Models\Voltas;
 class VoltasController extends Controller
 {
 
-    public function index()
+    public function index(): View
     {
         return view("Pilotos.index");
     }
@@ -31,7 +31,7 @@ class VoltasController extends Controller
         return view("Pilotos.index", ['voltas' => $voltas]);
     }*/
 
-    public function showDrivers(Request $request)
+    public function showDrivers(Request $request): View
     {
         $orderBy = $request->input('orderby', 'id');
         $direction = 'asc';
@@ -51,14 +51,14 @@ class VoltasController extends Controller
         return view("Pilotos.show", ['voltas' => $voltas]);
     }
 
-    public function inserirNota($id)
+    public function inserirNota($id): View
     {
         $volta = Voltas::find($id);
 
         return view("Pilotos.formulario", ['volta' => $volta]);
     }
 
-    public function salvarNota(Request $request, $id)
+    public function salvarNota(Request $request, $id): RedirectResponse
     {
         $volta = Voltas::find($id);
         $volta->notaPiloto = $request->input("notaPiloto");
@@ -67,7 +67,7 @@ class VoltasController extends Controller
         return redirect("/pilotos/kgv");
     }
 
-    public function excluirNota($id)
+    public function excluirNota($id): RedirectResponse
     {
         $volta = Voltas::find($id);
 

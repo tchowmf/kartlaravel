@@ -12,7 +12,7 @@ class TrocaController extends Controller
         return view("Troca.index");
     }
 
-    public function troca()
+    public function troca(): View
     {
         $karts = Karts::all();
 
@@ -25,7 +25,8 @@ class TrocaController extends Controller
         return view("Troca.show", ["nKart" => $nKarts]);
     }
 
-    public function calcularProbabilidade(Request $request) {
+    public function calcularProbabilidade(Request $request): View
+    {
         $kartsSelecionados = $request->input('karts_selecionados');
 
         // Contagem inicial de todos os karts disponíveis
@@ -51,7 +52,6 @@ class TrocaController extends Controller
 
         return view('Troca.chance', [
             'probabilidadePorNota' => $probabilidadePorNota,
-            // Você pode enviar outras informações necessárias para a view aqui
         ]);
     }
 

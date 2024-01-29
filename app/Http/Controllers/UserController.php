@@ -14,22 +14,22 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    public function login()
+    public function login(): View
     {
         return view("Landing.login");
     }
 
-    public function register()
+    public function register(): View
     {
         return view("Landing.register");
     }
 
-    public function forgot()
+    public function forgot(): View
     {
         return view("Landing.forgot-password");
     }
 
-    public function create(Request $request)
+    public function create(Request $request): RedirectResponse
     {
         $codigoInserido = $request->input('invite');
 
@@ -57,7 +57,7 @@ class UserController extends Controller
         return redirect('/register')->withErrors(['message' => 'Código de Convite Inválido']);
     }
 
-    public function sendVerificationEmail(User $user)
+    public function sendVerificationEmail(User $user): RedirectResponse
     {
         // Verifica se o usuário ainda não confirmou o e-mail
         if ($user->email_verified_at == null) {
@@ -91,7 +91,7 @@ class UserController extends Controller
         return $user;
     }
 
-    public function confirmEmail(Request $request)
+    public function confirmEmail(Request $request): RedirectResponse
     {
         $expires = $request->input('expires');
         $token = $request->input('token');
@@ -112,7 +112,7 @@ class UserController extends Controller
         return redirect('/login')->with('error', 'Falha na verificação do e-mail. Tente novamente.');
     }
 
-    public function doLogin(Request $request)
+    public function doLogin(Request $request): RedirectResponse
     {
         $credentials = $request->only('email', 'password');
         $is_remember = $request->has('remember-me');
@@ -125,7 +125,7 @@ class UserController extends Controller
         return redirect()->route('login')->with('error', 'Credenciais inválidas. Tente novamente.');
     }
 
-    public function reset($token)
+    public function reset($token): View
     {
         if ($this->isTokenValid($token)) {
             $user = User::where('reset_token', $token)->first();
@@ -139,7 +139,7 @@ class UserController extends Controller
         return redirect()->route('login')->with(['error' => 'Token de redefinição de senha não encontrado ou expirado.']);
     }
 
-    public function sendResetPasswordLink(Request $request)
+    public function sendResetPasswordLink(Request $request): RedirectResponse
     {
         $user = User::where('email', $request->get('email'))->first();
 
@@ -179,7 +179,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function resetPassword(Request $request)
+    public function resetPassword(Request $request): RedirectResponse
     {
         $user = User::where('reset_token', $request->get('token'))->first();
 
@@ -192,7 +192,7 @@ class UserController extends Controller
         return redirect()->route('login')->with(['error' => 'Token de redefinição de senha não encontrado ou expirado.']);
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         Auth::logout();
         return redirect('/login');

@@ -9,12 +9,12 @@ use App\Models\Voltas;
 
 class KartsController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view("Karts.index");
     }
 
-    public function showKarts(Request $request)
+    public function showKarts(Request $request): View
     {
         $orderBy = $request->input('orderby', 'id');
         $direction = 'asc';
@@ -34,13 +34,13 @@ class KartsController extends Controller
         return view("Karts.show", compact(['karts']));
     }
 
-    public function showVoltas($numKart)
+    public function showVoltas($numKart): View
     {
         $voltas = Voltas::where('numKart', $numKart)->get();
         return view("Karts.inspect", compact(['numKart', 'voltas']));
     }
 
-    public function excluir($numKart, $id)
+    public function excluir($numKart, $id): RedirectResponse
     {
         $voltas = Voltas::find($id);
         $voltas->delete();

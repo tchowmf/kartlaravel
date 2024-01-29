@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Http;
 class LivesController extends Controller
 {
 
-    public function index()
+    public function index(): View
     {
         return view("Live.index");
     }
 
-    public function live()
+    public function live(): View
     {
         return view("Live.live");
     }
 
-    public function info($numero)
+    public function info($numero): View
     {
         $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
@@ -35,14 +35,14 @@ class LivesController extends Controller
         return view("Live.info", ['attributesArray' => $attributesArray, 'numero' => $numero]);
     }
 
-    public function timer()
+    public function timer(): View
     {
         return view("Live.timer");
     }
 
 
     /* LIVETIME CONSULT WORKING*/
-    public function liveTable()
+    public function liveTable(): View
     {
         $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
@@ -96,7 +96,7 @@ class LivesController extends Controller
 
     }
 
-    public function select()
+    public function select(): View
     {
         $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
@@ -117,7 +117,8 @@ class LivesController extends Controller
         return redirect("/live/speedpark/$numero");
     }
 
-    public function showDetail($numero) {
+    public function showDetail($numero): View
+    {
         $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 
         $xml = simplexml_load_file($url) or die ("Can't load xml");
@@ -139,7 +140,7 @@ class LivesController extends Controller
         return view("Live.infoTable", ['attributesArray' => $attributesArray, 'header' => $header, 'ignoreFirstDIFA' => $ignoreFirstDIFA, 'numero' => $numero]);
     }
 
-    public function showAverage()
+    public function showAverage(): View
     {
         $url = "http://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/livetime.xml";
 

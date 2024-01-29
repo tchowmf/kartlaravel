@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {
-    public function profile()
+    public function profile(): RedirectResponse
     {
         if (Auth::check()) {
             $userInfo = Auth::user();
@@ -21,7 +21,7 @@ class ProfileController extends Controller
         return redirect()->route('login');
     }
 
-    public function settings()
+    public function settings(): RedirectResponse
     {
         if (Auth::check()) {
             $userInfo = Auth::user();
@@ -32,7 +32,7 @@ class ProfileController extends Controller
         return redirect()->route('login');
     }
 
-    public function updatePasswordForm()
+    public function updatePasswordForm(): RedirectResponse
     {
         if (Auth::check()) {
             $userInfo = Auth::user();
@@ -43,7 +43,7 @@ class ProfileController extends Controller
         return redirect()->route('login');
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(Request $request): RedirectResponse
     {
         $user = Auth::user();
 
@@ -68,7 +68,7 @@ class ProfileController extends Controller
         return redirect()->back()->with('error', 'A senha atual está incorreta. Tente novamente.');
     }
 
-    public function updateName(Request $request)
+    public function updateName(Request $request): RedirectResponse
     {
         $user = auth()->user();
         $user->firstname = $request->input('firstname');
@@ -79,7 +79,7 @@ class ProfileController extends Controller
         return redirect()->route('profile')->with('success', 'Nome atualizado com sucesso.');
     }
 
-    public function updateMail(Request $request)
+    public function updateMail(Request $request): RedirectResponse
     {
         $user = auth()->user();
         $user->email = $request->input('email');
@@ -90,7 +90,7 @@ class ProfileController extends Controller
         return redirect()->route('profile')->with('success', 'E-mail atualizado com sucesso.');
     }
 
-    public function updateBirthDate(Request $request)
+    public function updateBirthDate(Request $request): RedirectResponse
     {
         $user = auth()->user();
         $user->birth_date = $request->input('birth_date');
