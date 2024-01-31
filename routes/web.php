@@ -78,8 +78,8 @@ Route::group(['prefix' => 'pilotos'], function() {
     Route::get('/', [VoltasController::class, 'index']);
     Route::get('/kgv', [VoltasController::class, 'getDriverKgv']);
     Route::get('/speedpark', [VoltasController::class, 'getDriverSpeedPark']);
-    Route::get('/inserir-nota/{id}', [VoltasController::class, 'inserirNota']);
-    Route::post('/salvar-nota/{id}', [VoltasController::class, 'salvarNota']);
+    Route::get('/inserir-nota/{id}', [VoltasController::class, 'getGrade']);
+    Route::post('/salvar-nota/{id}', [VoltasController::class, 'postGrade']);
     Route::get('/excluir-nota/{id}', [VoltasController::class, 'excluirNota'])->name('excluir.nota');
 });
 
@@ -93,8 +93,8 @@ Route::group(['prefix' => 'results'], function() {
     Route::get('/', [ResultsController::class, 'index']);
     Route::get('/kgv', [ResultsController::class, 'showEvents']);
     Route::get('/speedpark', [ResultsController::class, 'showEvents']);
-    Route::get('/speedpark/{ID_EVENTO}/epg', [ResultsController::class, 'showEpg']);
-    Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'showProvas']);
+    Route::get('/speedpark/{ID_EVENTO}/epg', [ResultsController::class, 'getEpg']);
+    Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'getProvas']);
     Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'getResults']);
     Route::post('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'postResults']);
 });

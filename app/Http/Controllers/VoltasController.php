@@ -42,14 +42,14 @@ class VoltasController extends Controller
         return view("Pilotos.show", compact(['driverInfo']));
     }
 
-    public function inserirNota($id): View
+    public function getGrade($id): View
     {
         $volta = Voltas::find($id);
 
         return view("Pilotos.formulario", ['volta' => $volta]);
     }
 
-    public function salvarNota(Request $request, $id): RedirectResponse
+    public function postGrade(Request $request, $id): RedirectResponse
     {
         $volta = Voltas::find($id);
         $volta->notaPiloto = $request->input("notaPiloto");

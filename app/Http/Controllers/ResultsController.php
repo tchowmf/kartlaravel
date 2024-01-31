@@ -37,7 +37,7 @@ class ResultsController extends Controller
         return view("Results.show", ['attributesArray' => $attributesArray]);
     }
 
-    public function showEpg($ID_EVENTO): View
+    public function getEpg($ID_EVENTO): View
     {
 
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/epg.xml";
@@ -53,7 +53,7 @@ class ResultsController extends Controller
         return view("Results.epg", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO,]);
     }
 
-    public function showProvas($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO): View
+    public function getProvas($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO): View
     {
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/{$ID_EVENTO_PISTA_GRUPO}/provas.xml";
 
