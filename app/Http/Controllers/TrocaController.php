@@ -31,7 +31,7 @@ class TrocaController extends Controller
 
         // Contagem inicial de todos os karts disponíveis
         $totalKarts = Kart::count();
-        $kartsDisponiveis = Kart::whereIn('numKart', $kartsSelecionados)->count();
+        $kartsDisponiveis = Kart::whereIn('identifier', $kartsSelecionados)->count();
 
         // Contagem de karts por nota
         $kartsPorNota = [];
@@ -39,7 +39,7 @@ class TrocaController extends Controller
 
         foreach ($notas as $nota) {
             $kartsPorNota[$nota] = Kart::where('notaKart', $nota)
-                                        ->whereIn('numKart', $kartsSelecionados)
+                                        ->whereIn('identifier', $kartsSelecionados)
                                         ->count();
         }
 

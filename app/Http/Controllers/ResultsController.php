@@ -8,13 +8,13 @@ use App\Models\Pilot;
 use App\Models\Result;
 use App\Models\RaceTrack;
 use App\Controllers\KartsController;
-use App\Traits\CalculosTrait;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class ResultsController extends Controller
 {
-    use CalculosTrait;
-
     public function index(): View
     {
         return view("Results.index");
@@ -93,8 +93,6 @@ class ResultsController extends Controller
 
         $count = count($nKart);
 
-        $insertionSuccessful = true;
-
         for ($i = 0; $i < $count; $i++) {
             $time = $tempo[$i];
             list($minutes, $seconds) = explode(':', $time);
@@ -121,11 +119,45 @@ class ResultsController extends Controller
             $volta->save();
         }
 
-        if ($insertionSuccessful) {
+        if (0 == 0) {
+            $this->grades();
             return back()->with('success', 'TEMPOS INSERIDOS COM SUCESSO!!');
-
         } else {
             return back()->with('danger', 'TEMPOS DUPLICADOS OU ERRO NA INSERÇÃO!!');
+        }
+    }
+
+    private function grades()
+    {
+        $karts = Result::select('kart_id', DB::raw('AVG(best_lap) AS media'))->groupBy('kart_id')->get();
+        
+        foreach ($karts as $kart) {
+            $voltas = Kart::where('id', $kart->kart_id)->get();
+            $mediaKart = $kart->media;
+            
+            foreach ($voltas as $volta) {
+                $mediaTempo = Result::avg('best_lap');
+
+                $diferenca = $mediaKart - $mediaTempo;
+                
+                if ($diferenca <= -3) {
+                    $nota = 'S';
+                } elseif ($diferenca >= -5 && $diferenca <= -1.4) {
+                    $nota = 'A';
+                } elseif ($diferenca > -1.5 && $diferenca <= 1) {
+                    $nota = 'B';
+                } elseif ($diferenca > 1 && $diferenca <= 2) {
+                    $nota = 'C';
+                } elseif ($diferenca > 2) {
+                    $nota = 'D';
+                }
+
+                Kart::where('id', $kart->kart_id)->update(['grade' => $nota]);
+
+                //Quando a tabela estiver sem registros, usar:
+                //Kart::updateOrInsert(['id' => $kart->kart_id], ['grade' => $nota]);
+
+            }
         }
     }
 
