@@ -12,20 +12,20 @@ class TrocaController extends Controller
         return view("Troca.index");
     }
 
-    public function troca(): View
+    public function troca()
     {
         $karts = Kart::all();
 
         $nKarts = [];
 
         foreach($karts as $kart){
-            $nKarts[] = $kart->numKart;
+            $nKarts[] = $kart->identifier;
         }
 
         return view("Troca.show", ["nKart" => $nKarts]);
     }
 
-    public function calcularProbabilidade(Request $request): View
+    public function calcularProbabilidade(Request $request)
     {
         $kartsSelecionados = $request->input('karts_selecionados');
 
@@ -38,7 +38,7 @@ class TrocaController extends Controller
         $notas = ['S', 'A', 'B', 'C', 'D'];
 
         foreach ($notas as $nota) {
-            $kartsPorNota[$nota] = Kart::where('notaKart', $nota)
+            $kartsPorNota[$nota] = Kart::where('grade', $nota)
                                         ->whereIn('identifier', $kartsSelecionados)
                                         ->count();
         }

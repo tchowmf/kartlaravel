@@ -83,7 +83,7 @@ Route::group(['prefix' => 'pilotos'], function() {
     Route::get('/excluir-nota/{id}', [VoltasController::class, 'excluirNota'])->name('excluir.nota');
 });
 
-Route::group(['prefix' => 'tables', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'tables'], function() {
     Route::get('/', [TablesController::class, 'index']);
     Route::get('/kgv', [TablesController::class, 'showTables']);
     Route::get('/speedpark', [TablesController::class, 'showTables']);
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'results'], function() {
     Route::post('/{racetrack}/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'postResults'])->name('postResults');
 });
 
-Route::group(['prefix' => 'live', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'live'], function() {
     Route::get('/', [LivesController::class, 'index']);
     Route::get('/kgv', [LivesController::class, 'showLive']);
     Route::get('/kgv/select', [LivesController::class, 'select']);
@@ -116,7 +116,7 @@ Route::group(['prefix' => 'live', 'middleware' => 'auth'], function() {
 });
 
 
-Route::group(['prefix' => 'troca', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'troca'], function() {
     Route::get('/', [TrocaController::class, 'index']);
     Route::get('/speedpark', [TrocaController::class, 'troca']);
     Route::post('/speedpark', [TrocaController::class, 'calcularProbabilidade']);
