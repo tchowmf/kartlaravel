@@ -14,7 +14,7 @@ class TrocaController extends Controller
 
     public function troca()
     {
-        $karts = Kart::all();
+        $karts = Kart::all()->sortBy('identifier');
 
         $nKarts = [];
 
