@@ -92,11 +92,11 @@ Route::group(['prefix' => 'tables', 'middleware' => 'auth'], function() {
 Route::group(['prefix' => 'results'], function() {
     Route::get('/', [ResultsController::class, 'index']);
     Route::get('/kgv', [ResultsController::class, 'showEvents']);
-    Route::get('/speedpark', [ResultsController::class, 'showEvents']);
-    Route::get('/speedpark/{ID_EVENTO}/epg', [ResultsController::class, 'getEpg']);
-    Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'getProvas']);
-    Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'getResults']);
-    Route::post('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'postResults']);
+    Route::get('/speedpark', [ResultsController::class, 'getEvents']);
+    Route::get('/{racetrack}/{ID_EVENTO}/epg', [ResultsController::class, 'getEpg'])->name('getEpg');
+    Route::get('/{racetrack}/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'getProvas'])->name('getProvas');
+    Route::get('/{racetrack}/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'getResults'])->name('getResults');
+    Route::post('/{racetrack}/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'postResults'])->name('postResults');
 });
 
 Route::group(['prefix' => 'live', 'middleware' => 'auth'], function() {

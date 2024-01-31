@@ -21,6 +21,7 @@ class PilotFactory extends Factory
     public function definition(): array
     {
         return [
+            'racetrack_id' => RaceTrack::factory(),
             'name' => $this->faker->name,
         ];
     }

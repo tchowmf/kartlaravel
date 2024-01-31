@@ -12,6 +12,7 @@ class Pilot extends Model
     protected $table = 'pilots';
 
     protected $fillable = [
+        'racetrack_id',
         'name'
     ];
 

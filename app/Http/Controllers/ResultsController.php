@@ -20,7 +20,7 @@ class ResultsController extends Controller
         return view("Results.index");
     }
 
-    public function showEvents(): View
+    public function getEvents(): View
     {
 
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/eventos.xml";
@@ -37,7 +37,7 @@ class ResultsController extends Controller
         return view("Results.show", ['attributesArray' => $attributesArray]);
     }
 
-    public function getEpg($ID_EVENTO): View
+    public function getEpg($racetrack, $ID_EVENTO): View
     {
 
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/epg.xml";
@@ -53,7 +53,7 @@ class ResultsController extends Controller
         return view("Results.epg", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO,]);
     }
 
-    public function getProvas($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO): View
+    public function getProvas($racetrack, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO): View
     {
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/{$ID_EVENTO_PISTA_GRUPO}/provas.xml";
 
@@ -68,7 +68,7 @@ class ResultsController extends Controller
         return view("Results.prova", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO]);
     }
 
-    public function getResults($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): View
+    public function getResults($racetrack, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): View
     {
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/{$ID_EVENTO_PISTA_GRUPO}/{$ID_CORRIDA}.xml";
 
@@ -83,13 +83,17 @@ class ResultsController extends Controller
         return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA]);
     }
 
-    public function postResults(Request $request, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA)
+    public function postResults(Request $request, $racetrack, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA)
     {
         $nome = $request->input("nome");
         $nKart = $request->input("nKart");
         $tempo = $request->input("tempo");
 
+        $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
+
         $count = count($nKart);
+
+        $insertionSuccessful = true;
 
         for ($i = 0; $i < $count; $i++) {
             $time = $tempo[$i];
@@ -98,12 +102,13 @@ class ResultsController extends Controller
 
             // cadastro de novo kart
             $kart = new Kart();
-            $kart->racetrack_id = 2;
+            $kart->racetrack_id = $racetrackId;
             $kart->identifier = $nKart[$i];
             $kart->save();
             
             // cadastro de novo piloto
             $driver = new Pilot();
+            $driver->racetrack_id = $racetrackId;
             $driver->name = $nome[$i];
             $driver->save();
 
@@ -111,7 +116,7 @@ class ResultsController extends Controller
             $volta = new Result();
             $volta->kart_id = $kart->id;
             $volta->pilot_id = $driver->id;
-            $volta->racetrack_id = 2;
+            $volta->racetrack_id = $racetrackId;
             $volta->best_lap = $totalSeconds;
             $volta->save();
         }
