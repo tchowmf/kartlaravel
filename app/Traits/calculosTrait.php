@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Http\Request;
-use App\Models\Karts;
+use App\Models\Kart;
 use App\Models\Voltas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -36,8 +36,8 @@ trait calculosTrait
                     $nota = 'D';
                 }
 
-                Karts::where('numKart', $kart->numKart)->update(['notaKart' => $nota]);
-                
+                Kart::where('numKart', $kart->numKart)->update(['notaKart' => $nota]);
+
                 //Quando a tabela estiver sem registros, usar:
                 //Karts::updateOrInsert(['numKart' => $kart->numKart], ['notaKart' => $nota]);
 
@@ -61,7 +61,7 @@ trait calculosTrait
 
             try {
                 // Tente encontrar ou criar um Kart existente
-                $kart = Karts::firstOrNew(['numKart' => $kartId]);
+                $kart = Kart::firstOrNew(['numKart' => $kartId]);
 
                 // Preencha os valores do Kart
                 $kart->numKart = $kartId;

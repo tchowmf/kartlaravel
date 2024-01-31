@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invite', function (Blueprint $table) {
+        Schema::create('race_statistics', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
-            $table->boolean('used')->default(false);
+            $table->foreignId('kart_id')->constrained('karts');
+            $table->foreignId('pilot_id')->constrained('pilots');
+            $table->foreignId('racetrack_id')->constrained('racetracks');
+            $table->float('best_lap');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invite');
+        Schema::dropIfExists('races_statistics');
     }
 };

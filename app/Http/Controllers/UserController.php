@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    public function login(): View
+    public function login()
     {
         return view("Landing.login");
     }
@@ -31,6 +31,7 @@ class UserController extends Controller
 
     public function create(Request $request): RedirectResponse
     {
+
         $codigoInserido = $request->input('invite');
 
         $convite = Invite::where('codigo', $codigoInserido)->first();

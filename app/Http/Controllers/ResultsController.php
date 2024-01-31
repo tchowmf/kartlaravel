@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Voltas;
+use App\Models\Kart;
+use App\Models\Pilot;
+use App\Models\Result;
+use App\Models\RaceTrack;
 use App\Controllers\KartsController;
 use App\Traits\CalculosTrait;
+use Illuminate\View\View;
 
 class ResultsController extends Controller
 {
@@ -81,32 +85,40 @@ class ResultsController extends Controller
 
     public function insertData(Request $request, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): RedirectResponse
     {
-        $nKarts = $request->input("nKart");
+        $nKart = $request->input("nKart");
         $nome = $request->input("nome");
-        $tempos = $request->input("tempo");
+        $tempo = $request->input("tempo");
 
-        $count = count($nKarts);
+        $count = count($nKart);
         $insertionSuccessful = true;
 
+        $existingTempo = Results::whereRaw('CAST(best_lap AS DECIMAL(10, 3)) = ?', [$totalSeconds])->first();
+
+        if ($existingTempo) {
+            $insertionSuccessful = false;
+        }
+
         for ($i = 0; $i < $count; $i++) {
-            $time = $tempos[$i];
+            $time = $tempo[$i];
             list($minutes, $seconds) = explode(':', $time);
             $totalSeconds = (floatval($minutes) * 60) + floatval($seconds);
 
-            // Check if the same float value exists in the database's melhorVolta column
-            $existingTempo = Voltas::whereRaw('CAST(melhorVolta AS DECIMAL(10, 3)) = ?', [$totalSeconds])->first();
-
-            if ($existingTempo) {
-                $insertionSuccessful = false;
-                break;
-            }
-
             // If not a duplicate, proceed with insertion
-            $volta = new Voltas();
-            $volta->numKart = $nKarts[$i];
-            $volta->nomePiloto = $nome[$i];
-            $volta->melhorVolta = $totalSeconds;
+            $volta = new Result();
+            $volta->best_lap = $totalSeconds;
             $volta->save();
+
+            $kart = new Kart();
+            $kart->kart_id = $nKart[$i];
+            $kart->save();
+
+            $driver = new Pilot();
+            $driver->pilot_id = $nome[$i];
+            $driver->save();
+
+            $racetrack = new RaceTrack();
+            $racetrack->racetrack_id = 2;
+            $racetrack->save();
         }
 
         if ($insertionSuccessful) {

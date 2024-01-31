@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Karts;
-use App\Models\Voltas;
+use App\Models\Kart;
+use App\Models\Result;
+use App\Models\RaceTrack;
+use Illuminate\View\View;
 
 class KartsController extends Controller
 {
@@ -14,27 +16,32 @@ class KartsController extends Controller
         return view("Karts.index");
     }
 
-    public function showKarts(Request $request): View
+    public function getKarts($racetrack): View
     {
-        $orderBy = $request->input('orderby', 'id');
-        $direction = 'asc';
+        //alterar funcao para identificar kartodromo
+        $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
 
-        if ($orderBy === 'mediaTempo-desc') {
-            $direction = 'desc';
-            $orderBy = 'mediaTempo'; // Altere o valor de orderBy para a coluna real
+        $karts = Kart::where('racetrack_id', $racetrackId)->get();
+
+        $kartInfo = [];
+
+        foreach ($karts as $kart) {
+            $avgBestLap = Result::where('kart_id', $kart->id)->avg('best_lap');
+
+            $numAppearences = Result::where('kart_id', $kart->id)->count();
+
+            $kartInfo[] = [
+                'nKart' => $kart->identifier,
+                'avgLap' => $avgBestLap,
+                'appearences' => $numAppearences,
+                'currentRaceTrack' => $racetrack
+            ];
         }
 
-        if ($orderBy === 'notaKart-desc') {
-            $direction = 'desc';
-            $orderBy = 'notaKart';
-        }
-
-        $karts = Karts::orderBy($orderBy, $direction)->get();
-
-        return view("Karts.show", compact(['karts']));
+        return view("Karts.show", compact(['kartInfo']));
     }
 
-    public function showVoltas($numKart): View
+    public function getKart($nKart): View
     {
         $voltas = Voltas::where('numKart', $numKart)->get();
         return view("Karts.inspect", compact(['numKart', 'voltas']));

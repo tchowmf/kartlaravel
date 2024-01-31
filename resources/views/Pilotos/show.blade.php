@@ -11,22 +11,22 @@
             <table id="dataTable" class="table table-bordered">
 
                 <thead>
-                    <th>Nome do PILOTO</th>
-                    <th>Nota do Piloto</th>
-                    <th>Melhor Tempo</th>
-                    <th>KART do Melhor Tempo</th>
-                    <th>Ação</th>
+                    <th data-searchable="true">Nome do PILOTO</th>
+                    <th data-searchable="false">Nota do Piloto</th>
+                    <th data-searchable="false">Melhor Tempo</th>
+                    <th data-searchable="true">KART do Melhor Tempo</th>
+                    <th data-searchable="false">Ação</th>
                 </thead>
 
                 <tbody>
-                    @foreach ($voltas as $volta)
+                    @foreach ($driverInfo as $driver)
                         <tr>
-                            <td>{{ $volta->nomePiloto }}</td>
-                            <td>{{ $volta->notaPiloto }}</td>
-                            <td>{{ $volta->melhorVolta }}</td>
-                            <td>{{ $volta->numKart }}</td>
+                            <td>{{ $driver['driverName'] }}</td>
+                            <td>S</td>
+                            <td>{{ $driver['fastestLap'] }}</td>
+                            <td>{{ $driver['kartFastestLap'] }}</td>
                             <td>
-                                <a href="/pilotos/inserir-nota/{{ $volta->id }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                <a href="/pilotos/inserir-nota/{{ $driver['driverName'] }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                 <a href="#" class="btn btn-info"><i class="fa fa-search"></i></a>
                             </td>
                         </tr>

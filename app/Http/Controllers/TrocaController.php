@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Karts;
+use App\Models\Kart;
 
 class TrocaController extends Controller
 {
@@ -14,7 +14,7 @@ class TrocaController extends Controller
 
     public function troca(): View
     {
-        $karts = Karts::all();
+        $karts = Kart::all();
 
         $nKarts = [];
 
@@ -30,15 +30,15 @@ class TrocaController extends Controller
         $kartsSelecionados = $request->input('karts_selecionados');
 
         // Contagem inicial de todos os karts disponíveis
-        $totalKarts = Karts::count();
-        $kartsDisponiveis = Karts::whereIn('numKart', $kartsSelecionados)->count();
+        $totalKarts = Kart::count();
+        $kartsDisponiveis = Kart::whereIn('numKart', $kartsSelecionados)->count();
 
         // Contagem de karts por nota
         $kartsPorNota = [];
         $notas = ['S', 'A', 'B', 'C', 'D'];
 
         foreach ($notas as $nota) {
-            $kartsPorNota[$nota] = Karts::where('notaKart', $nota)
+            $kartsPorNota[$nota] = Kart::where('notaKart', $nota)
                                         ->whereIn('numKart', $kartsSelecionados)
                                         ->count();
         }

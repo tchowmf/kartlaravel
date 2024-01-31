@@ -21,6 +21,10 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
+Route::group(['prefix' => 'auth'], function() {
+
+});
+
 Route::group(['prefix' => 'login'], function() {
     Route::get('/', [UserController::class, 'login'])->name('login');
     Route::post('/', [UserController::class, 'doLogin']);
@@ -29,8 +33,8 @@ Route::group(['prefix' => 'login'], function() {
 });
 
 Route::group(['prefix' => 'register'], function() {
-    Route::get('/', [UserController::class, 'register']);
-    Route::post('/', [UserController::class, 'create']);
+    Route::get('/', [UserController::class, 'getRegister'])->name('get-register');
+    Route::post('/', [UserController::class, 'postRegister']);
 });
 
 Route::group(['prefix' => 'forgot-password'], function() {
@@ -41,6 +45,12 @@ Route::group(['prefix' => 'forgot-password'], function() {
 Route::group(['prefix' => 'reset-password'], function() {
     Route::get('/{token}', [UserController::class, 'reset'])->name('password.reset');
     Route::post('/{token}', [UserController::class, 'resetPassword']);
+});
+
+Route::prefix('/racetracks')->group(function() {
+    Route::prefix('/{racetrack}/karts')->group(function () {
+        Route::get('/', []); // /racetracks/1/karts
+    });
 });
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
@@ -56,19 +66,18 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function() {
     Route::post('/update-birth-date', [ProfileController::class, 'updateBirthDate'])->name('update-birth-date');
 });
 
-Route::group(['prefix' => 'karts', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'index']);
-    Route::get('/kgv', [KartsController::class, 'showKarts']);
-    Route::get('/speedpark', [KartsController::class, 'showKarts']);
-    Route::get('/speedpark/{numKart}', [KartsController::class, 'showVoltas']);
-    Route::get('/speedpark/{numKart}/excluir/{id}', [KartsController::class, 'excluir']);
+    Route::get('/{racetrack}', [KartsController::class, 'getKarts'])->name('getKarts');;
+    Route::get('/{racetrack}/{nKart}', [KartsController::class, 'getKart'])->name('getKart');
+    Route::get('/{racetrack}/{nKart}/excluir/{id}', [KartsController::class, 'excluir']);
 });
 
 
-Route::group(['prefix' => 'pilotos', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'pilotos'], function() {
     Route::get('/', [VoltasController::class, 'index']);
-    Route::get('/kgv', [VoltasController::class, 'showDrivers']);
-    Route::get('/speedpark', [VoltasController::class, 'showDrivers']);
+    Route::get('/kgv', [VoltasController::class, 'getDriverKgv']);
+    Route::get('/speedpark', [VoltasController::class, 'getDriverSpeedPark']);
     Route::get('/inserir-nota/{id}', [VoltasController::class, 'inserirNota']);
     Route::post('/salvar-nota/{id}', [VoltasController::class, 'salvarNota']);
     Route::get('/excluir-nota/{id}', [VoltasController::class, 'excluirNota'])->name('excluir.nota');
@@ -80,7 +89,7 @@ Route::group(['prefix' => 'tables', 'middleware' => 'auth'], function() {
     Route::get('/speedpark', [TablesController::class, 'showTables']);
 });
 
-Route::group(['prefix' => 'results', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'results'], function() {
     Route::get('/', [ResultsController::class, 'index']);
     Route::get('/kgv', [ResultsController::class, 'showEvents']);
     Route::get('/speedpark', [ResultsController::class, 'showEvents']);

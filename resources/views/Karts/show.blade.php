@@ -12,21 +12,25 @@
             <table id="dataTable" class="table table-bordered">
 
                 <thead>
-                    <th>Numero do KART</th>
-                    <th>Nota do KART</th>
-                    <th>Media de Tempo</th>
-                    <th>Quantidade de Baterias</th>
-                    <th>Ação</th>
+                    <th data-searchable="true">Numero do KART</th>
+                    <th data-searchable="false">Nota do KART</th>
+                    <th data-searchable="false">Media de Tempo</th>
+                    <th data-searchable="false">Quantidade de Baterias</th>
+                    <th data-searchable="false">Ação</th>
                 </thead>
 
                 <tbody>
-                    @foreach ($karts as $kart)
+                    @foreach ($kartInfo as $kart)
                         <tr>
-                            <td>{{ $kart['numKart'] }}</td>
-                            <td>{{ $kart['notaKart'] }}</td>
-                            <td>{{ $kart['mediaTempo'] }}</td>
-                            <td>{{ $kart['numVoltas'] }}</td>
-                            <td><a href="{{ url("karts/speedpark/". $kart['numKart']) }}" class="btn btn-info"><li class="fa fa-search"></li></a></td>
+                            <td>{{ $kart['nKart'] }}</td>
+                            <td>S</td>
+                            <td>{{ $kart['avgLap'] }}</td>
+                            <td>{{ $kart['appearences'] }}</td>
+                            <td>
+                                <a href="{{ route("getKart", ['racetrack' => $kart['currentRaceTrack'], 'nKart' => $kart['nKart']]) }}" class="btn btn-info">
+                                    <li class="fa fa-search"></li>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

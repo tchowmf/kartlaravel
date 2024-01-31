@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Voltas;
+use App\Models\Kart;
+use App\Models\Pilot;
+use App\Models\Result;
+use Illuminate\View\View;
 
 class VoltasController extends Controller
 {
@@ -13,42 +16,30 @@ class VoltasController extends Controller
         return view("Pilotos.index");
     }
 
-    /* -- SELECT WORKING CLEAN BUT DUPLICATED INFO
-    public function showDrivers(Request $request)
+    public function getDriverSpeedPark(): View
     {
-        $orderBy = $request->input('orderby', 'id');
-        $direction = 'asc';
+        $drivers = Pilot::where('name', 'Terrill Leuschke')->get();
 
-        if ($orderBy === 'notaPiloto') {
-            $direction = 'desc';
+        $driverInfo = [];
+
+        foreach($drivers as $driver) {
+            $fastestLap = Result::where('pilot_id', $driver->id)->min('best_lap');
+
+            $kartFastestLapId = Result::where('pilot_id', $driver->id)
+                                ->orderBy('best_lap')
+                                ->pluck('kart_id')
+                                ->first();
+
+            $kartFastestLapNumber = Kart::where('id', $kartFastestLapId)->value('identifier');
+
+            $driverInfo[] = [
+            'driverName' => $driver->name,
+            'fastestLap' => $fastestLap,
+            'kartFastestLap' => $kartFastestLapNumber
+            ];
         }
 
-        $voltas = Voltas::selectRaw('id, nomePiloto, MIN(melhorVolta) as melhorVolta, numKart, MAX(notaPiloto) as notaPiloto')
-            ->groupBy('id', 'nomePiloto', 'numKart')
-            ->orderBy($orderBy, $direction)
-            ->get();
-
-        return view("Pilotos.index", ['voltas' => $voltas]);
-    }*/
-
-    public function showDrivers(Request $request): View
-    {
-        $orderBy = $request->input('orderby', 'id');
-        $direction = 'asc';
-
-        if ($orderBy === 'notaPiloto') {
-            $direction = 'desc';
-        }
-
-        $voltas = Voltas::select('voltas.id', 'voltas.nomePiloto', 'voltas.melhorVolta', 'voltas.numKart', 'voltas.notaPiloto')
-            ->join(Voltas::raw("(SELECT nomePiloto, MIN(melhorVolta) AS minMelhorVolta FROM voltas GROUP BY nomePiloto) as sub"), function($join) {
-                $join->on('voltas.nomePiloto', '=', 'sub.nomePiloto');
-                $join->on('voltas.melhorVolta', '=', 'sub.minMelhorVolta');
-            })
-            ->orderBy($orderBy, $direction)
-            ->get();
-
-        return view("Pilotos.show", ['voltas' => $voltas]);
+        return view("Pilotos.show", compact(['driverInfo']));
     }
 
     public function inserirNota($id): View

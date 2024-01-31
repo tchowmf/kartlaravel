@@ -39,7 +39,7 @@
 
     <tbody>
         <tr>
-            <td onclick="location.href='/karts/speedpark';" style="cursor: pointer;">
+            <td onclick="redirect('/karts/speedpark');" style="cursor: pointer;">
                 <div>
                     <span style="font-weight: bold;">Speed Park</span><br>
                     <div style="float: left; height: 80px; width: 10px;"></div>
@@ -48,7 +48,7 @@
                 </div>
             </td>
 
-            <td onclick="location.href='/karts/kgv';" style="cursor: pointer;">
+            <td onclick="redirect('/karts/kgv');" style="cursor: pointer;">
                 <div>
                     <span style="font-weight: bold;">KGV - Kartodromo Granja Viana</span><br>
                     <div style="float: left; height: 80px; width: 10px;"></div>
@@ -59,4 +59,12 @@
         </tr>
     </tbody>
 </table>
+@endsection
+
+@section('scripts')
+<script>
+    function redirect(route) {
+        location.href = route;
+    }
+</script>
 @endsection
