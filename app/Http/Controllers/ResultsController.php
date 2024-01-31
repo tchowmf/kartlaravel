@@ -68,7 +68,7 @@ class ResultsController extends Controller
         return view("Results.prova", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO]);
     }
 
-    public function showResults($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): View
+    public function getResults($ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): View
     {
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/{$ID_EVENTO}/{$ID_EVENTO_PISTA_GRUPO}/{$ID_CORRIDA}.xml";
 
@@ -83,47 +83,40 @@ class ResultsController extends Controller
         return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA]);
     }
 
-    public function insertData(Request $request, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): RedirectResponse
+    public function postResults(Request $request, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA)
     {
-        $nKart = $request->input("nKart");
         $nome = $request->input("nome");
+        $nKart = $request->input("nKart");
         $tempo = $request->input("tempo");
 
         $count = count($nKart);
-        $insertionSuccessful = true;
-
-        $existingTempo = Results::whereRaw('CAST(best_lap AS DECIMAL(10, 3)) = ?', [$totalSeconds])->first();
-
-        if ($existingTempo) {
-            $insertionSuccessful = false;
-        }
 
         for ($i = 0; $i < $count; $i++) {
             $time = $tempo[$i];
             list($minutes, $seconds) = explode(':', $time);
             $totalSeconds = (floatval($minutes) * 60) + floatval($seconds);
 
-            // If not a duplicate, proceed with insertion
-            $volta = new Result();
-            $volta->best_lap = $totalSeconds;
-            $volta->save();
-
+            // cadastro de novo kart
             $kart = new Kart();
-            $kart->kart_id = $nKart[$i];
+            $kart->racetrack_id = 2;
+            $kart->identifier = $nKart[$i];
             $kart->save();
-
+            
+            // cadastro de novo piloto
             $driver = new Pilot();
-            $driver->pilot_id = $nome[$i];
+            $driver->name = $nome[$i];
             $driver->save();
 
-            $racetrack = new RaceTrack();
-            $racetrack->racetrack_id = 2;
-            $racetrack->save();
+            // cadastro de novo tempo relacionando as tabelas
+            $volta = new Result();
+            $volta->kart_id = $kart->id;
+            $volta->pilot_id = $driver->id;
+            $volta->racetrack_id = 2;
+            $volta->best_lap = $totalSeconds;
+            $volta->save();
         }
 
         if ($insertionSuccessful) {
-            $this->calcularNotas();
-            $this->calcularTempo();
             return back()->with('success', 'TEMPOS INSERIDOS COM SUCESSO!!');
 
         } else {

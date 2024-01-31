@@ -95,8 +95,8 @@ Route::group(['prefix' => 'results'], function() {
     Route::get('/speedpark', [ResultsController::class, 'showEvents']);
     Route::get('/speedpark/{ID_EVENTO}/epg', [ResultsController::class, 'showEpg']);
     Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'showProvas']);
-    Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'showResults']);
-    Route::post('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'insertData']);
+    Route::get('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'getResults']);
+    Route::post('/speedpark/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'postResults']);
 });
 
 Route::group(['prefix' => 'live', 'middleware' => 'auth'], function() {
