@@ -39,8 +39,8 @@ class TrocaController extends Controller
 
         foreach ($notas as $nota) {
             $kartsPorNota[$nota] = Kart::where('grade', $nota)
-                                        ->whereIn('identifier', $kartsSelecionados)
-                                        ->count();
+                                    ->whereIn('identifier', $kartsSelecionados)
+                                    ->count();
         }
 
         // Cálculo da porcentagem de chance por nota
