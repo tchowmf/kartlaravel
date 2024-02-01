@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Kart;
-use App\Models\Pilot;
+use App\Models\Driver;
 use App\Models\Result;
 use App\Models\RaceTrack;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,7 +25,7 @@ class ResultFactory extends Factory
     {
         return [
             'kart_id' => Kart::factory(),
-            'pilot_id' => Pilot::factory(),
+            'driver_id' => Driver::factory(),
             'racetrack_id' => RaceTrack::factory(),
             'best_lap' => $this->faker->randomFloat(3, 2, 100)
         ];

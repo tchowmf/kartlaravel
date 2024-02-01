@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Kart;
-use App\Models\Pilot;
+use App\Models\Driver;
 use App\Models\Result;
+use App\Models\RaceTrack;
 use Illuminate\View\View;
 
-class VoltasController extends Controller
+class DriversController extends Controller
 {
 
     public function index(): View
@@ -16,16 +18,18 @@ class VoltasController extends Controller
         return view("Pilotos.index");
     }
 
-    public function getDriverSpeedPark(): View
+    public function getDriverSpeedPark($racetrack): View
     {
-        $drivers = Pilot::where('name', 'Terrill Leuschke')->get();
+        $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
+
+        $drivers = Driver::where('racetrack_id', $racetrackId)->get();
 
         $driverInfo = [];
 
         foreach($drivers as $driver) {
-            $fastestLap = Result::where('pilot_id', $driver->id)->min('best_lap');
+            $fastestLap = Result::where('driver_id', $driver->id)->min('best_lap');
 
-            $kartFastestLapId = Result::where('pilot_id', $driver->id)
+            $kartFastestLapId = Result::where('driver_id', $driver->id)
                                 ->orderBy('best_lap')
                                 ->pluck('kart_id')
                                 ->first();

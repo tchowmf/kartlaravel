@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Pilot;
+use App\Models\Driver;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pilot>
  */
-class PilotFactory extends Factory
+class DriverFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,7 +16,7 @@ class PilotFactory extends Factory
      * @return array<string, mixed>
      */
 
-    protected $model = Pilot::class;
+    protected $model = Driver::class;
     
     public function definition(): array
     {

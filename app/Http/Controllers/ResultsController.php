@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kart;
-use App\Models\Pilot;
+use App\Models\Driver;
 use App\Models\Result;
 use App\Models\RaceTrack;
 use App\Controllers\KartsController;
@@ -105,7 +105,7 @@ class ResultsController extends Controller
             $kart->save();
             
             // cadastro de novo piloto
-            $driver = new Pilot();
+            $driver = new Driver();
             $driver->racetrack_id = $racetrackId;
             $driver->name = $nome[$i];
             $driver->save();
@@ -113,7 +113,7 @@ class ResultsController extends Controller
             // cadastro de novo tempo relacionando as tabelas
             $volta = new Result();
             $volta->kart_id = $kart->id;
-            $volta->pilot_id = $driver->id;
+            $volta->driver_id = $driver->id;
             $volta->racetrack_id = $racetrackId;
             $volta->best_lap = $totalSeconds;
             $volta->save();

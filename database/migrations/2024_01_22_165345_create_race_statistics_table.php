@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('race_statistics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kart_id')->constrained('karts');
-            $table->foreignId('pilot_id')->constrained('pilots');
+            $table->foreignId('driver_id')->constrained('drivers');
             $table->foreignId('racetrack_id')->constrained('racetracks');
             $table->float('best_lap');
             $table->timestamps();

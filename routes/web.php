@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TablesController;
 use App\Http\Controllers\KartsController;
-use App\Http\Controllers\VoltasController;
+use App\Http\Controllers\DriversController;
 use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\LivesController;
-use App\Http\Controllers\TrocaController;
+use App\Http\Controllers\TradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 
@@ -75,12 +75,12 @@ Route::group(['prefix' => 'karts'], function() {
 
 
 Route::group(['prefix' => 'pilotos'], function() {
-    Route::get('/', [VoltasController::class, 'index']);
-    Route::get('/kgv', [VoltasController::class, 'getDriverKgv']);
-    Route::get('/speedpark', [VoltasController::class, 'getDriverSpeedPark']);
-    Route::get('/inserir-nota/{id}', [VoltasController::class, 'getGrade']);
-    Route::post('/salvar-nota/{id}', [VoltasController::class, 'postGrade']);
-    Route::get('/excluir-nota/{id}', [VoltasController::class, 'excluirNota'])->name('excluir.nota');
+    Route::get('/', [DriversController::class, 'index']);
+    Route::get('/kgv', [DriversController::class, 'getDriverKgv']);
+    Route::get('/{racetrack}', [DriversController::class, 'getDriverSpeedPark'])->name('getDrivers');
+    Route::get('/inserir-nota/{id}', [DriversController::class, 'getGrade']);
+    Route::post('/salvar-nota/{id}', [DriversController::class, 'postGrade']);
+    Route::get('/excluir-nota/{id}', [DriversController::class, 'excluirNota'])->name('excluir.nota');
 });
 
 Route::group(['prefix' => 'tables'], function() {
@@ -117,7 +117,7 @@ Route::group(['prefix' => 'live'], function() {
 
 
 Route::group(['prefix' => 'troca'], function() {
-    Route::get('/', [TrocaController::class, 'index']);
-    Route::get('/speedpark', [TrocaController::class, 'troca']);
-    Route::post('/speedpark', [TrocaController::class, 'calcularProbabilidade']);
+    Route::get('/', [TradeController::class, 'index']);
+    Route::get('/speedpark', [TradeController::class, 'troca']);
+    Route::post('/speedpark', [TradeController::class, 'calcularProbabilidade']);
 });

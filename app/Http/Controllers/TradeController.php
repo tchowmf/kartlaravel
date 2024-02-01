@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kart;
 
-class TrocaController extends Controller
+class TradeController extends Controller
 {
     public function index()
     {
