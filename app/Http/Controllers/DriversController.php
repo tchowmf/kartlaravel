@@ -8,6 +8,7 @@ use App\Models\Kart;
 use App\Models\Driver;
 use App\Models\Result;
 use App\Models\RaceTrack;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class DriversController extends Controller
@@ -43,19 +44,19 @@ class DriversController extends Controller
             ];
         }
 
-        return view("Pilotos.show", compact(['driverInfo']));
+        return view("Pilotos.getDrivers", compact(['driverInfo']));
     }
 
     public function getGrade($id): View
     {
-        $volta = Voltas::find($id);
+        $volta = Kart::find($id);
 
         return view("Pilotos.formulario", ['volta' => $volta]);
     }
 
     public function postGrade(Request $request, $id): RedirectResponse
     {
-        $volta = Voltas::find($id);
+        $volta = Kart::find($id);
         $volta->notaPiloto = $request->input("notaPiloto");
         $volta->save();
 
@@ -64,7 +65,7 @@ class DriversController extends Controller
 
     public function excluirNota($id): RedirectResponse
     {
-        $volta = Voltas::find($id);
+        $volta = Kart::find($id);
 
         if ($volta) {
             $volta->notaPiloto = null; // Ou qualquer outro valor que represente uma nota ausente

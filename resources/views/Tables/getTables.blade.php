@@ -20,18 +20,7 @@
                     <th>Ação</th>
                 </thead>
                 <tbody>
-                    @foreach ($dadosCombinados as $dados)
-                        <tr>
-                            <td>{{ $dados['numKart'] }}</td>
-                            <td>{{ $dados['notaKart'] }}</td>
-                            <td>{{ $dados['mediaTempo'] }}</td>
-                            <td>{{ $dados['numVoltas'] }}</td>
-                            <td>{{ $dados['nomePiloto'] }}</td>
-                            <td>{{ $dados['notaPiloto'] }}</td>
-                            <td>{{ $dados['melhorVolta'] }}</td>
-                            <td><a href="#" class="btn btn-info"><li class="fa fa-search"></li></a></td>
-                        </tr>
-                    @endforeach
+                    
                 </tbody>
             </table>
         </div>

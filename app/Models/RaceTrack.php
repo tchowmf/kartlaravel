@@ -16,4 +16,14 @@ class RaceTrack extends Model
     ];
 
     public $timestamps = true;
+
+    public function karts()
+    {
+        return $this->hasMany(Kart::class);
+    }
+
+    public function drivers()
+    {
+        return $this->hasMany(Driver::class);
+    }
 }

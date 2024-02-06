@@ -85,8 +85,7 @@ Route::group(['prefix' => 'pilotos'], function() {
 
 Route::group(['prefix' => 'tables'], function() {
     Route::get('/', [TablesController::class, 'index']);
-    Route::get('/kgv', [TablesController::class, 'showTables']);
-    Route::get('/speedpark', [TablesController::class, 'showTables']);
+    Route::get('/{racetrack}', [TablesController::class, 'getTables'])->name('getTables');
 });
 
 Route::group(['prefix' => 'results'], function() {
@@ -101,10 +100,6 @@ Route::group(['prefix' => 'results'], function() {
 
 Route::group(['prefix' => 'live'], function() {
     Route::get('/', [LivesController::class, 'index']);
-    Route::get('/kgv', [LivesController::class, 'showLive']);
-    Route::get('/kgv/select', [LivesController::class, 'select']);
-    Route::post('/kgv/select', [LivesController::class, 'saveSelect']);
-    Route::get('/kgv/{numero}', [LivesController::class, 'showDetail']);
     Route::get('/liveTable', [LivesController::class, 'liveTable']);
     Route::get('/speedpark', [LivesController::class, 'live']);
     Route::get('/speedpark/select', [LivesController::class, 'select']);

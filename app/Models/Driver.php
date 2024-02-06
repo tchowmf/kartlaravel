@@ -17,4 +17,5 @@ class Driver extends Model
     ];
 
     public $timestamps = true;
+
 }

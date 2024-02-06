@@ -18,4 +18,9 @@ class Kart extends Model
     ];
 
     public $timestamps = true;
+
+    public function racetrack()
+    {
+        return $this->belongsTo(Racetrack::class, 'racetrack_id');
+    }
 }

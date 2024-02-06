@@ -38,7 +38,7 @@ class KartsController extends Controller
             ];
         }
 
-        return view("Karts.show", compact(['kartInfo']));
+        return view("Karts.getKarts", compact(['kartInfo']));
     }
 
     public function getKart($nKart): View
