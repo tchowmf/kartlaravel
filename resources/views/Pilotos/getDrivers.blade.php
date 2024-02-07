@@ -11,18 +11,18 @@
             <table id="dataTable" class="table table-bordered">
 
                 <thead>
-                    <th data-searchable="true">Nome do PILOTO</th>
-                    <th data-searchable="false">Nota do Piloto</th>
-                    <th data-searchable="false">Melhor Tempo</th>
-                    <th data-searchable="true">KART do Melhor Tempo</th>
-                    <th data-searchable="false">Ação</th>
+                    <th>Nome do PILOTO</th>
+                    <th>Nota do Piloto</th>
+                    <th>Melhor Tempo</th>
+                    <th>KART do Melhor Tempo</th>
+                    <th>Ação</th>
                 </thead>
 
                 <tbody>
                     @foreach ($driverInfo as $driver)
                         <tr>
                             <td>{{ $driver['driverName'] }}</td>
-                            <td>S</td>
+                            <td>{{ $driver['grade']}}</td>
                             <td>{{ $driver['fastestLap'] }}</td>
                             <td>{{ $driver['kartFastestLap'] }}</td>
                             <td>

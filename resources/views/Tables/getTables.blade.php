@@ -20,7 +20,24 @@
                     <th>Ação</th>
                 </thead>
                 <tbody>
-                    
+                    @foreach ($kartInfo as $kartData)
+                        <tr>
+                            <td>{{ $kartData['kart']->identifier }}</td>
+                            <td>{{ $kartData['kart']->grade }}</td>
+                            <td>{{ $kartData['bestLap']->best_lap }}</td>
+                            @if ($kartData['bestLap'])
+                            <td>{{ $kartData['appearences']}}</td>
+                                <td>{{ $kartData['driver']->name }}</td>
+                                <td>{{ $kartData['driver']->grade }}</td>
+                                <td>{{ $kartData['bestLap']->best_lap }}</td>
+                            @endif
+                            <td>
+                                <a href="" class="btn btn-info">
+                                    <li class="fa fa-search"></li>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

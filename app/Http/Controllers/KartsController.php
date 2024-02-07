@@ -32,7 +32,8 @@ class KartsController extends Controller
 
             $kartInfo[] = [
                 'nKart' => $kart->identifier,
-                'avgLap' => $avgBestLap,
+                'grade' => $kart->grade,
+                'avgLap' => number_format($avgBestLap, 3),
                 'appearences' => $numAppearences,
                 'currentRaceTrack' => $racetrack
             ];

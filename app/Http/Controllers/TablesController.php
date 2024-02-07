@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use App\Models\Kart;
-use App\Models\Tables;
-use App\Models\Voltas;
+use App\Models\RaceTrack;
+use App\Models\Result;
 use Illuminate\View\View;
+use PhpParser\Node\Stmt\Foreach_;
 
 class TablesController extends Controller
 {
@@ -17,6 +19,42 @@ class TablesController extends Controller
 
     public function getTables($racetrack): View
     {
-        return view("Tables.getTables", compact(['']));
+        // Recupera qual pista usuario esta
+        $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
+
+        // Recupera todos os karts associados ao kartódromo
+        $karts = Kart::where('racetrack_id', $racetrackId)->get();
+
+        // Array para armazenar todas as informações de cada kart
+        $kartInfo = [];
+
+        // Para cada kart, obter as informações relevantes
+        foreach ($karts as $kart) {
+            // Recupera as estatísticas de corrida para a melhor volta do kart
+            $bestLap = Result::where('kart_id', $kart->id)
+                                                ->orderBy('best_lap', 'asc')
+                                                ->first();
+
+            $numAppearences = Result::where('kart_id', $kart->id)->count();
+            
+            // Se encontrarmos estatísticas para a melhor volta
+            if ($bestLap) {
+                // Recupera o piloto associado a essas estatísticas
+                $driver = Driver::findOrFail($bestLap->driver_id);
+            } else {
+                // Se não houver estatísticas para a melhor volta, define o piloto como null
+                $driver = null;
+            }
+
+            // Armazena as informações do kart em um array
+            $kartInfo[] = [
+                'kart' => $kart,
+                'bestLap' => $bestLap,
+                'driver' => $driver,
+                'appearences' => $numAppearences,
+            ];
+        }
+
+        return view('Tables.getTables', compact(['kartInfo']));
     }
 }

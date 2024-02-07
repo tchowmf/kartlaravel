@@ -12,18 +12,18 @@
             <table id="dataTable" class="table table-bordered">
 
                 <thead>
-                    <th data-searchable="true">Numero do KART</th>
-                    <th data-searchable="false">Nota do KART</th>
-                    <th data-searchable="false">Media de Tempo</th>
-                    <th data-searchable="false">Quantidade de Baterias</th>
-                    <th data-searchable="false">Ação</th>
+                    <th>Numero do KART</th>
+                    <th>Nota do KART</th>
+                    <th>Media de Tempo</th>
+                    <th>Quantidade de Baterias</th>
+                    <th>Ação</th>
                 </thead>
 
                 <tbody>
                     @foreach ($kartInfo as $kart)
                         <tr>
                             <td>{{ $kart['nKart'] }}</td>
-                            <td>S</td>
+                            <td>{{ $kart['grade']}}</td>
                             <td>{{ $kart['avgLap'] }}</td>
                             <td>{{ $kart['appearences'] }}</td>
                             <td>

@@ -39,7 +39,7 @@ class DriversController extends Controller
 
             $driverInfo[] = [
             'driverName' => $driver->name,
-            'fastestLap' => $fastestLap,
+            'fastestLap' => number_format($fastestLap, 3),
             'kartFastestLap' => $kartFastestLapNumber
             ];
         }
