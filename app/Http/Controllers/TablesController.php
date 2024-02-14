@@ -36,6 +36,8 @@ class TablesController extends Controller
                                                 ->first();
 
             $numAppearences = Result::where('kart_id', $kart->id)->count();
+
+            $avgLap = Result::where('kart_id', $kart->id)->avg('best_lap');
             
             // Se encontrarmos estatísticas para a melhor volta
             if ($bestLap) {
@@ -52,6 +54,7 @@ class TablesController extends Controller
                 'bestLap' => $bestLap,
                 'driver' => $driver,
                 'appearences' => $numAppearences,
+                'avgLap' => number_format($avgLap, 3),
             ];
         }
 

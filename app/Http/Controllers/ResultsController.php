@@ -98,17 +98,37 @@ class ResultsController extends Controller
             list($minutes, $seconds) = explode(':', $time);
             $totalSeconds = (floatval($minutes) * 60) + floatval($seconds);
 
-            // cadastro de novo kart
-            $kart = new Kart();
-            $kart->racetrack_id = $racetrackId;
-            $kart->identifier = $nKart[$i];
-            $kart->save();
-            
-            // cadastro de novo piloto
-            $driver = new Driver();
-            $driver->racetrack_id = $racetrackId;
-            $driver->name = $nome[$i];
-            $driver->save();
+            // Verificar se o kart já existe para a pista específica
+            $existingKart = Kart::where('identifier', $nKart[$i])
+                                ->where('racetrack_id', $racetrackId)
+                                ->first();
+
+            if (!$existingKart) {
+                // Se o kart não existir, criar um novo kart
+                $kart = new Kart();
+                $kart->racetrack_id = $racetrackId;
+                $kart->identifier = $nKart[$i];
+                $kart->save();
+            } else {
+                // Se o kart existir, usar o kart existente
+                $kart = $existingKart;
+            }
+
+            // Verificar se o piloto já existe para a pista específica
+            $existingDriver = Driver::where('name', $nome[$i])
+                                    ->where('racetrack_id', $racetrackId)
+                                    ->first();
+
+            if (!$existingDriver) {
+                // Se o piloto não existir, criar um novo piloto
+                $driver = new Driver();
+                $driver->racetrack_id = $racetrackId;
+                $driver->name = $nome[$i];
+                $driver->save();
+            } else {
+                // Se o piloto existir, usar o piloto existente
+                $driver = $existingDriver;
+            }
 
             // cadastro de novo tempo relacionando as tabelas
             $volta = new Result();
