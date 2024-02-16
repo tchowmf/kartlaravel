@@ -2,106 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Mail\SupportMail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function profile(): RedirectResponse
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request): View
     {
-        if (Auth::check()) {
-            $userInfo = Auth::user();
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
+    }
 
-            return view("Profile.profile", compact('userInfo'));
+    /**
+     * Update the user's profile information.
+     */
+    public function update(ProfileUpdateRequest $request): RedirectResponse
+    {
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
         }
 
-        return redirect()->route('login');
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    public function settings(): RedirectResponse
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
     {
-        if (Auth::check()) {
-            $userInfo = Auth::user();
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
 
-            return view("Profile.support", compact('userInfo'));
-        }
+        $user = $request->user();
 
-        return redirect()->route('login');
-    }
+        Auth::logout();
 
-    public function updatePasswordForm(): RedirectResponse
-    {
-        if (Auth::check()) {
-            $userInfo = Auth::user();
+        $user->delete();
 
-            return view("Profile.update-password", compact('userInfo'));
-        }
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return redirect()->route('login');
-    }
-
-    public function updatePassword(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-
-        $currentPassword = $request->input('current_password');
-        $newPassword = $request->input('new_password');
-        $confirmPassword = $request->input('confirm_password');
-
-        // Verifica se a nova senha e a confirmcao coincidem
-        if ($newPassword !== $confirmPassword) {
-            return redirect()->back()->with('error', 'As senhas não coincidem.');
-        }
-
-        // Verifica se a senha atual fornecida corresponde à senha armazenada no banco de dados
-        if (Hash::check($currentPassword, $user->password)) {
-            // Senha atual fornecida está correta, então atualize a senha
-            $user->password = Hash::make($newPassword);
-            $user->save();
-
-            return redirect()->back()->with('success', 'Senha atualizada com sucesso.');
-        }
-
-        return redirect()->back()->with('error', 'A senha atual está incorreta. Tente novamente.');
-    }
-
-    public function updateName(Request $request): RedirectResponse
-    {
-        $user = auth()->user();
-        $user->firstname = $request->input('firstname');
-        $user->lastname = $request->input('lastname');
-        $user->save();
-
-        // Redirecionar de volta à página ou para qualquer outra rota desejada após a atualização
-        return redirect()->route('profile')->with('success', 'Nome atualizado com sucesso.');
-    }
-
-    public function updateMail(Request $request): RedirectResponse
-    {
-        $user = auth()->user();
-        $user->email = $request->input('email');
-        $user->email_verified_at = null;
-        $user->save();
-
-        // Redirecionar de volta à página ou para qualquer outra rota desejada após a atualização
-        return redirect()->route('profile')->with('success', 'E-mail atualizado com sucesso.');
-    }
-
-    public function updateBirthDate(Request $request): RedirectResponse
-    {
-        $user = auth()->user();
-        $user->birth_date = $request->input('birth_date');
-        $user->save();
-
-        // Redirecionar de volta à página ou para qualquer outra rota desejada após a atualização
-        return redirect()->route('profile')->with('success', 'Data de nascimento atualizada com sucesso.');
-    }
-
-    public function sendSupport()
-    {
-
+        return Redirect::to('/');
     }
 }

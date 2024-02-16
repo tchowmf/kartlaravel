@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('racetrack_id')->constrained('racetracks');
             $table->string('name');
+            $table->char('grade')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pilots');
+        Schema::dropIfExists('drivers');
     }
 };

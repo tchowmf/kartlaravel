@@ -35,7 +35,7 @@ class TablesController extends Controller
                                                 ->orderBy('best_lap', 'asc')
                                                 ->first();
 
-            $numAppearences = Result::where('kart_id', $kart->id)->count();
+            $numAppearences = Result::where('kart_id', $kart)->count();
 
             $avgLap = Result::where('kart_id', $kart->id)->avg('best_lap');
             

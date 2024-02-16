@@ -25,7 +25,7 @@
                         <tr>
                             <form method="post" action="">
                                 @CSRF
-                                <td>{{ $attributes->NM_POSICAO }}</td>
+                                <td>{{ $attributes->NM_POSICAO }}⁰</td>
                                 <td>{{ $attributes->NM_NUMERO }}</td>
                                 <td>
                                     {{ $attributes->ST_NOME }}

@@ -1,14 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TablesController;
-use App\Http\Controllers\KartsController;
 use App\Http\Controllers\DriversController;
-use App\Http\Controllers\ResultsController;
+use App\Http\Controllers\KartsController;
 use App\Http\Controllers\LivesController;
-use App\Http\Controllers\TradeController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResultsController;
+use App\Http\Controllers\TablesController;
+use App\Http\Controllers\TradeController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,54 +20,23 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::group(['prefix' => 'auth'], function() {
-
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::group(['prefix' => 'login'], function() {
-    Route::get('/', [UserController::class, 'login'])->name('login');
-    Route::post('/', [UserController::class, 'doLogin']);
-    Route::get('/confirm-email', [UserController::class, 'confirmEmail'])->name('verification');
-    Route::post('/send-verification-email/{user}', [UserController::class, 'sendVerificationEmail'])->name('sendVerificationEmail');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::group(['prefix' => 'register'], function() {
-    Route::get('/', [UserController::class, 'getRegister'])->name('get-register');
-    Route::post('/', [UserController::class, 'postRegister']);
-});
-
-Route::group(['prefix' => 'forgot-password'], function() {
-    Route::get('/', [UserController::class, 'forgot']);
-    Route::post('/', [UserController::class, 'sendResetPasswordLink']);
-});
-
-Route::group(['prefix' => 'reset-password'], function() {
-    Route::get('/{token}', [UserController::class, 'reset'])->name('password.reset');
-    Route::post('/{token}', [UserController::class, 'resetPassword']);
-});
-
-Route::prefix('/racetracks')->group(function() {
-    Route::prefix('/{racetrack}/karts')->group(function () {
-        Route::get('/', []); // /racetracks/1/karts
-    });
-});
-
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function() {
-    Route::get('/', [ProfileController::class, 'profile'])->name('profile');
-    Route::get('/support', [ProfileController::class, 'settings']);
-    Route::post('/support', [ProfileController::class, 'sendSupport']);
-    Route::get('/update-password', [ProfileController::class, 'updatePasswordForm']);
-    Route::post('/update-password', [ProfileController::class, 'updatePassword']);
-    Route::post('/update-name', [ProfileController::class, 'updateName'])->name('update-name');
-    Route::post('/update-email', [ProfileController::class, 'updateMail'])->name('update-email');
-    Route::post('/update-birth-date', [ProfileController::class, 'updateBirthDate'])->name('update-birth-date');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'index']);
-    Route::get('/{racetrack}', [KartsController::class, 'getKarts'])->name('getKarts');;
+    Route::get('/{racetrack}', [KartsController::class, 'getKarts'])->name('getKarts');
     Route::get('/{racetrack}/{nKart}', [KartsController::class, 'getKart'])->name('getKart');
     Route::get('/{racetrack}/{nKart}/excluir/{id}', [KartsController::class, 'excluir']);
 });
@@ -116,3 +84,4 @@ Route::group(['prefix' => 'troca'], function() {
     Route::get('/speedpark', [TradeController::class, 'troca']);
     Route::post('/speedpark', [TradeController::class, 'calcularProbabilidade']);
 });
+require __DIR__.'/auth.php';

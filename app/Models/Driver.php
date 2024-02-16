@@ -13,7 +13,8 @@ class Driver extends Model
 
     protected $fillable = [
         'racetrack_id',
-        'name'
+        'name',
+        'grade',
     ];
 
     public $timestamps = true;

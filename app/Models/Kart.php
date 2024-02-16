@@ -14,7 +14,8 @@ class Kart extends Model
 
     protected $fillable = [
         'racetrack_id',
-        'identifier'
+        'identifier',
+        'grade',
     ];
 
     public $timestamps = true;

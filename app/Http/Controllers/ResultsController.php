@@ -108,6 +108,7 @@ class ResultsController extends Controller
                 $kart = new Kart();
                 $kart->racetrack_id = $racetrackId;
                 $kart->identifier = $nKart[$i];
+                $kart->grade = 0; //fix: call grade for kart number not in the end
                 $kart->save();
             } else {
                 // Se o kart existir, usar o kart existente
