@@ -41,35 +41,35 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bem-Vindo Piloto!</h1>
                                     </div>
-                                    @if(session('success'))
-                                        <div class="alert alert-success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-                                    @if (session('error'))
-                                        <div class="alert alert-danger">
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
-                                    <form class="user" method="post" action="/login">
+                                    <form method="POST" action="{{ route('login') }}">
                                         @CSRF
+                                        <!-- Email -->
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                name="email" id="email" aria-describedby="emailHelp"
-                                                placeholder="E-mail">
+                                            <input type="email" id="email" class="form-control form-control-user"
+                                                name="email" aria-describedby="emailHelp"
+                                                required placeholder="{{ __('E-mail') }}">
+
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
+
+                                        <!-- Password -->
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                name="password" id="password" placeholder="Senha">
+                                            <input type="password" id="password" class="form-control form-control-user"
+                                                name="password" required autocomplete placeholder="{{ __('Password') }}" />
+
+                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                         </div>
+
+                                        <!-- Remember me -->
                                         <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" name="remember-me" id="remember-me">
-                                                <label class="custom-control-label" for="remember-me">Lembre-me</label>
-                                            </div>
+                                            <label for="remember_me" class="inline-flex custom-checkbox small items-center">
+                                                <input type="checkbox" class="rounded" name="remember_me" id="remember_me">
+                                                <span class="ms-2 text-sm">{{ __('Remember me') }}</span>
+                                            <label>
                                         </div>
+
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            {{ __('Log in') }}
                                         </button>
                                     </form>
                                     <hr>
@@ -77,7 +77,7 @@
                                         <a class="small" href="/register">Crie sua conta!</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="/forgot-password">Esqueceu a senha?</a>
+                                        <a class="small" href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
                                     </div>
                                 </div>
                             </div>
