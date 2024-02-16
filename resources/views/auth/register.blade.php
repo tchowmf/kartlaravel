@@ -23,8 +23,10 @@
 </head>
 
 <body class="bg-gradient-primary">
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div class="container">
+    <div class="container custom-container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -95,7 +97,7 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="{{ route('password.request') }}">Esqueceu a senha?</a>
+                                <a class="small" href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
                             </div>
                             <div class="text-center">
                                 <a class="small" href="{{ route('login') }}">Já tem uma conta? Login!</a>

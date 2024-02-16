@@ -23,8 +23,10 @@
 </head>
 
 <body class="bg-gradient-primary">
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div class="container">
+    <div class="container custom-cotainer">
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -39,37 +41,33 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Esqueceu sua senha?</h1>
-                                        <p class="mb-4">Nós entendemos, coisas assim acontecem. Basta digitar seu endereço de e-mail abaixo
-                                            e lhe enviaremos um link para redefinir sua senha!</p>
+                                        <h1 class="h4 text-gray-900 mb-2">{{ __('Forgot your password?') }}</h1>
+                                        <p class="mb-4">Nós entendemos, coisas assim acontecem. Basta digitar seu 
+                                            endereço de e-mail abaixo e lhe enviaremos
+                                             um link para redefinir sua senha!</p>
                                     </div>
-                                    @if(session('success'))
-                                        <div class="alert alert-success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-                                    @if (session('error'))
-                                        <div class="alert alert-danger">
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
-                                    <form class="user" method="post" action="">
+                                    <form method="POST" action="{{ route('password.email') }}">
                                         @CSRF
+
+                                        <!-- Email -->
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                name="email" id="email" required aria-describedby="emailHelp"
+                                            <input type="email" class="form-control w-full form-control-user"
+                                                name="email" id="email" required autofocus 
                                                 placeholder="Endereço de E-mail ...">
+
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
+
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Enviar link de recuperação no e-mail
+                                            {{ __('Email Password Reset Link') }}
                                         </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="/register">Crie sua conta!</a>
+                                        <a class="small" href="{{ route('register') }}">{{ __('Create your account') }}</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="/login">Já tem uma conta? Login!</a>
+                                        <a class="small" href="{{ route('login') }}">Já tem uma conta? Login!</a>
                                     </div>
                                 </div>
                             </div>

@@ -24,7 +24,10 @@
 
 <body class="bg-gradient-primary">
 
-    <div class="container">
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <div class="container custom-container">
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -46,8 +49,7 @@
                                         <!-- Email -->
                                         <div class="form-group">
                                             <input type="email" id="email" class="form-control form-control-user"
-                                                name="email" aria-describedby="emailHelp"
-                                                required placeholder="{{ __('E-mail') }}">
+                                                name="email" required placeholder="{{ __('E-mail') }}">
 
                                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
@@ -74,7 +76,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="/register">Crie sua conta!</a>
+                                        <a class="small" href="/register">{{ __('Create your account') }}</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
