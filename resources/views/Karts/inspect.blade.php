@@ -5,7 +5,17 @@
 
     <!-- Page Heading -->
     <h2 class="h3 mb-4 text-gray-800">Detalhes do Kart nº {{ $nKart }}</h2>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="card">
         <div class="card-body">
             <table class="table table-bordered dataTable">
@@ -18,13 +28,17 @@
                 <tbody>
                     @foreach ($laps as $lap)
                         <tr>
-                            <td>{{ $driverName }}</td>
-                            <td>{{ $driverGrade }}</td>
+                            <td>{{ $lap->driver_name }}</td>
+                            <td>{{ $lap->driver_grade }}</td>
                             <td>{{ $lap->best_lap }}</td>
                             <td>
-                                <a href="/karts/{{ $lap->numKart }}/excluir/{{ $lap->id }}" class="btn btn-danger">
-                                    <li class="fa fa-trash"></li>
-                                </a>
+                                <form action="{{ route('delete.record', ['racetrack' => $racetrack, 'nKart' => $nKart, 'id' => $lap->id]) }}" method="post" id="deleteForm_{{ $lap->id }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $lap->id }}')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -33,4 +47,14 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    function confirmDelete(id) {
+        if (confirm("Tem certeza que deseja excluir esta volta?")) {
+            document.getElementById('deleteForm_' + id).submit();
+        }
+    }
+</script>
 @endsection

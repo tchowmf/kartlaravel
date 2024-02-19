@@ -50,24 +50,26 @@ class KartsController extends Controller
     {
         $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
 
-        $laps = Result::where('racetrack_id', $racetrackId)
-                        ->where('kart_id', $nKart)
-                        ->get();
+        $laps = Result::join('karts', 'race_statistics.kart_id', '=', 'karts.id')
+              ->join('drivers', 'race_statistics.driver_id', '=', 'drivers.id')
+              ->where('race_statistics.racetrack_id', $racetrackId)
+              ->where('karts.identifier', $nKart)
+              ->select('race_statistics.*', 'drivers.name as driver_name', 'drivers.grade as driver_grade')
+              ->get();
 
-        foreach($laps as $lap) {
-            $driver = Driver::find($lap->driver_id);
-            $driverName = $driver->name;
-            $driverGrade = $driver->grade;
-        }
         
-        return view("Karts.inspect", compact(['nKart', 'laps', 'driverName', 'driverGrade']));
+        return view("Karts.inspect", compact(['nKart', 'laps', 'racetrack']));
     }
 
-    public function excluir($numKart, $id)
+    public function delete($racetrack, $nKart, $id)
     {
-        $voltas = Driver::find($id);
-        $voltas->delete();
-
-        return redirect("/karts/{$numKart}");
+        $lap = Result::find($id);
+        if (!$lap) {
+            return redirect()->back()->with('error', 'Tempo de volta não encontrado.');
+        }
+        
+        $lap->delete();
+    
+        return redirect()->route('getKart', ['racetrack' => $racetrack, 'nKart' => $nKart])->with('success', 'Tempo de volta excluído com sucesso.');
     }
 }

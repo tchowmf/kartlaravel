@@ -545,6 +545,13 @@ pre code {
   overflow-y: scroll;
 }
 
+.custom-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
 .container,
 .container-fluid,
 .container-sm,

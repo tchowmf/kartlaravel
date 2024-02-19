@@ -38,7 +38,7 @@ Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'index']);
     Route::get('/{racetrack}', [KartsController::class, 'getKarts'])->name('getKarts');
     Route::get('/{racetrack}/{nKart}', [KartsController::class, 'getKart'])->name('getKart');
-    Route::get('/{racetrack}/{nKart}/excluir/{id}', [KartsController::class, 'excluir']);
+    Route::delete('/{racetrack}/{nKart}/delete/{id}', [KartsController::class, 'delete'])->name('delete.record');
 });
 
 

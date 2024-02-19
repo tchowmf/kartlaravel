@@ -83,7 +83,7 @@ class ResultsController extends Controller
         return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA]);
     }
 
-    public function postResults(Request $request, $racetrack, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA)
+    public function postResults(Request $request, $racetrack)
     {
         $nome = $request->input("nome");
         $nKart = $request->input("nKart");
