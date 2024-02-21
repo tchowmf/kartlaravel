@@ -34,7 +34,7 @@ class ResultsController extends Controller
 
         }
         usort($attributesArray, function ($a, $b) {return $b['ID_EVENTO'] - $a['ID_EVENTO'];});
-        return view("Results.show", ['attributesArray' => $attributesArray]);
+        return view("Results.getResults", ['attributesArray' => $attributesArray]);
     }
 
     public function getEpg($racetrack, $ID_EVENTO): View
@@ -50,7 +50,7 @@ class ResultsController extends Controller
             $attributesArray[] = $item->attributes();
         }
 
-        return view("Results.epg", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO,]);
+        return view("Results.epg", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'racetrack' => $racetrack]);
     }
 
     public function getProvas($racetrack, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO): View
@@ -65,7 +65,7 @@ class ResultsController extends Controller
             $attributesArray[] = $item->attributes();
         }
 
-        return view("Results.prova", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO]);
+        return view("Results.prova", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'racetrack' => $racetrack]);
     }
 
     public function getResults($racetrack, $ID_EVENTO, $ID_EVENTO_PISTA_GRUPO, $ID_CORRIDA): View
@@ -80,7 +80,7 @@ class ResultsController extends Controller
             $attributesArray[] = $item;
         }
 
-        return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA]);
+        return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA, 'racetrack' => $racetrack]);
     }
 
     public function postResults(Request $request, $racetrack)

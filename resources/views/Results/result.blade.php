@@ -46,7 +46,8 @@
                 </tbody>
             </table>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="/results/speedpark/{{$ID_EVENTO}}/{{$ID_EVENTO_PISTA_GRUPO}}/provas" class="btn btn-info">Voltar</a>
+                <a href="{{ route('get.provas', ['racetrack' => $racetrack, 'ID_EVENTO' => $ID_EVENTO, 
+                'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO]) }}" class="btn btn-info">Voltar</a>
                 <input type="submit" class="btn btn-success" value="Inserir Tempos">
             </div>
         </form>

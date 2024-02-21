@@ -49,7 +49,7 @@
                     @endforeach
                 </tr>
             </table>
-            <a href="/results/speedpark/{{$ID_EVENTO}}/epg" class="btn btn-info">Voltar</a>
+            <a href="{{ route('get.epg', [ 'racetrack' => $racetrack, 'ID_EVENTO' => $ID_EVENTO]) }}" class="btn btn-info">Voltar</a>
         </tbody>
 
 @endsection

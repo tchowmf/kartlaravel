@@ -50,7 +50,7 @@
                     @endforeach
                 </tr>
             </table>
-            <a href="/results/speedpark" class="btn btn-info">Voltar</a>
+            <a href="{{ route('results.speedpark') }}" class="btn btn-info">Voltar</a>
         </tbody>
 
 @endsection
