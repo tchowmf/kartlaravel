@@ -60,8 +60,12 @@ class DriversController extends Controller
 
     public function postGrade(Request $request, $racetrack, $id): RedirectResponse
     {
+        $validatedData = $request->validate([
+            'driverGrade' => 'required|string|size:1|in:S,A,B,C,D',
+        ]);
+
         $driver = Driver::find($id);
-        $driver->grade = $request->input("driverGrade");
+        $driver->grade = $validatedData['driverGrade'];
         $driver->save();
 
         return redirect(route('get.drivers', $racetrack));
