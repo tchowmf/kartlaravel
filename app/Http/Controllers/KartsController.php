@@ -39,11 +39,10 @@ class KartsController extends Controller
                 'grade' => $kart->grade,
                 'avgLap' => number_format($avgBestLap, 3),
                 'appearences' => $numAppearences,
-                'currentRaceTrack' => $racetrack
             ];
         }
 
-        return view("Karts.getKarts", compact(['kartInfo']));
+        return view("Karts.getKarts", compact(['kartInfo', 'racetrack']));
     }
 
     public function getKart($racetrack, $nKart): View

@@ -21,12 +21,13 @@
                 <tbody>
                     @foreach ($driverInfo as $driver)
                         <tr>
+                            <input type="hidden" value="{{ $driver['id'] }}"/>
                             <td>{{ $driver['driverName'] }}</td>
                             <td>{{ $driver['grade']}}</td>
                             <td>{{ $driver['fastestLap'] }}</td>
                             <td>{{ $driver['kartFastestLap'] }}</td>
                             <td>
-                                <a href="/pilotos/inserir-nota/{{ $driver['driverName'] }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                <a href="{{ route('get.grade', ['racetrack' => $racetrack, 'id' => $driver['id']]) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                 <a href="#" class="btn btn-info"><i class="fa fa-search"></i></a>
                             </td>
                         </tr>

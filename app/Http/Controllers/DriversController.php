@@ -38,6 +38,7 @@ class DriversController extends Controller
             $kartFastestLapNumber = Kart::where('id', $kartFastestLapId)->value('identifier');
 
             $driverInfo[] = [
+            'id' => $driver->id,
             'driverName' => $driver->name,
             'grade' => $driver->grade,
             'fastestLap' => number_format($fastestLap, 3),
@@ -45,23 +46,28 @@ class DriversController extends Controller
             ];
         }
 
-        return view("Pilotos.getDrivers", compact(['driverInfo']));
+        return view("Pilotos.getDrivers", compact(['driverInfo', 'racetrack']));
     }
 
-    public function getGrade($id): View
+    public function getGrade($racetrack, $id): View
     {
-        $volta = Kart::find($id);
-
-        return view("Pilotos.formulario", ['volta' => $volta]);
+        $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
+    
+        $driver = Driver::find($id);
+    
+        return view("Pilotos.formulario", compact('racetrack', 'driver'));
     }
 
-    public function postGrade(Request $request, $id): RedirectResponse
+    public function postGrade(Request $request, $racetrack, $id)
     {
-        $volta = Kart::find($id);
-        $volta->notaPiloto = $request->input("notaPiloto");
-        $volta->save();
+        $driver = Driver::find($id);
+        if (!$driver) {
+            return response()->json(['error' => 'Driver not found', $id], 404);
+        }
+        $driver->grade = $request->input("driverGrade");
+        $driver->save();
 
-        return redirect("/pilotos/kgv");
+        return redirect(route('get.drivers', $racetrack));
     }
 
     public function excluirNota($id): RedirectResponse

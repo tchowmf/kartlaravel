@@ -32,7 +32,7 @@
                             <td>{{ $lap->driver_grade }}</td>
                             <td>{{ $lap->best_lap }}</td>
                             <td>
-                                <form action="{{ route('delete.record', ['racetrack' => $racetrack, 'nKart' => $nKart, 'id' => $lap->id]) }}" method="post" id="deleteForm_{{ $lap->id }}">
+                                <form action="{{ route('delete.lap', ['racetrack' => $racetrack, 'nKart' => $nKart, 'id' => $lap->id]) }}" method="post" id="deleteForm_{{ $lap->id }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $lap->id }}')">
