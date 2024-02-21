@@ -60,7 +60,7 @@ class KartsController extends Controller
         return view("Karts.inspect", compact(['nKart', 'laps', 'racetrack']));
     }
 
-    public function delete($racetrack, $nKart, $id)
+    public function deleteLap($racetrack, $nKart, $id)
     {
         $lap = Result::find($id);
         if (!$lap) {

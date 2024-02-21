@@ -38,7 +38,7 @@ Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'index']);
     Route::get('/{racetrack}', [KartsController::class, 'getKarts'])->name('getKarts');
     Route::get('/{racetrack}/{nKart}', [KartsController::class, 'getKart'])->name('get.kart');
-    Route::delete('/{racetrack}/{nKart}/delete/{id}', [KartsController::class, 'delete'])->name('delete.lap');
+    Route::delete('/{racetrack}/{nKart}/delete/{id}', [KartsController::class, 'deleteLap'])->name('delete.lap');
 });
 
 
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'pilotos'], function() {
     Route::get('/{racetrack}', [DriversController::class, 'getDriverSpeedPark'])->name('get.drivers');
     Route::get('/{racetrack}/{id}', [DriversController::class, 'getGrade'])->name('get.grade');
     Route::post('/{racetrack}/salvar-nota/{id}', [DriversController::class, 'postGrade'])->name('post.grade');
-    Route::get('/{racetrack}/excluir-nota/{id}', [DriversController::class, 'excluirNota'])->name('excluir.nota');
+    Route::get('/{racetrack}/excluir-nota/{id}', [DriversController::class, 'deleteGrade'])->name('delete.grade');
 });
 
 Route::group(['prefix' => 'tables'], function() {

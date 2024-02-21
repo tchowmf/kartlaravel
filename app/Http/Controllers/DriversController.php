@@ -52,34 +52,31 @@ class DriversController extends Controller
     public function getGrade($racetrack, $id): View
     {
         $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
-    
+
         $driver = Driver::find($id);
-    
+
         return view("Pilotos.formulario", compact('racetrack', 'driver'));
     }
 
-    public function postGrade(Request $request, $racetrack, $id)
+    public function postGrade(Request $request, $racetrack, $id): RedirectResponse
     {
         $driver = Driver::find($id);
-        if (!$driver) {
-            return response()->json(['error' => 'Driver not found', $id], 404);
-        }
         $driver->grade = $request->input("driverGrade");
         $driver->save();
 
         return redirect(route('get.drivers', $racetrack));
     }
 
-    public function excluirNota($id): RedirectResponse
+    public function deleteGrade($racetrack, $id): RedirectResponse
     {
-        $volta = Kart::find($id);
+        $driver = Driver::find($id);
 
-        if ($volta) {
-            $volta->notaPiloto = null; // Ou qualquer outro valor que represente uma nota ausente
-            $volta->save();
+        if ($driver) {
+            $driver->grade = null; // Ou qualquer outro valor que represente uma nota ausente
+            $driver->save();
         }
 
-        return redirect("/pilotos");
+        return redirect(route('get.drivers', $racetrack));
     }
 
 

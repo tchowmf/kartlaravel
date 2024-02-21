@@ -21,7 +21,7 @@
             <td>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <a href="{{ route('get.drivers', ['racetrack' => $racetrack]) }}" class="btn btn-info">Voltar</a>
-                    <a href="" class="btn btn-danger"><li class="fa fa-trash"></li></a>
+                    <a href="{{ route('delete.grade', ['racetrack' => $racetrack, 'id' => $driver->id]) }}" class="btn btn-danger"><li class="fa fa-trash"></li></a>
                     <input type="submit" class="btn btn-success" value="Atualizar">
                 </div>
             </td>
