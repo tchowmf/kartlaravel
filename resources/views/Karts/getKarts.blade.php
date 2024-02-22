@@ -27,6 +27,10 @@
                             <td>{{ $kart['avgLap'] }}</td>
                             <td>{{ $kart['appearences'] }}</td>
                             <td>
+                                <a href="#" 
+                                    class="btn btn-success"><i class="fa fa-edit"></i>
+                                </a>
+
                                 <a href="{{ route("get.kart", ['racetrack' => $racetrack, 'nKart' => $kart['nKart']]) }}" class="btn btn-info">
                                     <li class="fa fa-search"></li>
                                 </a>

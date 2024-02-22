@@ -58,6 +58,6 @@ class TablesController extends Controller
             ];
         }
 
-        return view('Tables.getTables', compact(['kartInfo']));
+        return view('Tables.getTables', compact(['kartInfo', 'racetrack']));
     }
 }

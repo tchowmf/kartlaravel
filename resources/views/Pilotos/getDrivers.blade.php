@@ -27,8 +27,13 @@
                             <td>{{ $driver['fastestLap'] }}</td>
                             <td>{{ $driver['kartFastestLap'] }}</td>
                             <td>
-                                <a href="{{ route('get.grade', ['racetrack' => $racetrack, 'id' => $driver['id']]) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-info"><i class="fa fa-search"></i></a>
+                                <a href="{{ route('get.grade', ['racetrack' => $racetrack, 'id' => $driver['id']]) }}" 
+                                    class="btn btn-success"><i class="fa fa-edit"></i>
+                                </a>
+
+                                <a href="{{ route('get.driver', ['racetrack' => $racetrack, 'id' => $driver['id']]) }}" 
+                                    class="btn btn-info"><i class="fa fa-search"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

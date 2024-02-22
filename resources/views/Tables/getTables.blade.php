@@ -3,7 +3,7 @@
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h1 class="h3 mb-0 text-gray-800">Tabelas</h1>
+        <h1 class="h3 mb-0 text-gray-800">TABELA GERAL</h1>
     </div>
 
     <div class="card">
@@ -32,7 +32,13 @@
                                 <td>{{ $kartData['bestLap']->best_lap }}</td>
                             @endif
                             <td>
-                                <a href="" class="btn btn-info">
+                                <a href="{{ route('get.grade', ['racetrack' => $racetrack, 
+                                'id' => $kartData['driver']->id]) }}" class="btn btn-success">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+
+                                <a href="{{ route('get.kart', ['racetrack' => $racetrack, 
+                                'nKart' => $kartData['kart']->identifier]) }}" class="btn btn-info">
                                     <li class="fa fa-search"></li>
                                 </a>
                             </td>

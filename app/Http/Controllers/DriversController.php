@@ -49,6 +49,22 @@ class DriversController extends Controller
         return view("Pilotos.getDrivers", compact(['driverInfo', 'racetrack']));
     }
 
+    public function getDriver($racetrack, $id)
+    {
+        $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
+
+        $driver = Driver::find($id);
+
+        $laps = Result::join('drivers', 'race_statistics.driver_id', '=', 'drivers.id')
+                        ->join('karts', 'race_statistics.kart_id', '=', 'karts.id')
+                        ->where('race_statistics.racetrack_id', $racetrackId)
+                        ->where('drivers.id', $id)
+                        ->select('race_statistics.*', 'karts.id as kart_id', 'karts.identifier as kart_identifier', 'karts.grade as kart_grade')
+                        ->get();
+        
+        return view("Pilotos.inspectDriver", compact(['racetrack', 'laps', 'driver']));
+    }
+
     public function getGrade($racetrack, $id): View
     {
         $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
