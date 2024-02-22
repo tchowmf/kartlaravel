@@ -1,10 +1,10 @@
 @extends('TemplateUser.index')
-@section('title', 'Karts Speed Park - Kart Timer')
+@section('title', "Karts $racetrack - Kart Timer")
 
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h2 class="h3 mb-0 text-gray-800">KARTS</h2>
+        <h2 class="h3 mb-0 text-gray-800">KARTS {{ $racetrack }}</h2>
     </div>
 
     <div class="card">
@@ -27,11 +27,13 @@
                             <td>{{ $kart['avgLap'] }}</td>
                             <td>{{ $kart['appearences'] }}</td>
                             <td>
-                                <a href="#" 
-                                    class="btn btn-success"><i class="fa fa-edit"></i>
+                                <a href="{{ route('get.kartgrade', ['racetrack' => $racetrack, 'nKart' => $kart['nKart']]) }}" 
+                                    class="btn btn-success">
+                                    <i class="fa fa-edit"></i>
                                 </a>
 
-                                <a href="{{ route("get.kart", ['racetrack' => $racetrack, 'nKart' => $kart['nKart']]) }}" class="btn btn-info">
+                                <a href="{{ route("get.kart", ['racetrack' => $racetrack, 'nKart' => $kart['nKart']]) }}" 
+                                    class="btn btn-info">
                                     <li class="fa fa-search"></li>
                                 </a>
                             </td>

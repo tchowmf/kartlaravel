@@ -8,6 +8,8 @@ use App\Models\Kart;
 use App\Models\Driver;
 use App\Models\Result;
 use App\Models\RaceTrack;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class KartsController extends Controller
@@ -69,5 +71,39 @@ class KartsController extends Controller
         $lap->delete();
     
         return redirect()->route('get.kart', ['racetrack' => $racetrack, 'nKart' => $nKart])->with('success', 'Tempo de volta excluído com sucesso.');
+    }
+
+    public function getKartGrade($racetrack, $nKart): View
+    {
+        $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
+
+        $kart = Kart::where('identifier', $nKart)->first();
+
+        return view("Karts.formulario", compact('racetrack', 'kart'));
+    }
+
+    public function postKartGrade(Request $request, $racetrack, $nKart): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'kartGrade' => 'required|string|size:1|in:S,A,B,C,D',
+        ]);
+        
+        $kart = Kart::where('identifier', $nKart)->first();
+        $kart->grade = $validatedData['kartGrade'];
+        $kart->save();
+
+        return redirect(route('get.karts', $racetrack));
+    }
+
+    public function deleteKartGrade($racetrack, $nKart): RedirectResponse
+    {
+        $kart = Kart::where('identifier', $nKart)->first();
+
+        if ($kart) {
+            $kart->grade = null; // Ou qualquer outro valor que represente uma nota ausente
+            $kart->save();
+        }
+
+        return redirect(route('get.karts', $racetrack));
     }
 }

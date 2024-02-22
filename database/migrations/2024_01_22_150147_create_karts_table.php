@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('racetrack_id')->constrained('racetracks');
             $table->integer('identifier');
-            $table->char('grade');
+            $table->char('grade')->nullable();
             $table->timestamps();
         });
     }

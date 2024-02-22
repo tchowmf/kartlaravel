@@ -1,4 +1,5 @@
 @extends('TemplateUser.index')
+@section('title', "Pilotos $racetrack - Kart Timer")
 
 @section('contents')
     <!-- Page Heading -->
@@ -27,7 +28,7 @@
                             <td>{{ $driver['fastestLap'] }}</td>
                             <td>{{ $driver['kartFastestLap'] }}</td>
                             <td>
-                                <a href="{{ route('get.grade', ['racetrack' => $racetrack, 'id' => $driver['id']]) }}" 
+                                <a href="{{ route('get.drivergrade', ['racetrack' => $racetrack, 'id' => $driver['id']]) }}" 
                                     class="btn btn-success"><i class="fa fa-edit"></i>
                                 </a>
 

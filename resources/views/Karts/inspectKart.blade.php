@@ -1,5 +1,5 @@
 @extends('TemplateUser.index')
-@section('title', "Kart: $nKart - Kart Timer")
+@section('title', "$racetrack Kart: $nKart - Kart Timer")
 
 @section('contents')
 
@@ -36,7 +36,7 @@
                                 'id' => $lap->id]) }}" method="post" id="deleteForm_{{ $lap->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('get.grade', ['racetrack' => $racetrack, 
+                                    <a href="{{ route('get.drivergrade', ['racetrack' => $racetrack, 
                                     'id' => $lap->driver_id]) }}" class="btn btn-success">
                                         <i class="fa fa-edit"></i>
                                     </a>

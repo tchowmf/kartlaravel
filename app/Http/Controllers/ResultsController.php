@@ -20,9 +20,8 @@ class ResultsController extends Controller
         return view("Results.index");
     }
 
-    public function getEvents(): View
+    public function getEvents($racetrack): View
     {
-
         $url = "https://www.mylaptime.com/laptime/clientes/01B8502PX0650661AC69772LB/results/eventos.xml";
 
         $xml = simplexml_load_file($url) or die("Can't load xml");
@@ -34,7 +33,7 @@ class ResultsController extends Controller
 
         }
         usort($attributesArray, function ($a, $b) {return $b['ID_EVENTO'] - $a['ID_EVENTO'];});
-        return view("Results.getResults", ['attributesArray' => $attributesArray]);
+        return view("Results.getResults", ['attributesArray' => $attributesArray, 'racetrack' => $racetrack]);
     }
 
     public function getEpg($racetrack, $ID_EVENTO): View
@@ -80,7 +79,8 @@ class ResultsController extends Controller
             $attributesArray[] = $item;
         }
 
-        return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA, 'racetrack' => $racetrack]);
+        return view("Results.result", ['attributesArray' => $attributesArray, 'ID_EVENTO' => $ID_EVENTO, 
+        'ID_EVENTO_PISTA_GRUPO' => $ID_EVENTO_PISTA_GRUPO, 'ID_CORRIDA' => $ID_CORRIDA, 'racetrack' => $racetrack]);
     }
 
     public function postResults(Request $request, $racetrack)

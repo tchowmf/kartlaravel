@@ -38,6 +38,9 @@ Route::group(['prefix' => 'karts'], function() {
     Route::get('/', [KartsController::class, 'index']);
     Route::get('/{racetrack}', [KartsController::class, 'getKarts'])->name('get.karts');
     Route::get('/{racetrack}/{nKart}', [KartsController::class, 'getKart'])->name('get.kart');
+    Route::get('/{racetrack}/inserir-nota/{nKart}', [KartsController::class, 'getKartGrade'])->name('get.kartgrade');
+    Route::post('/{racetrack}/salvar-nota/{nKart}', [KartsController::class, 'postKartGrade'])->name('post.kartgrade');
+    Route::get('/{racetrack}/excluir-nota/{nKart}', [KartsController::class, 'deleteKartGrade'])->name('delete.kartgrade');
     Route::delete('/{racetrack}/{nKart}/delete/{id}', [KartsController::class, 'deleteLap'])->name('delete.lap');
 });
 
@@ -47,9 +50,9 @@ Route::group(['prefix' => 'pilotos'], function() {
     Route::get('/kgv', [DriversController::class, 'getDriverKgv']);
     Route::get('/{racetrack}', [DriversController::class, 'getDriverSpeedPark'])->name('get.drivers');
     Route::get('/{racetrack}/{id}', [DriversController::class, 'getDriver'])->name('get.driver');
-    Route::get('/{racetrack}/inserir-nota/{id}', [DriversController::class, 'getGrade'])->name('get.grade');
-    Route::post('/{racetrack}/salvar-nota/{id}', [DriversController::class, 'postGrade'])->name('post.grade');
-    Route::get('/{racetrack}/excluir-nota/{id}', [DriversController::class, 'deleteGrade'])->name('delete.grade');
+    Route::get('/{racetrack}/inserir-nota/{id}', [DriversController::class, 'getDriverGrade'])->name('get.drivergrade');
+    Route::post('/{racetrack}/salvar-nota/{id}', [DriversController::class, 'postDriverGrade'])->name('post.drivergrade');
+    Route::get('/{racetrack}/excluir-nota/{id}', [DriversController::class, 'deleteDriverGrade'])->name('delete.drivergrade');
 });
 
 Route::group(['prefix' => 'tables'], function() {
@@ -60,7 +63,7 @@ Route::group(['prefix' => 'tables'], function() {
 Route::group(['prefix' => 'results'], function() {
     Route::get('/', [ResultsController::class, 'index']);
     Route::get('/kgv', [ResultsController::class, 'showEvents']);
-    Route::get('/speedpark', [ResultsController::class, 'getEvents'])->name('results.speedpark');
+    Route::get('/{racetrack}', [ResultsController::class, 'getEvents'])->name('results.speedpark');
     Route::get('/{racetrack}/{ID_EVENTO}/epg', [ResultsController::class, 'getEpg'])->name('get.epg');
     Route::get('/{racetrack}/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/provas', [ResultsController::class, 'getProvas'])->name('get.provas');
     Route::get('/{racetrack}/{ID_EVENTO}/{ID_EVENTO_PISTA_GRUPO}/{ID_CORRIDA}', [ResultsController::class, 'getResults'])->name('get.results');

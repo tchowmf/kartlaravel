@@ -1,9 +1,10 @@
 @extends('TemplateUser.index')
+@section('title', "Baterias $racetrack - Kart Timer")
 
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h2 class="h3 mb-0 text-gray-800">CORRIDAS</h2>
+        <h2 class="h3 mb-0 text-gray-800">CORRIDAS {{ $racetrack }}</h2>
     </div>
 
 
@@ -50,7 +51,7 @@
                     @endforeach
                 </tr>
             </table>
-            <a href="{{ route('results.speedpark') }}" class="btn btn-info">Voltar</a>
+            <a href="{{ route('results.speedpark', ['racetrack' => $racetrack]) }}" class="btn btn-info">Voltar</a>
         </tbody>
 
 @endsection

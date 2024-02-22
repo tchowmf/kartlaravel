@@ -65,7 +65,7 @@ class DriversController extends Controller
         return view("Pilotos.inspectDriver", compact(['racetrack', 'laps', 'driver']));
     }
 
-    public function getGrade($racetrack, $id): View
+    public function getDriverGrade($racetrack, $id): View
     {
         $racetrackId = RaceTrack::where('name', $racetrack)->value('id');
 
@@ -74,7 +74,7 @@ class DriversController extends Controller
         return view("Pilotos.formulario", compact('racetrack', 'driver'));
     }
 
-    public function postGrade(Request $request, $racetrack, $id): RedirectResponse
+    public function postDriverGrade(Request $request, $racetrack, $id): RedirectResponse
     {
         $validatedData = $request->validate([
             'driverGrade' => 'required|string|size:1|in:S,A,B,C,D',
@@ -87,7 +87,7 @@ class DriversController extends Controller
         return redirect(route('get.drivers', $racetrack));
     }
 
-    public function deleteGrade($racetrack, $id): RedirectResponse
+    public function deleteDriverGrade($racetrack, $id): RedirectResponse
     {
         $driver = Driver::find($id);
 

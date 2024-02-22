@@ -1,5 +1,5 @@
 @extends('TemplateUser.index')
-@section('title', "Piloto: $driver->name - Kart Timer")
+@section('title', "$racetrack Piloto: $driver->name - Kart Timer")
 
 @section('contents')
 

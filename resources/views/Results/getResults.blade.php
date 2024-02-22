@@ -1,9 +1,10 @@
 @extends('TemplateUser.index')
+@section('title', "Corridas $racetrack - Kart Timer")
 
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h2 class="h3 mb-0 text-gray-800">CORRIDAS - RESULTADOS</h2>
+        <h2 class="h3 mb-0 text-gray-800">CORRIDAS - RESULTADOS {{ $racetrack }}</h2>
         <div class="input-group col-md-2">
             <input type="text" class="form-control" placeholder="Pesquisar n° RESULTADO">
             <div class="input-group-append">

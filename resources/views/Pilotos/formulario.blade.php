@@ -1,10 +1,11 @@
 @extends('TemplateUser.index')
+@section('title', "Nota Piloto $driver->name - Kart Timer")
 @section('contents')
 
 <h2 class="h3 mb-4 text-gray-800">{{ isset($driver->grade) ? 'Atualizar' : 'Inserir' }} nota do PILOTO</h2>
 <div class="card" style="width: 30%;">
     <div class="card-body">
-        <form method="post" action="{{ route('post.grade', ['racetrack' => $racetrack, 'id' => $driver->id]) }}">
+        <form method="post" action="{{ route('post.drivergrade', ['racetrack' => $racetrack, 'id' => $driver->id]) }}">
             @CSRF
             <input type="hidden" name="id" value="{{ $driver->id ?? $id ?? '' }}"/>
 
@@ -21,7 +22,7 @@
             <td>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <a href="{{ route('get.drivers', ['racetrack' => $racetrack]) }}" class="btn btn-info">Voltar</a>
-                    <a href="{{ route('delete.grade', ['racetrack' => $racetrack, 'id' => $driver->id]) }}" class="btn btn-danger"><li class="fa fa-trash"></li></a>
+                    <a href="{{ route('delete.drivergrade', ['racetrack' => $racetrack, 'id' => $driver->id]) }}" class="btn btn-danger"><li class="fa fa-trash"></li></a>
                     <input type="submit" class="btn btn-success" value="Atualizar">
                 </div>
             </td>

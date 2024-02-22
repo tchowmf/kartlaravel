@@ -32,7 +32,7 @@
                                 <td>{{ $kartData['bestLap']->best_lap }}</td>
                             @endif
                             <td>
-                                <a href="{{ route('get.grade', ['racetrack' => $racetrack, 
+                                <a href="{{ route('get.drivergrade', ['racetrack' => $racetrack, 
                                 'id' => $kartData['driver']->id]) }}" class="btn btn-success">
                                     <i class="fa fa-edit"></i>
                                 </a>
