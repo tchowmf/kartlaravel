@@ -26,4 +26,9 @@ class RaceTrack extends Model
     {
         return $this->hasMany(Driver::class, 'racetrack_id');
     }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class, 'racetrack_id');
+    }
 }

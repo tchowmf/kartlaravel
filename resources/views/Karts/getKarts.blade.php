@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ $kart['nKart'] }}</td>
                             <td>{{ $kart['grade']}}</td>
-                            <td>{{ $kart['avgLap'] }}</td>
+                            <td>{{ $kart['kart']->formattedBestLap() }}</td>
                             <td>{{ $kart['appearences'] }}</td>
                             <td>
                                 <a href="{{ route('get.kartgrade', ['racetrack' => $racetrack, 'nKart' => $kart['nKart']]) }}" 

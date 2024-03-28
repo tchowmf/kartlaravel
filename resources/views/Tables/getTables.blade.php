@@ -24,12 +24,12 @@
                         <tr>
                             <td>{{ $kartData['kart']->identifier }}</td>
                             <td>{{ $kartData['kart']->grade }}</td>
-                            <td>{{ $kartData['avgLap'] }}</td>
+                            <td>{{ $kartData['kart']->formattedBestLap() }}</td>
                             @if ($kartData['bestLap'])
                             <td>{{ $kartData['appearences']}}</td>
                                 <td>{{ $kartData['driver']->name }}</td>
                                 <td>{{ $kartData['driver']->grade }}</td>
-                                <td>{{ $kartData['bestLap']->best_lap }}</td>
+                                <td>{{ $kartData['driver']->formattedBestLap() }}</td>
                             @endif
                             <td>
                                 <a href="{{ route('get.drivergrade', ['racetrack' => $racetrack, 

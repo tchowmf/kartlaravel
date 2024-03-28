@@ -37,9 +37,9 @@ class KartsController extends Controller
                                     ->count();
 
             $kartInfo[] = [
+                'kart' => $kart,
                 'nKart' => $kart->identifier,
                 'grade' => $kart->grade,
-                'avgLap' => number_format($avgBestLap, 3),
                 'appearences' => $numAppearences,
             ];
         }

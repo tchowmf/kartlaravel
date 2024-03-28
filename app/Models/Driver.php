@@ -23,4 +23,23 @@ class Driver extends Model
     {
         return $this->belongsTo(Racetrack::class, 'racetrack_id');
     }
+
+    public function formattedBestLap()
+    {
+        // Obtendo a melhor volta média com base nos resultados associados a este kart
+        $BestLap = Result::where('driver_id', $this->id)->min('best_lap');
+
+        // Se não houver resultados, retorna 'N/A'
+        if ($BestLap === null) {
+            return 'N/A';
+        }
+
+        // Convertendo para minutos, segundos e milissegundos
+        $minutes = floor($BestLap / 60);
+        $seconds = floor($BestLap % 60);
+        $milliseconds = round(($BestLap - floor($BestLap)) * 1000);
+
+        // Formatando a string de tempo
+        return sprintf('%02d:%02d:%03d', $minutes, $seconds, $milliseconds);
+    }
 }

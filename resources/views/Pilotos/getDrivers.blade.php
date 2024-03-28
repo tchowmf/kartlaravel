@@ -1,10 +1,10 @@
 @extends('TemplateUser.index')
-@section('title', "Pilotos $racetrack->name - Kart Timer")
+@section('title', "Pilotos $racetrack - Kart Timer")
 
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h2 class="h3 mb-0 text-gray-800">PILOTOS {{ $racetrack->name }}</h2>
+        <h2 class="h3 mb-0 text-gray-800">PILOTOS {{ $racetrack }}</h2>
     </div>
 
     <div class="card">
@@ -25,7 +25,7 @@
                             <input type="hidden" value="{{ $driver['id'] }}"/>
                             <td>{{ $driver['driverName'] }}</td>
                             <td>{{ $driver['grade']}}</td>
-                            <td>{{ $driver['fastestLap'] }}</td>
+                            <td>{{ $driver['driver']->formattedBestLap() }}</td>
                             <td>{{ $driver['kartFastestLap'] }}</td>
                             <td>
                                 <a href="{{ route('get.drivergrade', ['racetrack' => $racetrack, 'id' => $driver['id']]) }}" 
