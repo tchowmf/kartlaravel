@@ -29,8 +29,8 @@
                     @foreach ($laps as $lap)
                         <tr>
                             <td>{{ $lap->driver_name }}</td>
-                            <td>{{ $lap->driver_grade }}</td>
                             <td>{{ $lap->best_lap }}</td>
+                            <td>{{ $lap->driver_grade }}</td>
                             <td>
                                 <form action="{{ route('delete.lap', ['racetrack' => $racetrack, 'nKart' => $nKart, 
                                 'id' => $lap->id]) }}" method="post" id="deleteForm_{{ $lap->id }}">

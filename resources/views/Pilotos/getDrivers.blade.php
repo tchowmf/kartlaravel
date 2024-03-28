@@ -1,10 +1,10 @@
 @extends('TemplateUser.index')
-@section('title', "Pilotos $racetrack - Kart Timer")
+@section('title', "Pilotos $racetrack->name - Kart Timer")
 
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h2 class="h3 mb-0 text-gray-800">PILOTOS</h2>
+        <h2 class="h3 mb-0 text-gray-800">PILOTOS {{ $racetrack->name }}</h2>
     </div>
 
     <div class="card">

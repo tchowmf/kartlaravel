@@ -19,11 +19,11 @@ class RaceTrack extends Model
 
     public function karts()
     {
-        return $this->hasMany(Kart::class);
+        return $this->hasMany(Kart::class, 'racetrack_id');
     }
 
     public function drivers()
     {
-        return $this->hasMany(Driver::class);
+        return $this->hasMany(Driver::class, 'racetrack_id');
     }
 }

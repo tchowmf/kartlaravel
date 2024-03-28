@@ -23,6 +23,7 @@
                 <thead>
                     <th>Kart da Volta</th>
                     <th>Tempo de Volta</th>
+                    <th>Tempo Medio do Kart</th>
                     <th>Nota do Kart</th>
                     <th>Ação</th>
                 </thead>
@@ -31,6 +32,7 @@
                         <tr>
                             <td>{{ $lap->kart_identifier }}</td>
                             <td>{{ $lap->best_lap }}</td>
+                            <td> </td>
                             <td>{{ $lap->kart_grade}}</td>
                             <td>
                                 <form action="{{ route('delete.lap', ['racetrack' => $racetrack, 'nKart' => $lap->kart_identifier, 
