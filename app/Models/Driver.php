@@ -42,4 +42,23 @@ class Driver extends Model
         // Formatando a string de tempo
         return sprintf('%02d:%02d:%03d', $minutes, $seconds, $milliseconds);
     }
+
+    public function formattedAvgLap()
+    {
+        // Obtendo a melhor volta média com base nos resultados associados a este kart
+        $AvgLap = Result::where('driver_id', $this->id)->min('best_lap');
+
+        // Se não houver resultados, retorna 'N/A'
+        if ($AvgLap === null) {
+            return 'N/A';
+        }
+
+        // Convertendo para minutos, segundos e milissegundos
+        $minutes = floor($AvgLap / 60);
+        $seconds = floor($AvgLap % 60);
+        $milliseconds = round(($AvgLap - floor($AvgLap)) * 1000);
+
+        // Formatando a string de tempo
+        return sprintf('%02d:%02d:%03d', $minutes, $seconds, $milliseconds);
+    }
 }

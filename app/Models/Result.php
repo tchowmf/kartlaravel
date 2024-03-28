@@ -19,4 +19,12 @@ class Result extends Model
     ];
 
     public $timestamps = true;
+
+    public function driver() {
+        return $this->belongsTo(Driver::class);
+    }
+
+    public function kart() {
+        return $this->belongsTo(Kart::class);
+    }
 }

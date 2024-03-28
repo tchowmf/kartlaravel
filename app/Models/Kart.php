@@ -28,17 +28,36 @@ class Kart extends Model
     public function formattedBestLap()
     {
         // Obtendo a melhor volta média com base nos resultados associados a este kart
-        $avgBestLap = Result::where('kart_id', $this->id)->avg('best_lap');
+        $BestLap = Result::where('kart_id', $this->id)->min('best_lap');
 
         // Se não houver resultados, retorna 'N/A'
-        if ($avgBestLap === null) {
+        if ($BestLap === null) {
             return 'N/A';
         }
 
         // Convertendo para minutos, segundos e milissegundos
-        $minutes = floor($avgBestLap / 60);
-        $seconds = floor($avgBestLap % 60);
-        $milliseconds = round(($avgBestLap - floor($avgBestLap)) * 1000);
+        $minutes = floor($BestLap / 60);
+        $seconds = floor($BestLap % 60);
+        $milliseconds = round(($BestLap - floor($BestLap)) * 1000);
+
+        // Formatando a string de tempo
+        return sprintf('%02d:%02d:%03d', $minutes, $seconds, $milliseconds);
+    }
+
+    public function formattedAvgLap()
+    {
+        // Obtendo a melhor volta média com base nos resultados associados a este kart
+        $AvgLap = Result::where('kart_id', $this->id)->avg('best_lap');
+
+        // Se não houver resultados, retorna 'N/A'
+        if ($AvgLap === null) {
+            return 'N/A';
+        }
+
+        // Convertendo para minutos, segundos e milissegundos
+        $minutes = floor($AvgLap / 60);
+        $seconds = floor($AvgLap % 60);
+        $milliseconds = round(($AvgLap - floor($AvgLap)) * 1000);
 
         // Formatando a string de tempo
         return sprintf('%02d:%02d:%03d', $minutes, $seconds, $milliseconds);

@@ -22,7 +22,7 @@
             <table class="table table-bordered dataTable">
                 <thead>
                     <th>Kart da Volta</th>
-                    <th>Tempo de Volta</th>
+                    <th>Tempo de Melhor Volta</th>
                     <th>Tempo Medio do Kart</th>
                     <th>Nota do Kart</th>
                     <th>Ação</th>
@@ -30,12 +30,12 @@
                 <tbody>
                     @foreach ($laps as $lap)
                         <tr>
-                            <td>{{ $lap->kart_identifier }}</td>
-                            <td>{{ $lap->best_lap }}</td>
-                            <td> </td>
-                            <td>{{ $lap->kart_grade}}</td>
+                            <td>{{ $lap->kart->identifier }}</td>
+                            <td>{{ $lap->kart->formattedBestLap() }}</td>
+                            <td>{{ $lap->kart->formattedAvgLap() }}</td>
+                            <td>{{ $lap->kart->grade }}</td>
                             <td>
-                                <form action="{{ route('delete.lap', ['racetrack' => $racetrack, 'nKart' => $lap->kart_identifier, 
+                                <form action="{{ route('delete.lap', ['racetrack' => $racetrack, 'nKart' => $lap->kart->identifier, 
                                 'id' => $lap->id]) }}" method="post" id="deleteForm_{{ $lap->id }}">
                                     @csrf
                                     @method('DELETE')

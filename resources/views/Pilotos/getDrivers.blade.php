@@ -44,6 +44,8 @@
     </table>
 
     <script>
-        new DataTable('#dataTable');
+        new DataTable('#dataTable', {
+            pageLength: 50
+        });('#dataTable');
     </script>
 @endsection

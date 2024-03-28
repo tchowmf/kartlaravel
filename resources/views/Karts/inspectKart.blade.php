@@ -21,7 +21,7 @@
             <table class="table table-bordered dataTable">
                 <thead>
                     <th>Nome do Piloto</th>
-                    <th>Tempo de Volta</th>
+                    <th>Tempo de Melhor Volta</th>
                     <th>Nota do Piloto</th>
                     <th>Ação</th>
                 </thead>
@@ -29,7 +29,7 @@
                     @foreach ($laps as $lap)
                         <tr>
                             <td>{{ $lap->driver_name }}</td>
-                            <td>{{ $lap->best_lap }}</td>
+                            <td>{{ $lap->kart->formattedBestLap() }}</td>
                             <td>{{ $lap->driver_grade }}</td>
                             <td>
                                 <form action="{{ route('delete.lap', ['racetrack' => $racetrack, 'nKart' => $nKart, 

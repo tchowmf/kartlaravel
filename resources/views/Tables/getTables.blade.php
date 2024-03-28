@@ -1,9 +1,10 @@
 @extends('TemplateUser.index')
+@section('title', "Tabela $racetrack - Kart Timer")
 
 @section('contents')
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h1 class="h3 mb-0 text-gray-800">TABELA GERAL</h1>
+        <h1 class="h3 mb-0 text-gray-800">TABELA GERAL {{ $racetrack }}</h1>
     </div>
 
     <div class="card">
@@ -14,17 +15,18 @@
                     <th>Nota do KART</th>
                     <th>Media de Tempo</th>
                     <th>Quantidade de Baterias</th>
-                    <th>Nome do Piloto</th>
+                    <th>Nome do Piloto da Melhor Volta</th>
                     <th>Nota do Piloto</th>
                     <th>Melhor Volta</th>
                     <th>Ação</th>
                 </thead>
+                
                 <tbody>
                     @foreach ($kartInfo as $kartData)
                         <tr>
                             <td>{{ $kartData['kart']->identifier }}</td>
                             <td>{{ $kartData['kart']->grade }}</td>
-                            <td>{{ $kartData['kart']->formattedBestLap() }}</td>
+                            <td>{{ $kartData['kart']->formattedAvgLap() }}</td>
                             @if ($kartData['bestLap'])
                             <td>{{ $kartData['appearences']}}</td>
                                 <td>{{ $kartData['driver']->name }}</td>
@@ -51,6 +53,8 @@
 
 
     <script>
-        new DataTable('#dataTable');
+        new DataTable('#dataTable', {
+            pageLength: 50
+        });
     </script>
 @endsection

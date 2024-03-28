@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ $kart['nKart'] }}</td>
                             <td>{{ $kart['grade']}}</td>
-                            <td>{{ $kart['kart']->formattedBestLap() }}</td>
+                            <td>{{ $kart['kart']->formattedAvgLap() }}</td>
                             <td>{{ $kart['appearences'] }}</td>
                             <td>
                                 <a href="{{ route('get.kartgrade', ['racetrack' => $racetrack, 'nKart' => $kart['nKart']]) }}" 
@@ -45,7 +45,9 @@
     </div>
 
     <script>
-        new DataTable('#dataTable');
+        new DataTable('#dataTable', {
+            pageLength: 50
+        });('#dataTable');
     </script>
 
 @endsection

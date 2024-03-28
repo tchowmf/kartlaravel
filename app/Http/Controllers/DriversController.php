@@ -55,12 +55,11 @@ class DriversController extends Controller
 
         $driver = Driver::find($id);
 
-        $laps = Result::join('drivers', 'race_statistics.driver_id', '=', 'drivers.id')
-                        ->join('karts', 'race_statistics.kart_id', '=', 'karts.id')
-                        ->where('race_statistics.racetrack_id', $racetrackId)
-                        ->where('drivers.id', $id)
-                        ->select('race_statistics.*', 'karts.id as kart_id', 'karts.identifier as kart_identifier', 'karts.grade as kart_grade')
-                        ->get();
+        $laps = Result::with('kart')
+              ->where('driver_id', $id)
+              ->where('racetrack_id', $racetrackId)
+              ->get(['id', 'kart_id', 'best_lap']);
+
         
         return view("Pilotos.inspectDriver", compact(['racetrack', 'laps', 'driver']));
     }
